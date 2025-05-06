@@ -1,5 +1,5 @@
 ---
-title: "Supplementary material for: The Drastic Effect of Choice of Spacer-to-Protospacer Search or Alignment Tool in CRISPR-Based Viral Defense Analysis"
+title: "Supplementary material for: Tool Choice drastically Impacts CRISPR Spacer-Protospacer Detection"
 author:
   - name: Uri Neri
     affiliations:

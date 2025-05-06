@@ -1,5 +1,5 @@
 # Benchmarking protospacer identification tools
-Scripts, code, and data for the manuscript: "The Drastic Effect of Choice of Spacer-to-Protospacer Search or Alignment Tool in CRISPR-Based Viral Defense Analysis"   
+Scripts, code, and data for the manuscript: "Tool Choice drastically Impacts CRISPR Spacer-Protospacer Detection"   
 Raw data files available in zenodo: [https://zenodo.org/doi/10.5281/zenodo.15171878](https://zenodo.org/doi/10.5281/zenodo.15171878).
 
 ## Overview
@@ -178,7 +178,7 @@ If you use this software or data in your research, please cite accordingly:
 ```bibtex
 @article{spacer_matching_bench_manuscript,
   author = {Uri Neri, Antonio Pedro Camargo, Brian Bushnell, Simon Roux},
-  title = {The Drastic Effect of Choice of Spacer-to-Protospacer Search or Alignment Tool in CRISPR-Based Viral Defense Analysis},
+  title = {Tool Choice drastically Impacts CRISPR Spacer-Protospacer Detection},
   journal = {bioRxiv},
   year = {2025},
   doi = {TBD},

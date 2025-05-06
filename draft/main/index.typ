@@ -290,7 +290,7 @@
 )
 
 #show: doc => article(
-  title: [The Drastic Effect of Choice of Spacer-to-Protospacer Search or Alignment Tool in CRISPR-Based Viral Defense Analysis],
+  title: [Tool Choice drastically Impacts CRISPR Spacer-Protospacer Detection],
   authors: (
     ( name: [Uri Neri],
       affiliation: [DOE Joint Genome Institute],
