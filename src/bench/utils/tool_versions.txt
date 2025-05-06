@@ -1,0 +1,54 @@
+bowtie1
+.micromamba/envs/bowtie1_env/bin/bowtie-align-s version 1.3.1
+64-bit
+Built on fv-az1778-96
+2024-12-10T17:52:10
+Compiler: gcc version 13.3.0 (conda-forge gcc 13.3.0-1) 
+Options: -O3 -Wl,--hash-style=both -DPOPCNT_CAPABILITY -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem .micromamba/envs/bowtie1_env/include -fdebug-prefix-map=/opt/conda/conda-bld/bowtie_1733853009584/work=/usr/local/src/conda/bowtie-1.3.1 -fdebug-prefix-map=.micromamba/envs/bowtie1_env=/usr/local/src/conda-prefix  -fvisibility-inlines-hidden -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem .micromamba/envs/bowtie1_env/include -fdebug-prefix-map=/opt/conda/conda-bld/bowtie_1733853009584/work=/usr/local/src/conda/bowtie-1.3.1 -fdebug-prefix-map=.micromamba/envs/bowtie1_env=/usr/local/src/conda-prefix
+Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}
+#####
+bowtie2
+.micromamba/envs/bowtie2_env/bin/bowtie2-align-s version 2.5.4
+64-bit
+Built on fv-az849-261
+Tue Dec 10 19:14:18 UTC 2024
+Compiler: gcc version 13.3.0 (conda-forge gcc 13.3.0-1) 
+Options: -O3 -msse2 -funroll-loops -g3 -fvisibility-inlines-hidden -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem .micromamba/envs/bowtie2_env/include -fdebug-prefix-map=/opt/conda/conda-bld/bowtie2_1733857893168/work=/usr/local/src/conda/bowtie2-2.5.4 -fdebug-prefix-map=.micromamba/envs/bowtie2_env=/usr/local/src/conda-prefix -O3
+Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}
+#####
+minimap2
+2.28-r1209
+#####
+bbmapskimmer
+39.13
+#####
+strobealign
+0.15.0
+#####
+blastn
+2.16.0+ Package: blast 2.16.0, build Dec 14 2024 23:05:40
+#####
+MMseqs2
+db8ad2d14d0a285ce0ad62bbefd0dce927663315
+#####
+BWA
+0.7.19-r1273
+#####
+Hisat2
+.micromamba/envs/hisat2_env/bin/hisat2-align-s version 2.2.1
+64-bit
+Built on fv-az658-8
+Thu Dec 12 16:06:06 UTC 2024
+Compiler: collect2: error: ld returned 1 exit status
+Options: -O3 -m64 -msse2 -funroll-loops -g3 -std=c++11
+Sizeof {int, long, long long, void*, size_t, off_t}: {4, 8, 8, 8, 8, 8}
+#####
+spacer-containment
+0.1.0
+#####
+LexicMap
+v0.5.0 (06741c8)
+#####
+Mummer4
+4.10.0-r1304 // 4.0.1
+

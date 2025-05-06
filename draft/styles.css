@@ -1,0 +1,61 @@
+/* Import external fonts */
+@import url("https://rsms.me/inter/inter.css");
+
+/* Base HTML styles */
+html {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "cv05";
+}
+
+/* Specific element styles */
+#toc-title {
+    font-weight: 700;
+}
+
+#title-block-header {
+    margin-block-end: 1.9rem;
+}
+
+/* Class styles */
+.quarto-title-banner {
+    padding-top: 3.2rem;
+    padding-bottom: 3.2rem;
+}
+
+.tippy-content img {
+    width: 100% !important;
+}
+
+/* Lightbox */
+.gslide-description.description-right {
+    max-width: 400px;
+}
+
+.quarto-title {
+    margin-bottom: 1.5rem;
+}
+
+/* Heading styles */
+.quarto-title-banner .quarto-title .title,
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-variation-settings: "opsz" 22;
+}
+
+h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-variation-settings: "opsz" 22;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-variation-settings: "opsz" 22;
+}
+
+/* KaTeX customizations */
+.katex {
+    font-size: 1.1rem !important;
+}

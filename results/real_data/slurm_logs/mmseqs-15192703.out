@@ -1,0 +1,63 @@
+results/real_data/raw_outputs//tmp_spacers/mmdb exists and will be overwritten
+createdb example/crispr-host-prediction/crispr-db/rm_duped_spacers.fna results/real_data/raw_outputs//tmp_spacers/mmdb 
+
+MMseqs Version:       	db8ad2d14d0a285ce0ad62bbefd0dce927663315
+Database type         	0
+Shuffle input database	true
+Createdb mode         	0
+Write lookup file     	1
+Offset of numeric ids 	0
+Compressed            	0
+Verbosity             	3
+
+Converting sequences
+[===================================================================================================	1 Mio. sequences processed
+===================================================================================================	2 Mio. sequences processed
+===================================================================================================	3 Mio. sequences processed
+===================================================================================
+Time for merging to mmdb_h: 0h 0m 4s 515ms
+Time for merging to mmdb: 0h 0m 7s 199ms
+Database type: Nucleotide
+Time for processing: 0h 0m 41s 181ms
+results/real_data/raw_outputs//tmp_contigs/mmdb exists and will be overwritten
+createdb example/crispr-host-prediction/IMGVR_all_nucleotides-high_confidence_nr.fna results/real_data/raw_outputs//tmp_contigs/mmdb 
+
+MMseqs Version:       	db8ad2d14d0a285ce0ad62bbefd0dce927663315
+Database type         	0
+Shuffle input database	true
+Createdb mode         	0
+Write lookup file     	1
+Offset of numeric ids 	0
+Compressed            	0
+Verbosity             	3
+
+Converting sequences
+[===================================================================================================	1 Mio. sequences processed
+===================================================================================================	2 Mio. sequences processed
+===================================================================================================	3 Mio. sequences processed
+===================================================================================================	4 Mio. sequences processed
+===================================================================================================	5 Mio. sequences processed
+==============================================
+Time for merging to mmdb_h: 0h 0m 8s 774ms
+Time for merging to mmdb: 0h 8m 59s 430ms
+Database type: Nucleotide
+Time for processing: 0h 34m 35s 990ms
+convertalis results/real_data/raw_outputs//tmp_spacers/mmdb results/real_data/raw_outputs//tmp_contigs/mmdb results/real_data/raw_outputs//tmp_mmseqs_outputs/mmseqs_output results/real_data/raw_outputs//mmseqs_output.tsv --format-mode 0 --search-type 4 --format-output query,target,nident,alnlen,mismatch,qlen,gapopen,qstart,qend,tstart,tend,evalue,bits 
+
+MMseqs Version:        	db8ad2d14d0a285ce0ad62bbefd0dce927663315
+Substitution matrix    	aa:blosum62.out,nucl:nucleotide.out
+Alignment format       	0
+Format alignment output	query,target,nident,alnlen,mismatch,qlen,gapopen,qstart,qend,tstart,tend,evalue,bits
+Translation table      	1
+Gap open cost          	aa:11,nucl:5
+Gap extension cost     	aa:1,nucl:2
+Database output        	false
+Preload mode           	0
+Search type            	4
+Threads                	64
+Compressed             	0
+Verbosity              	3
+
+[=================================================================] 3.84M 15s 67ms
+Time for merging to mmseqs_output.tsv: 0h 0m 37s 353ms
+Time for processing: 0h 1m 18s 655ms

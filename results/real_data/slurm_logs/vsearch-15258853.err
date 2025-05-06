@@ -1,0 +1,9 @@
+vsearch v2.29.2_linux_x86_64, 503.5GB RAM, 64 cores
+https://github.com/torognes/vsearch
+
+Reading file example/crispr-host-prediction/IMGVR_all_nucleotides-high_confidence_nr.fna 100%
+79049118084 nt in 5465076 seqs, min 165, max 2473870, avg 14464
+Masking 100%
+Counting k-mers 100%
+Creating k-mer index 100%
+Searchingslurmstepd: error: *** JOB 15258853 ON n0005.dori0 CANCELLED AT 2025-01-31T15:10:15 DUE TO TIME LIMIT ***

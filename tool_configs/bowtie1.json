@@ -1,0 +1,10 @@
+{
+  "name": "bowtie1",
+  "output_file": "{output_dir}/bowtie1_output.sam",
+  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "script_name": "bowtie1.sh",
+  "mamba_env": "bowtie1_env",
+  "command": [
+    "bowtie-build --threads {threads} {contigs_file} {results_dir}/simulated_data/bt1_contigs_index && bowtie --threads {threads} -f --all -v 3 -x {results_dir}/simulated_data/bt1_contigs_index {spacers_file} -S {output_dir}/bowtie1_output.sam"
+  ]
+}

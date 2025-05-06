@@ -1,0 +1,11 @@
+# this is not a DNA - DNA tool, but if maybe converting everything to amino acid? then revtrans ?
+{
+  "name": "diamond",
+  "output_file": "{output_dir}/diamond_output.tsv",
+  "parse_function_name": "parse_blast6",
+  "script_name": "diamond.sh",
+  "mamba_env": "diamond_env",
+  "command": [
+    "diamond blastx --query {spacers_file} --db {output_dir}/diamond_db --out {output_dir}/diamond_output.tsv --threads {threads} --outfmt 6 --id 75 --query-gencode 1 --range-culling --max-target-seqs 0 --query-cover 75 --evalue 0.01"
+  ]
+}

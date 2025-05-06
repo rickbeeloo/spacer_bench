@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.43">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Uri Neri">
+<meta name="author" content="Antonio Pedro Camargo">
+<meta name="author" content="Brian Bushnell">
+<meta name="author" content="Simon Roux">
+
+<title>The Drastic Effect of Choice of Spacer-to-Protospacer Search or Alignment Tool in CRISPR-Based Viral Defense Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7fd0fe4245b865325b8ce8dccb604d59.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-44021f42a2a1947de612bb117055efbf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<meta name="robots" content="noindex, nofollow">
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta name="citation_title" content="The Drastic Effect of Choice of Spacer-to-Protospacer Search or Alignment Tool in CRISPR-Based Viral Defense Analysis">
+<meta name="citation_author" content="Uri Neri">
+<meta name="citation_author" content="Antonio Pedro Camargo">
+<meta name="citation_author" content="Brian Bushnell">
+<meta name="citation_author" content="Simon Roux">
+<meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=CRISPR provides acquired resistance against viruses in prokaryotes;,citation_author=Rodolphe Barrangou;,citation_author=Christophe Fremaux;,citation_author=Hélène Deveau;,citation_author=Melissa Richards;,citation_author=Patrick Boyaval;,citation_author=Sylvain Moineau;,citation_author=Dennis A Romero;,citation_author=Philippe Horvath;,citation_publication_date=2007;,citation_cover_date=2007;,citation_year=2007;,citation_issue=5819;,citation_volume=315;,citation_journal_title=Science;,citation_publisher=American Association for the Advancement of Science;">
+<meta name="citation_reference" content="citation_title=Intervening sequences of regularly spaced prokaryotic repeats derive from foreign genetic elements;,citation_author=Francisco J. M. Mojica;,citation_author=César Díez-Villaseñor;,citation_author=Jesús García-Martínez;,citation_author=Elena Soria;,citation_publication_date=2005-02;,citation_cover_date=2005-02;,citation_year=2005;,citation_fulltext_html_url=http://dx.doi.org/10.1007/s00239-004-0046-3;,citation_issue=2;,citation_doi=10.1007/s00239-004-0046-3;,citation_issn=1432-1432;,citation_volume=60;,citation_journal_title=Journal of Molecular Evolution;,citation_publisher=Springer Science; Business Media LLC;">
+<meta name="citation_reference" content="citation_title=Streamlining CRISPR spacer-based bacterial host predictions to decipher the viral dark matter;,citation_author=Moïra B Dion;,citation_author=Pier-Luc Plante;,citation_author=Edwige Zufferey;,citation_author=Shiraz A Shah;,citation_author=Jacques Corbeil;,citation_author=Sylvain Moineau;,citation_publication_date=2021-03;,citation_cover_date=2021-03;,citation_year=2021;,citation_fulltext_html_url=http://dx.doi.org/10.1093/nar/gkab133;,citation_issue=6;,citation_doi=10.1093/nar/gkab133;,citation_issn=1362-4962;,citation_volume=49;,citation_journal_title=Nucleic Acids Research;,citation_publisher=Oxford University Press (OUP);">
+<meta name="citation_reference" content="citation_title=CRISPRTarget;,citation_author=Ambarish Biswas;,citation_author=Joshua N. Gagnon;,citation_author=Stan J. J. Brouns;,citation_author=Peter C. Fineran;,citation_author=Chris M. Brown and;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;,citation_issue=5;,citation_doi=10.4161/rna.24046;,citation_volume=10;,citation_journal_title=RNA Biology;,citation_publisher=Taylor &amp;amp;amp; Francis;">
+<meta name="citation_reference" content="citation_title=A fast and symmetric DUST implementation to mask low-complexity DNA sequences;,citation_author=Aleksandr Morgulis;,citation_author=E. Michael Gertz;,citation_author=Alejandro A. Schäffer;,citation_author=Richa Agarwala;,citation_publication_date=2006-06;,citation_cover_date=2006-06;,citation_year=2006;,citation_fulltext_html_url=http://dx.doi.org/10.1089/cmb.2006.13.1028;,citation_issue=5;,citation_doi=10.1089/cmb.2006.13.1028;,citation_issn=1557-8666;,citation_volume=13;,citation_journal_title=Journal of Computational Biology;,citation_publisher=Mary Ann Liebert Inc;">
+<meta name="citation_reference" content="citation_title=Horizontal gene transfer and CRISPR targeting drive phage-bacterial host interactions and coevolution in “pink berry” marine microbial aggregates;,citation_author=James C. Kosmopoulos;,citation_author=Danielle E. Campbell;,citation_author=Rachel J. Whitaker;,citation_author=Elizabeth G. Wilbanks;,citation_editor=Martha Vives;,citation_publication_date=2023-07;,citation_cover_date=2023-07;,citation_year=2023;,citation_fulltext_html_url=http://dx.doi.org/10.1128/aem.00177-23;,citation_issue=7;,citation_doi=10.1128/aem.00177-23;,citation_issn=1098-5336;,citation_volume=89;,citation_journal_title=Applied and Environmental Microbiology;,citation_publisher=American Society for Microbiology;">
+<meta name="citation_reference" content="citation_title=Evolutionary plasticity and functional versatility of CRISPR systems;,citation_abstract=The principal biological function of bacterial and archaeal CRISPR systems is RNA-guided adaptive immunity against viruses and other mobile genetic elements (MGEs). These systems show remarkable evolutionary plasticity and functional versatility at multiple levels, including both the defense mechanisms that lead to direct, specific elimination of the target DNA or RNA and those that cause programmed cell death (PCD) or induction of dormancy. This flexibility is also evident in the recruitment of CRISPR systems for nondefense functions. Defective CRISPR systems or individual CRISPR components have been recruited by transposons for RNA-guided transposition, by plasmids for interplasmid competition, and by viruses for antidefense and interviral conflicts. Additionally, multiple highly derived CRISPR variants of yet unknown functions have been discovered. A major route of innovation in CRISPR evolution is the repurposing of diverged repeat variants encoded outside CRISPR arrays for various structural and regulatory functions. The evolutionary plasticity and functional versatility of CRISPR systems are striking manifestations of the ubiquitous interplay between defense and “normal” cellular functions.;,citation_author=Kira S. Koonin;,citation_publication_date=2022-01;,citation_cover_date=2022-01;,citation_year=2022;,citation_fulltext_html_url=https://doi.org/10.1371/journal.pbio.3001481;,citation_issue=1;,citation_doi=10.1371/journal.pbio.3001481;,citation_volume=20;,citation_journal_title=PLOS Biology;,citation_publisher=Public Library of Science;">
+<meta name="citation_reference" content="citation_title=Evolutionary classification of CRISPR–cas systems: A burst of class 2 and derived variants;,citation_author=Kira S Makarova;,citation_author=Yuri I Wolf;,citation_author=Jaime Iranzo;,citation_author=Sergey A Shmakov;,citation_author=Omer S Alkhnbashi;,citation_author=Stan JJ Brouns;,citation_author=Emmanuelle Charpentier;,citation_author=David Cheng;,citation_author=Daniel H Haft;,citation_author=Philippe Horvath;,citation_author=others;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_issue=2;,citation_volume=18;,citation_journal_title=Nature Reviews Microbiology;,citation_publisher=Nature Publishing Group;">
+<meta name="citation_reference" content="citation_title=The CRISPR spacer space is dominated by sequences from species-specific mobilomes;,citation_author=Sergey A. Shmakov;,citation_author=Vassilii Sitnik;,citation_author=Kira S. Makarova;,citation_author=Yuri I. Wolf;,citation_author=Konstantin V. Severinov;,citation_author=Eugene V. Koonin;,citation_editor=Michael S. Gilmore;,citation_publication_date=2017-11;,citation_cover_date=2017-11;,citation_year=2017;,citation_fulltext_html_url=http://dx.doi.org/10.1128/mbio.01397-17;,citation_issue=5;,citation_doi=10.1128/mbio.01397-17;,citation_issn=2150-7511;,citation_volume=8;,citation_journal_title=mBio;,citation_publisher=American Society for Microbiology;">
+<meta name="citation_reference" content="citation_title=A CRISPR/cas system mediates bacterial innate immune evasion and virulence;,citation_author=Timothy R. Sampson;,citation_author=Sunil D. Saroj;,citation_author=Anna C. Llewellyn;,citation_author=Yih-Ling Tzeng;,citation_author=David S. Weiss;,citation_publication_date=2013-04;,citation_cover_date=2013-04;,citation_year=2013;,citation_fulltext_html_url=http://dx.doi.org/10.1038/nature12048;,citation_issue=7448;,citation_doi=10.1038/nature12048;,citation_issn=1476-4687;,citation_volume=497;,citation_journal_title=Nature;,citation_publisher=Springer Science; Business Media LLC;">
+<meta name="citation_reference" content="citation_title=The nuts and bolts of the haloferax CRISPR-cas system i-b;,citation_author=Lisa-Katharina Maier;,citation_author=Aris-Edda Stachler;,citation_author=Jutta Brendel;,citation_author=Britta Stoll;,citation_author=Susan Fischer;,citation_author=Karina A. Haas;,citation_author=Thandi S. Schwarz;,citation_author=Omer S. Alkhnbashi;,citation_author=Kundan Sharma;,citation_author=Henning Urlaub;,citation_author=Rolf Backofen;,citation_author=Uri Gophna;,citation_author=Anita Marchfelder;,citation_publication_date=2018-05;,citation_cover_date=2018-05;,citation_year=2018;,citation_fulltext_html_url=http://dx.doi.org/10.1080/15476286.2018.1460994;,citation_issue=4;,citation_doi=10.1080/15476286.2018.1460994;,citation_issn=1555-8584;,citation_volume=16;,citation_journal_title=RNA Biology;,citation_publisher=Informa UK Limited;">
+<meta name="citation_reference" content="citation_title=Widespread CRISPR-derived RNA regulatory elements in CRISPR-cas systems;,citation_author=Sergey A Shmakov;,citation_author=Zachary K Barth;,citation_author=Kira S Makarova;,citation_author=Yuri I Wolf;,citation_author=Vyacheslav Brover;,citation_author=Joseph E Peters;,citation_author=Eugene V Koonin;,citation_publication_date=2023-06;,citation_cover_date=2023-06;,citation_year=2023;,citation_fulltext_html_url=http://dx.doi.org/10.1093/nar/gkad495;,citation_issue=15;,citation_doi=10.1093/nar/gkad495;,citation_issn=1362-4962;,citation_volume=51;,citation_journal_title=Nucleic Acids Research;,citation_publisher=Oxford University Press (OUP);">
+<meta name="citation_reference" content="citation_title=SpacePHARER: Sensitive identification of phages from CRISPR spacers in prokaryotic hosts;,citation_author=Ruoshi Zhang;,citation_author=Milot Mirdita;,citation_author=Eli Levy Karin;,citation_author=Clovis Norroy;,citation_author=Clovis Galiez;,citation_author=Johannes Söding;,citation_editor=Alfonso Valencia;,citation_publication_date=2021-04;,citation_cover_date=2021-04;,citation_year=2021;,citation_fulltext_html_url=http://dx.doi.org/10.1093/bioinformatics/btab222;,citation_issue=19;,citation_doi=10.1093/bioinformatics/btab222;,citation_issn=1367-4811;,citation_volume=37;,citation_journal_title=Bioinformatics;,citation_publisher=Oxford University Press (OUP);">
+<meta name="citation_reference" content="citation_title=iPHoP: An integrated machine learning framework to maximize host prediction for metagenome-derived viruses of archaea and bacteria;,citation_author=Antonio Pedro AND Coutinho Roux;,citation_publication_date=2023-04;,citation_cover_date=2023-04;,citation_year=2023;,citation_fulltext_html_url=https://doi.org/10.1371/journal.pbio.3002083;,citation_issue=4;,citation_doi=10.1371/journal.pbio.3002083;,citation_volume=21;,citation_journal_title=PLOS Biology;,citation_publisher=Public Library of Science;">
+<meta name="citation_reference" content="citation_title=Binary codes capable of correcting deletions, insertions and reversals;,citation_author=Vladimir I Levenshtein;,citation_publication_date=1966-02;,citation_cover_date=1966-02;,citation_year=1966;,citation_volume=10;,citation_journal_title=Soviet Physics Doklady;">
+<meta name="citation_reference" content="citation_title=Evolution of superinfection immunity in cluster a mycobacteriophages;,citation_author=Travis N. Mavrich;,citation_author=Graham F. Hatfull;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://journals.asm.org/doi/abs/10.1128/mbio.00971-19;,citation_issue=3;,citation_doi=10.1128/mbio.00971-19;,citation_volume=10;,citation_journal_title=mBio;">
+<meta name="citation_reference" content="citation_title=Comprehensive analysis of CRISPR array repeat mutations reveals subtype-specific patterns and links to spacer dynamics;,citation_author=Alexander Mitrofanov;,citation_author=Chase L. Beisel;,citation_author=Franz Baumdicker;,citation_author=Omer S. Alkhnbashi;,citation_author=Rolf Backofen;,citation_publication_date=2025;,citation_cover_date=2025;,citation_year=2025;,citation_fulltext_html_url=https://www.biorxiv.org/content/early/2025/04/02/2025.04.02.646798;,citation_doi=10.1101/2025.04.02.646798;,citation_journal_title=bioRxiv;,citation_publisher=Cold Spring Harbor Laboratory;">
+<meta name="citation_reference" content="citation_title=PAM-repeat associations and spacer selection preferences in single and co-occurring CRISPR-cas systems;,citation_author=Jochem N. A. Vink;,citation_author=Jan-Hendrik L. Baijens;,citation_author=Stan J. J. Brouns;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_doi=10.1186/s13059-021-02495-9;,citation_pmid=34593010;,citation_journal_title=Genome Biology;">
+<meta name="citation_reference" content="citation_title=Ultrafast and memory-efficient alignment of short DNA sequences to the human genome;,citation_author=Ben Langmead;,citation_author=Cole Trapnell;,citation_author=Mihai Pop;,citation_author=Steven L Salzberg;,citation_publication_date=2009-03;,citation_cover_date=2009-03;,citation_year=2009;,citation_issue=3;,citation_volume=10;,citation_journal_title=Genome Biol.;,citation_publisher=Springer Nature;">
+<meta name="citation_reference" content="citation_title=Fast gapped-read alignment with bowtie 2;,citation_author=Ben Langmead;,citation_author=Steven L Salzberg;,citation_publication_date=2012-03;,citation_cover_date=2012-03;,citation_year=2012;,citation_issue=4;,citation_volume=9;,citation_journal_title=Nat. Methods;,citation_publisher=Springer Science; Business Media LLC;">
+<meta name="citation_reference" content="citation_title=Identification of mobile genetic elements with geNomad;,citation_author=Antonio Pedro Camargo;,citation_author=Simon Roux;,citation_author=Frederik Schulz;,citation_author=Michal Babinski;,citation_author=Yan Xu;,citation_author=Bin Hu;,citation_author=Patrick S. G. Chain;,citation_author=Stephen Nayfach;,citation_author=Nikos C. Kyrpides;,citation_publication_date=2024-08;,citation_cover_date=2024-08;,citation_year=2024;,citation_fulltext_html_url=https://www.nature.com/articles/s41587-023-01953-y;,citation_issue=8;,citation_doi=10.1038/s41587-023-01953-y;,citation_issn=1087-0156, 1546-1696;,citation_volume=42;,citation_journal_title=Nature Biotechnology;">
+<meta name="citation_reference" content="citation_title=Sambamba: Fast processing of NGS alignment formats;,citation_author=Artem Tarasov;,citation_author=Albert J. Vilella;,citation_author=Edwin Cuppen;,citation_author=Isaac J. Nijman;,citation_author=Pjotr Prins;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url= + http://dx.doi.org/10.1093/bioinformatics/btv098;,citation_issue=12;,citation_doi=10.1093/bioinformatics/btv098;,citation_volume=31;,citation_journal_title=Bioinformatics;">
+<meta name="citation_reference" content="citation_title=conda: A system-level, binary package and environment manager running on all major operating systems and platforms.;,citation_author=conda contributors;,citation_fulltext_html_url=https://github.com/conda/conda;">
+<meta name="citation_reference" content="citation_title=Mamba: The Fast Cross-Platform Package Manager;,citation_author=mamba-org;,citation_fulltext_html_url=https://github.com/mamba-org/mamba;">
+<meta name="citation_reference" content="citation_title=MMseqs2 enables sensitive protein sequence searching for the analysis of massive data sets;,citation_author=Martin Steinegger;,citation_author=Johannes Söding;,citation_publication_date=2017-11;,citation_cover_date=2017-11;,citation_year=2017;,citation_issue=11;,citation_volume=35;,citation_journal_title=Nat. Biotechnol.;,citation_publisher=Springer Science; Business Media LLC;">
+<meta name="citation_reference" content="citation_title=Basic local alignment search tool;,citation_author=S F Altschul;,citation_author=W Gish;,citation_author=W Miller;,citation_author=E W Myers;,citation_author=D J Lipman;,citation_publication_date=1990-10;,citation_cover_date=1990-10;,citation_year=1990;,citation_issue=3;,citation_volume=215;,citation_journal_title=J. Mol. Biol.;,citation_publisher=Elsevier BV;">
+<meta name="citation_reference" content="citation_title=pysam: htslib interface for python;,citation_author=pysam-developers;,citation_fulltext_html_url=https://github.com/pysam-developers/pysam;">
+<meta name="citation_reference" content="citation_title=HTSlib: C library for reading/writing high-throughput sequencing data;,citation_author=James K Bonfield;,citation_author=John Marshall;,citation_author=Petr Danecek;,citation_author=Heng Li;,citation_author=Valeriu Ohan;,citation_author=Andrew Whitwham;,citation_author=Thomas Keane;,citation_author=Robert M Davies;,citation_publication_date=2021-02;,citation_cover_date=2021-02;,citation_year=2021;,citation_fulltext_html_url=https://doi.org/10.1093/gigascience/giab007;,citation_issue=2;,citation_doi=10.1093/gigascience/giab007;,citation_issn=2047-217X;,citation_volume=10;,citation_journal_title=GigaScience;">
+<meta name="citation_reference" content="citation_title=hyperfine;,citation_author=David Peter;,citation_publication_date=2023-03;,citation_cover_date=2023-03;,citation_year=2023;,citation_fulltext_html_url=https://github.com/sharkdp/hyperfine;">
+<meta name="citation_reference" content="citation_title=Parasail: SIMD c library for global, semi-global, and local pairwise sequence alignments;,citation_author=Jeff Daily;,citation_publication_date=2016-02;,citation_cover_date=2016-02;,citation_year=2016;,citation_fulltext_html_url=https://doi.org/10.1186/s12859-016-0930-z;,citation_issue=1;,citation_doi=10.1186/s12859-016-0930-z;,citation_issn=1471-2105;,citation_volume=17;,citation_journal_title=BMC Bioinformatics;">
+<meta name="citation_reference" content="citation_title=Supplementary data for CRISPR spacer-protospacer matching benchmarks [data set];,citation_author=U. Neri;,citation_author=A. Pedro Camargo;,citation_author=S. Roux;,citation_author=B. Brian;,citation_doi=10.5281/zenodo.15171878;">
+<meta name="citation_reference" content="citation_title=pyseff: A Python script to calculate the efficiency of SLURM jobs;,citation_author=Uri Neri;,citation_fulltext_html_url=https://github.com/UriNeri/pyseff;">
+<meta name="citation_reference" content="citation_title=Minimap2: Pairwise alignment for nucleotide sequences;,citation_author=Heng Li;,citation_publication_date=2018-09;,citation_cover_date=2018-09;,citation_year=2018;,citation_issue=18;,citation_volume=34;,citation_journal_title=Bioinformatics;,citation_publisher=Oxford University Press (OUP);">
+<meta name="citation_reference" content="citation_title=CRISPR targeting reveals a reservoir of common phages associated with the human gut microbiome;,citation_abstract=The bacterial community in the human gut has crucial health roles both in metabolic functions and in protection against pathogens. Phages, which are known to significantly affect microbial community composition in many ecological niches, have the potential to impact the gut microbiota, yet thorough characterization of this relationship remains elusive. We have reconstructed the content of the CRISPR bacterial immune system in the human gut microbiomes of 124 European individuals and used it to identify a catalog of 991 phages targeted by CRISPR across all individuals. Our results show that 78;,citation_author=Adi Stern;,citation_author=Eran Mick;,citation_author=Itay Tirosh;,citation_author=Or Sagy;,citation_author=Rotem Sorek;,citation_publication_date=2012-10;,citation_cover_date=2012-10;,citation_year=2012;,citation_issue=10;,citation_doi=10.1101/gr.138297.112;,citation_issn=1088-9051;,citation_volume=22;,citation_journal_title=Genome Research;,citation_publisher=Cold Spring Harbor Laboratory Press;">
+<meta name="citation_reference" content="citation_title=Holding a grudge;,citation_author=Adi Stern Eran Mick;,citation_author=Rotem Sorek;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;,citation_issue=5;,citation_doi=10.4161/rna.23929;,citation_volume=10;,citation_journal_title=RNA Biology;,citation_publisher=Taylor &amp;amp;amp; Francis;">
+<meta name="citation_reference" content="citation_title=Pyfastx: A robust python package for fast random access to sequences from plain and gzipped FASTA/Q files;,citation_author=Lianming Du;,citation_author=Qin Liu;,citation_author=Zhenxin Fan;,citation_author=Jie Tang;,citation_author=Xiuyue Zhang;,citation_author=Megan Price;,citation_author=Bisong Yue;,citation_author=Kelei Zhao;,citation_publication_date=2021-07;,citation_cover_date=2021-07;,citation_year=2021;,citation_issue=4;,citation_volume=22;,citation_journal_title=Brief. Bioinform.;,citation_publisher=Oxford University Press (OUP);">
+<meta name="citation_reference" content="citation_title=Strobealign: Flexible seed size enables ultra-fast and accurate read alignment;,citation_author=Kristoffer Sahlin;,citation_publication_date=2022-12;,citation_cover_date=2022-12;,citation_year=2022;,citation_issue=1;,citation_volume=23;,citation_journal_title=Genome Biol.;">
+<meta name="citation_reference" content="citation_title=MUMmer4: A fast and versatile genome alignment system;,citation_author=Guillaume Marçais;,citation_author=Arthur L Delcher;,citation_author=Adam M Phillippy;,citation_author=Rachel Coston;,citation_author=Steven L Salzberg;,citation_author=Aleksey Zimin;,citation_publication_date=2018-01;,citation_cover_date=2018-01;,citation_year=2018;,citation_issue=1;,citation_doi=10.1371/journal.pcbi.1005944;,citation_volume=14;,citation_journal_title=PLoS Comput. Biol.;,citation_publisher=Public Library of Science (PLoS);">
+<meta name="citation_reference" content="citation_title=VSEARCH: a versatile open source tool for metagenomic;,citation_author=Torbjørn Rognes;,citation_author=Tomas Flouri;,citation_author=Ben Nichols;,citation_author=Christopher Quince;,citation_author=Frédéric Mahé;,citation_publication_date=2016-10;,citation_cover_date=2016-10;,citation_year=2016;,citation_doi=10.7717/peerj.2584;,citation_volume=4;,citation_journal_title=Peer Journal;">
+<meta name="citation_reference" content="citation_title=LexicMap: Efficient sequence alignment against millions of prokaryotic genomes;,citation_author=Wei Shen;,citation_author=Zamin Iqbal;,citation_publication_date=2024-08;,citation_cover_date=2024-08;,citation_year=2024;,citation_journal_title=bioRxiv;">
+<meta name="citation_reference" content="citation_title=CRISPR-cas spacer acquisition is a rare event in human gut microbiome;,citation_author=An-Ni Zhang;,citation_author=Jeffry M. Gaston;,citation_author=Pablo Cárdenas;,citation_author=Shijie Zhao;,citation_author=Xiaoqiong Gu;,citation_author=Eric J. Alm;,citation_publication_date=2025-01;,citation_cover_date=2025-01;,citation_year=2025;,citation_fulltext_html_url=http://dx.doi.org/10.1016/j.xgen.2024.100725;,citation_issue=1;,citation_doi=10.1016/j.xgen.2024.100725;,citation_issn=2666-979X;,citation_volume=5;,citation_journal_title=Cell Genomics;,citation_publisher=Elsevier BV;">
+<meta name="citation_reference" content="citation_title=Self-targeting by CRISPR: Gene regulation or autoimmunity?;,citation_author=Adi Stern;,citation_author=Leeat Keren;,citation_author=Omri Wurtzel;,citation_author=Gil Amitai;,citation_author=Rotem Sorek;,citation_publication_date=2010-08;,citation_cover_date=2010-08;,citation_year=2010;,citation_fulltext_html_url=http://dx.doi.org/10.1016/j.tig.2010.05.008;,citation_issue=8;,citation_doi=10.1016/j.tig.2010.05.008;,citation_issn=0168-9525;,citation_volume=26;,citation_journal_title=Trends in Genetics;,citation_publisher=Elsevier BV;">
+<meta name="citation_reference" content="citation_title=CRISPR-cas systems and the paradox of self-targeting spacers;,citation_author=Franziska Wimmer;,citation_author=Chase L. Beisel;,citation_publication_date=2020-01;,citation_cover_date=2020-01;,citation_year=2020;,citation_fulltext_html_url=http://dx.doi.org/10.3389/fmicb.2019.03078;,citation_doi=10.3389/fmicb.2019.03078;,citation_issn=1664-302X;,citation_volume=10;,citation_journal_title=Frontiers in Microbiology;,citation_publisher=Frontiers Media SA;">
+<meta name="citation_reference" content="citation_title=Pervasive acquisition of CRISPR memory driven by inter-species mating of archaea can limit gene transfer and influence speciation;,citation_author=Israela Turgeman-Grott;,citation_author=Shirley Joseph;,citation_author=Sam Marton;,citation_author=Kim Eizenshtein;,citation_author=Adit Naor;,citation_author=Shannon M. Soucy;,citation_author=Aris-Edda Stachler;,citation_author=Yarden Shalev;,citation_author=Mor Zarkor;,citation_author=Leah Reshef;,citation_author=Neta Altman-Price;,citation_author=Anita Marchfelder;,citation_author=Uri Gophna;,citation_publication_date=2018-11;,citation_cover_date=2018-11;,citation_year=2018;,citation_fulltext_html_url=http://dx.doi.org/10.1038/s41564-018-0302-8;,citation_issue=1;,citation_doi=10.1038/s41564-018-0302-8;,citation_issn=2058-5276;,citation_volume=4;,citation_journal_title=Nature Microbiology;,citation_publisher=Springer Science; Business Media LLC;">
+<meta name="citation_reference" content="citation_title=CRISPRmap: An automated classification of repeat conservation in prokaryotic adaptive immune systems;,citation_author=Sita J. Lange;,citation_author=Omer S. Alkhnbashi;,citation_author=Dominic Rose;,citation_author=Sebastian Will;,citation_author=Rolf Backofen;,citation_publication_date=2013-07;,citation_cover_date=2013-07;,citation_year=2013;,citation_fulltext_html_url=https://doi.org/10.1093/nar/gkt606;,citation_issue=17;,citation_doi=10.1093/nar/gkt606;,citation_issn=0305-1048;,citation_volume=41;,citation_journal_title=Nucleic Acids Research;">
+<meta name="citation_reference" content="citation_title=Computational approaches to predict bacteriophage–host relationships;,citation_author=Robert A. Edwards;,citation_author=Katelyn McNair;,citation_author=Karoline Faust;,citation_author=Jeroen Raes;,citation_author=Bas E. Dutilh;,citation_publication_date=2015-12;,citation_cover_date=2015-12;,citation_year=2015;,citation_fulltext_html_url=https://doi.org/10.1093/femsre/fuv048;,citation_issue=2;,citation_doi=10.1093/femsre/fuv048;,citation_issn=0168-6445;,citation_volume=40;,citation_journal_title=FEMS Microbiology Reviews;">
+<meta name="citation_reference" content="citation_title=BBMap: A fast, accurate, splice-aware aligner;,citation_author=Brian Bushnell;,citation_publication_date=2014-03;,citation_cover_date=2014-03;,citation_year=2014;,citation_fulltext_html_url=https://www.osti.gov/biblio/1241166;,citation_publisher=Lawrence Berkeley National Lab. (LBNL), Berkeley, CA (United States);">
+<meta name="citation_reference" content="citation_title=IMG/VR v4: An expanded database of uncultivated virus genomes within a framework of extensive functional, taxonomic, and ecological metadata;,citation_author=Antonio Pedro Camargo;,citation_author=Stephen Nayfach;,citation_author=I-Min A Chen;,citation_author=Krishnaveni Palaniappan;,citation_author=Anna Ratner;,citation_author=Ken Chu;,citation_author=Stephan J Ritter;,citation_author=T B K Reddy;,citation_author=Supratim Mukherjee;,citation_author=Frederik Schulz;,citation_author=Lee Call;,citation_author=Russell Y Neches;,citation_author=Tanja Woyke;,citation_author=Natalia N Ivanova;,citation_author=Emiley A Eloe-Fadrosh;,citation_author=Nikos C Kyrpides;,citation_author=Simon Roux;,citation_publication_date=2023-01;,citation_cover_date=2023-01;,citation_year=2023;,citation_fulltext_html_url=https://academic.oup.com/nar/article/51/D1/D733/6833254;,citation_issue=D1;,citation_doi=10.1093/nar/gkac1037;,citation_issn=0305-1048, 1362-4962;,citation_volume=51;,citation_journal_title=Nucleic Acids Research;">
+<meta name="citation_reference" content="citation_title=PHIST: Fast and accurate prediction of prokaryotic hosts from metagenomic viral sequences;,citation_author=Andrzej Zielezinski;,citation_author=Sebastian Deorowicz;,citation_author=Adam Gudyś;,citation_publication_date=2022-02;,citation_cover_date=2022-02;,citation_year=2022;,citation_fulltext_html_url=https://academic.oup.com/bioinformatics/article/38/5/1447/6460800;,citation_issue=5;,citation_doi=10.1093/bioinformatics/btab837;,citation_issn=1367-4803, 1367-4811;,citation_volume=38;,citation_journal_title=Bioinformatics;">
+<meta name="citation_reference" content="citation_title=Misunderstood parameter of NCBI BLAST impacts the correctness of bioinformatics workflows;,citation_author=Nidhi Shah;,citation_author=Michael G Nute;,citation_author=Tandy Warnow;,citation_author=Mihai Pop;,citation_publication_date=2018-09;,citation_cover_date=2018-09;,citation_year=2018;,citation_fulltext_html_url=https://doi.org/10.1093/bioinformatics/bty833;,citation_issue=9;,citation_doi=10.1093/bioinformatics/bty833;,citation_issn=1367-4803;,citation_volume=35;,citation_journal_title=Bioinformatics;">
+<meta name="citation_reference" content="citation_title=Reply to the paper: Misunderstood parameters of NCBI BLAST impacts the correctness of bioinformatics workflows;,citation_author=Thomas L Madden;,citation_author=Ben Busby;,citation_author=Jian Ye;,citation_publication_date=2018-12;,citation_cover_date=2018-12;,citation_year=2018;,citation_fulltext_html_url=https://doi.org/10.1093/bioinformatics/bty1026;,citation_issue=15;,citation_doi=10.1093/bioinformatics/bty1026;,citation_issn=1367-4803;,citation_volume=35;,citation_journal_title=Bioinformatics;">
+<meta name="citation_reference" content="citation_title=CRISPRidentify: Identification of CRISPR arrays using machine learning approach;,citation_author=Alexander Mitrofanov;,citation_author=Omer S Alkhnbashi;,citation_author=Sergey A Shmakov;,citation_author=Kira S Makarova;,citation_author=Eugene V Koonin;,citation_author=Rolf Backofen;,citation_publication_date=2021-02;,citation_cover_date=2021-02;,citation_year=2021;,citation_fulltext_html_url=https://academic.oup.com/nar/article/49/4/e20/6027817;,citation_issue=4;,citation_doi=10.1093/nar/gkaa1158;,citation_issn=0305-1048, 1362-4962;,citation_volume=49;,citation_journal_title=Nucleic Acids Research;">
+<meta name="citation_reference" content="citation_title=CRISPR-Cas System of a Prevalent Human Gut Bacterium Reveals Hyper-targeting against Phages in a Human Virome Catalog;,citation_author=Paola Soto-Perez;,citation_author=Jordan E. Bisanz;,citation_author=Joel D. Berry;,citation_author=Kathy N. Lam;,citation_author=Joseph Bondy-Denomy;,citation_author=Peter J. Turnbaugh;,citation_publication_date=2019-09;,citation_cover_date=2019-09;,citation_year=2019;,citation_fulltext_html_url=https://linkinghub.elsevier.com/retrieve/pii/S1931312819304172;,citation_issue=3;,citation_doi=10.1016/j.chom.2019.08.008;,citation_issn=19313128;,citation_volume=26;,citation_journal_title=Cell Host &amp;amp;amp; Microbe;">
+<meta name="citation_reference" content="citation_title=CRISPR Recognition Tool (CRT): A tool for automatic detection of clustered regularly interspaced palindromic repeats;,citation_author=Charles Bland;,citation_author=Teresa L Ramsey;,citation_author=Fareedah Sabree;,citation_author=Micheal Lowe;,citation_author=Kyndall Brown;,citation_author=Nikos C Kyrpides;,citation_author=Philip Hugenholtz;,citation_publication_date=2007-12;,citation_cover_date=2007-12;,citation_year=2007;,citation_fulltext_html_url=https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-209;,citation_issue=1;,citation_doi=10.1186/1471-2105-8-209;,citation_issn=1471-2105;,citation_volume=8;,citation_journal_title=BMC Bioinformatics;">
+<meta name="citation_reference" content="citation_title=PILER-CR: Fast and accurate identification of CRISPR repeats;,citation_author=Robert C Edgar;,citation_publication_date=2007-12;,citation_cover_date=2007-12;,citation_year=2007;,citation_fulltext_html_url=https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-18;,citation_issue=1;,citation_doi=10.1186/1471-2105-8-18;,citation_issn=1471-2105;,citation_volume=8;,citation_journal_title=BMC Bioinformatics;">
+</head>
+
+<body>
+
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The Drastic Effect of Choice of Spacer-to-Protospacer Search or Alignment Tool in CRISPR-Based Viral Defense Analysis</h1>
+          </div>
+
+    
+    <div class="quarto-title-meta-container">
+      <div class="quarto-title-meta-column-start">
+            <div class="quarto-title-meta-author">
+          <div class="quarto-title-meta-heading">Authors</div>
+          <div class="quarto-title-meta-heading">Affiliation</div>
+          
+                <div class="quarto-title-meta-contents">
+            <p class="author">Uri Neri <a href="mailto:uneri@lbl.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        DOE Joint Genome Institute
+                      </p>
+                  </div>
+                      <div class="quarto-title-meta-contents">
+            <p class="author">Antonio Pedro Camargo </p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        DOE Joint Genome Institute
+                      </p>
+                  </div>
+                      <div class="quarto-title-meta-contents">
+            <p class="author">Brian Bushnell </p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        DOE Joint Genome Institute
+                      </p>
+                  </div>
+                      <div class="quarto-title-meta-contents">
+            <p class="author">Simon Roux </p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        DOE Joint Genome Institute
+                      </p>
+                  </div>
+                    </div>
+        
+        <div class="quarto-title-meta">
+
+                      
+          
+                
+              </div>
+      </div>
+      <div class="quarto-title-meta-column-end quarto-other-formats-target">
+      <div class="quarto-alternate-formats"><div class="quarto-title-meta-heading">Other Formats</div><div class="quarto-title-meta-contents"><p><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></p></div><div class="quarto-title-meta-contents"><p><a href="index.docx"><i class="bi bi-file-word"></i>MS Word</a></p></div></div></div>
+    </div>
+
+
+
+    <div class="quarto-other-links-text-target">
+    </div>  </div>
+</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-abstract" id="toc-sec-abstract" class="nav-link active" data-scroll-target="#sec-abstract"><span class="header-section-number">1</span> Abstract</a></li>
+  <li><a href="#sec-introduction" id="toc-sec-introduction" class="nav-link" data-scroll-target="#sec-introduction"><span class="header-section-number">2</span> Introduction</a></li>
+  <li><a href="#sec-methods" id="toc-sec-methods" class="nav-link" data-scroll-target="#sec-methods"><span class="header-section-number">3</span> Methods</a>
+  <ul class="collapse">
+  <li><a href="#sec-tool-selection" id="toc-sec-tool-selection" class="nav-link" data-scroll-target="#sec-tool-selection"><span class="header-section-number">3.1</span> Tool Selection</a></li>
+  <li><a href="#data-generation-and-acquisition" id="toc-data-generation-and-acquisition" class="nav-link" data-scroll-target="#data-generation-and-acquisition"><span class="header-section-number">3.2</span> Data Generation and acquisition</a></li>
+  <li><a href="#synthetic-dataset" id="toc-synthetic-dataset" class="nav-link" data-scroll-target="#synthetic-dataset"><span class="header-section-number">3.3</span> Synthetic dataset</a></li>
+  <li><a href="#real-datasets" id="toc-real-datasets" class="nav-link" data-scroll-target="#real-datasets"><span class="header-section-number">3.4</span> Real datasets</a></li>
+  <li><a href="#sec-alignment-recalc" id="toc-sec-alignment-recalc" class="nav-link" data-scroll-target="#sec-alignment-recalc"><span class="header-section-number">3.5</span> Alignment and Recalculation of Mismatches</a></li>
+  <li><a href="#sec-performance-calc" id="toc-sec-performance-calc" class="nav-link" data-scroll-target="#sec-performance-calc"><span class="header-section-number">3.6</span> Performance definition and calculation</a></li>
+  <li><a href="#sec-benchmark" id="toc-sec-benchmark" class="nav-link" data-scroll-target="#sec-benchmark"><span class="header-section-number">3.7</span> Benchmarking framework</a></li>
+  <li><a href="#sec-resource-tracking" id="toc-sec-resource-tracking" class="nav-link" data-scroll-target="#sec-resource-tracking"><span class="header-section-number">3.8</span> Computational Resource and runtime tracking</a></li>
+  <li><a href="#sec-reproducibility" id="toc-sec-reproducibility" class="nav-link" data-scroll-target="#sec-reproducibility"><span class="header-section-number">3.9</span> Versioning and Reproducibility</a></li>
+  <li><a href="#extensibility" id="toc-extensibility" class="nav-link" data-scroll-target="#extensibility"><span class="header-section-number">3.10</span> Extensibility</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">4</span> Results</a>
+  <ul class="collapse">
+  <li><a href="#sec-mismatch-performance" id="toc-sec-mismatch-performance" class="nav-link" data-scroll-target="#sec-mismatch-performance"><span class="header-section-number">4.1</span> Performance as a function of mismatch threshold</a></li>
+  <li><a href="#sec-abundance-performance" id="toc-sec-abundance-performance" class="nav-link" data-scroll-target="#sec-abundance-performance"><span class="header-section-number">4.2</span> Performance as a function of query (spacer) abundance in reference database</a></li>
+  <li><a href="#sec-pairwise" id="toc-sec-pairwise" class="nav-link" data-scroll-target="#sec-pairwise"><span class="header-section-number">4.3</span> Overall number of identified spacer-contig</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">5</span> Discussion</a>
+  <ul class="collapse">
+  <li><a href="#study-limitations" id="toc-study-limitations" class="nav-link" data-scroll-target="#study-limitations"><span class="header-section-number">5.1</span> Study Limitations</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">6</span> Conclusion</a></li>
+  <li><a href="#code-and-data-availability" id="toc-code-and-data-availability" class="nav-link" data-scroll-target="#code-and-data-availability"><span class="header-section-number">7</span> Code and data availability</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><span class="header-section-number">8</span> Acknowledgements</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+  
+
+
+<section id="sec-abstract" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="sec-abstract"><span class="header-section-number">1</span> Abstract</h2>
+<p>CRISPR (Clustered Regularly Interspaced Short Palindromic Repeats) systems are a fundamental defense mechanism in prokaryotes, where short sequences called spacers are stored in the host genome to recognize and target exogenous genetic elements. Viromics, the study of viral communities in environmental samples, relies heavily on identifying these spacer-target interactions to understand host-virus relationships. However, the choice of sequence search tool to identify putative spacer targets is often overlooked, leading to an unknown impact of downstream inferences in virus-host analysis. Here, we utilize simulated and real datasets to compare popular sequence alignment and search tools, revealing critical differences in their ability to detect multiple matches and handle varying degrees of sequence identity between spacers and potential targets. Finally, we provide general guidelines that may inform future research regarding matching, which is a common practice in studying the complex nature of host-MGE interactions.</p>
+</section>
+<section id="sec-introduction" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="sec-introduction"><span class="header-section-number">2</span> Introduction</h2>
+<p>CRISPR (clustered regularly interspaced short palindromic repeats) systems play a vital role in prokaryotic defense against mobile genetic elements, including viruses, plasmids, and other autonomous genetic elements<span class="citation" data-cites="Mojica_2005 CRISPR_review"><sup><a href="#ref-Mojica_2005" role="doc-biblioref">1</a>,<a href="#ref-CRISPR_review" role="doc-biblioref">2</a></sup></span>. These systems are organized as arrays in the bacteria or archaea genome, where short sequences called spacers are interspersed between repeated sequences. The spacer sequences within these arrays guide the targeting of invasive genetic elements, allowing for specific defense against these threats<span class="citation" data-cites="CRISPR_classification"><sup><a href="#ref-CRISPR_classification" role="doc-biblioref">3</a></sup></span>. The corresponding locus on the virus genome where the spacer complements is termed “protospacer”. The analysis of spacer-protospacer pairs is essential in understanding the complex interactions between hosts and MGEs<span class="citation" data-cites="Edwards2015_phage_host"><sup><a href="#ref-Edwards2015_phage_host" role="doc-biblioref">4</a></sup></span>.</p>
+<p>The identification of genuine host-MGE interactions through spacer-protospacer matching presents unique challenges due to the dynamic nature of these relationships and the complexity of sequence evolution. While matches between spacers and protospacers are often interpreted as evidence of interaction, various biological and technical factors can complicate this interpretation<span class="citation" data-cites="Edwards2015_phage_host soto_perez_crispr_2019"><sup><a href="#ref-Edwards2015_phage_host" role="doc-biblioref">4</a>,<a href="#ref-soto_perez_crispr_2019" role="doc-biblioref">5</a></sup></span>.</p>
+<p>Several key scenarios can lead to false positive assignments in spacer-protospacer matching. Low complexity sequences can create spurious matches between simple repeat regions (albeit these can be mitigated through complexity filtering via Shannon entropy or DUST). Another type of potential false positives are highly conserved sequences shared by unrelated MGEs, potentially resulting from horizontal gene transfer between MGEs. The horizontal transfer of CRISPR arrays themselves on mobile elements further requires careful examination of array genomic context (regions outside the CRISPR loci) and phylogenetic analysis. Self-targeting events, where matches occur against the host genome rather than MGEs, necessitate comparison against host genome databases and analysis of targeting context. Finally, historical acquisition events may not reflect current interactions, requiring consideration of phylogenetic dating, evolution rates and the effects of the protospacers being under selective pressure to mutate (which may reduce the MGE susceptibility to deterioration by the CRISPR system). This is further complicated by the fact that increasing the allowed distance between sequences directly increases the likelihood of considering sequences similar or related to each other.</p>
+<p>False negatives present another challenge in spacer-protospacer matching, particularly when dealing with large databases of potential targets. Many alignment and search tools default to reporting only the best matches or the first matches that pass a given threshold for a given query or HSP. This may result in potentially missing additional legitimate matches. Unfortunately, different tools also handle ambiguous or secondary alignments differently: they may be reported, reported up to a number or based on relative alignment quality, or omitted. Similarly, cases where a query sequence has multiple matches in different reference sequences are not handled uniformly across tools. This limitation becomes increasingly problematic as databases grow larger and more diverse, a single spacer might match (implying a targeting) multiple related MGEs.</p>
+<p>Yet despite these variations, the choice of spacer-to-protospacer search or alignment tool is often not deeply considered. Presently, the common option for this task, popularized by Edwards et al and Biswas et al<span class="citation" data-cites="Edwards2015_phage_host Biswas2013"><sup><a href="#ref-Edwards2015_phage_host" role="doc-biblioref">4</a>,<a href="#ref-Biswas2013" role="doc-biblioref">6</a></sup></span>, uses BLASTn<span class="citation" data-cites="Altschul1990_blast"><sup><a href="#ref-Altschul1990_blast" role="doc-biblioref">7</a></sup></span> with parameters adjusted for short input sequences. However for most bioinformatic tools, the exact workflow design and parameter choice can impact the outcome, including in sequence analysis. The importance of proper tool usage and parameter interpretation is highlighted by historical examples in bioinformatics. A striking example is the work of Shah et al,<span class="citation" data-cites="Shah2018"><sup><a href="#ref-Shah2018" role="doc-biblioref">8</a></sup></span>, in which they report how certain misunderstandings of BLAST’s <code>-max_target_seqs</code> parameter may lead to incorrect assumptions about result completeness, potentially impacting published analyses. Albeit this was later clarified by Madden et al.,<span class="citation" data-cites="Madden2018"><sup><a href="#ref-Madden2018" role="doc-biblioref">9</a></sup></span> (of the blast development team) as an unfortunate combination of a software bug (that were since patched) affecting rare cases, and misconceptions regarding the process BLAST+ uses for tie-breaking (alignments of equal plausibility), and finally a consideration regarding composition base scoring. Apart from the patched bug, the main outcome of this correspondence led to more explicit details in blast documentation (specifically the appendix “Outline of the BLAST process”). Still, this highlights that misconceptions about the expected exhaustiveness of tools’ result-reporting can also lead to incorrect assumptions about the outcome of an analysis. In practice, most bioinformatic tools use various heuristics and optimizations, typically designed with specific use cases in mind. For example, most short-read mappers assume the reference to be the output of a singular assembly - which would imply the reference does not contain extremely redundant copies of the same loci, or a limited number of very similar sequences (e.g.&nbsp;strain variants, alternative splice variants), and this assumption impacts the way read mapping is computed and results are reported.</p>
+<p>The choice of tool and its parameters can significantly impact the detection of these multiple matches, with some tools prioritizing speed over completeness by limiting the number of reported matches, or by other internal heuristics such as seed sequence selection from high occurring sequences being penalized. This trade-off between sensitivity and computational efficiency is especially important to consider as most available tools were designed for different tasks than spacer-protospacer matching (e.g.&nbsp;expression analysis, homology detection, and variant calling), and under different assumptions (such as reference and query sequence size and database size or the nature of the reference source: from a single isolate or metagenomic sample rather than from aggregation of sequences from different sources).</p>
+<p>Another potential consideration is the computational resources requirements. Memory, storage, and availability of CPU cores are factors differing between tools. Parameter choice may also impact these factors considerably, with certain tools offering tunable parameters to trade-off between sensitivity and computational efficiency. In recent years, spacer database size has been rapidly increasing - from 366,799 unique spacers in 2017<span class="citation" data-cites="Shmakov_2017"><sup><a href="#ref-Shmakov_2017" role="doc-biblioref">10</a></sup></span> to 1,173,006 unique spacers reported in 2021<span class="citation" data-cites="Dion_2021"><sup><a href="#ref-Dion_2021" role="doc-biblioref">11</a></sup></span> to 3,835,942 unique spacers in 2023<span class="citation" data-cites="camargo_img_vr4_2023"><sup><a href="#ref-camargo_img_vr4_2023" role="doc-biblioref">12</a></sup></span>. Similarly, public virus and MGE databases are growing rapidly, with large contributions from metagenomic samples resulting in routine fold increases in the number of predicted viral contigs<span class="citation" data-cites="camargo_img_vr4_2023"><sup><a href="#ref-camargo_img_vr4_2023" role="doc-biblioref">12</a></sup></span>. Most tools require more resources as the size of the database grows, and as this trend continues, certain workflows and tools may become prohibitively expensive to run in a reasonable time frame.</p>
+</section>
+<section id="sec-methods" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="sec-methods"><span class="header-section-number">3</span> Methods</h2>
+<section id="sec-tool-selection" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="sec-tool-selection"><span class="header-section-number">3.1</span> Tool Selection</h3>
+<p>We evaluated several widely-used sequence alignment and search tools, alongside an implementation of basic string containment. The tools were selected based on their availability and historical use, and were chosen to span a range of different algorithmic approaches. It is important to note that these tools were not specifically designed for spacer-protospacer matching, but rather for more general sequence search tasks (mmseqs2, blastn-short and lexicmap), or alignment/mapping of short reads to reference genomes (bowtie1, bowtie2, minimap2, nucmer, bbmap-skimmer, strobealign). Additionally, our focus here is specifically on spacer-protospacer matching, and so we did not evaluate general host-prediction tools (even those that may perform spacer-protospacer matching), like SpacePHARER<span class="citation" data-cites="Zhang_2021"><sup><a href="#ref-Zhang_2021" role="doc-biblioref">13</a></sup></span> or iPHoP<span class="citation" data-cites="Roux2023_iphop"><sup><a href="#ref-Roux2023_iphop" role="doc-biblioref">14</a></sup></span>, which may perform additional analyses based on prior additional information, such as evaluating the LCA from multiple spacer-protospacer matches.</p>
+<div id="tbl-tools" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Evaluated Tools and Their Characteristics. <em>Indexing: “<em>Optional</em>” - A persistent index can be generated (and used across multiple mapping/alignment runs) but a one-off command can also do this ‘on the fly’. </em>”Yes”* - A precomputed index is required, <em>“No”</em> - Indexing or building the database is not required. All tools were run with default parameters unless otherwise specified. As a general rule, parameters for each tool were chosen to maximize sensitivity or avoid limiting the ability to detect multiple matches. For more details about the exact configuration and version of each tool, see the code availability below or supplementary table 1.
+</figcaption>
+<div aria-describedby="tbl-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Aligner</th>
+<th style="text-align: center;">Indexing*</th>
+<th style="text-align: center;">Publication Year</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://github.com/BenLangmead/bowtie">Bowtie1</a></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">2009</td>
+<td style="text-align: left;">Last updated 2017, optimized for short sequences (25-50 bp, max 1kbp)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://github.com/BenLangmead/bowtie2">Bowtie2</a></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">2012</td>
+<td style="text-align: left;">FM Index, supports longer reads (&gt;50bp) than v1.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://github.com/lh3/minimap2">Minimap2</a></td>
+<td style="text-align: center;">Optional</td>
+<td style="text-align: center;">2018</td>
+<td style="text-align: left;">Versatile, supports various sequence types</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://sourceforge.net/projects/bbmap/">BBMap-skimmer</a></td>
+<td style="text-align: center;">Optional</td>
+<td style="text-align: center;">2014</td>
+<td style="text-align: left;">Part of BBTools suite</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://github.com/ksahlin/StrobeAlign">StrobeAlign</a></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">2022</td>
+<td style="text-align: left;">strobemer-based indexing.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://blast.ncbi.nlm.nih.gov/doc/blast-help/downloadblastdata.html">BLAST+</a></td>
+<td style="text-align: center;">Optional</td>
+<td style="text-align: center;">2009</td>
+<td style="text-align: left;">BLASTN-short is a mode (task parameter), optimized for short sequences.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://github.com/soedinglab/MMseqs2">MMseqs2</a></td>
+<td style="text-align: center;">Optional</td>
+<td style="text-align: center;">2017</td>
+<td style="text-align: left;">Fast protein/nucleotide search</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://github.com/apcamargo/spacer-containment">spacer-containment</a></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Simple string containment. FASTA parsing with needletail, parallel processing with rayon, and string matching with memchr::memmem::Finder</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://github.com/mummer4/mummer">mummer4</a></td>
+<td style="text-align: center;">Optional</td>
+<td style="text-align: center;">2005</td>
+<td style="text-align: left;">Fast protein/nucleotide search</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="https://github.com/shenwei356/LexicMap">LexicMap</a></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">2024</td>
+<td style="text-align: left;"><strong>Preprint</strong> - Highly scalable, designed for fast querying of genes, genomes and long reads (&gt;100bp)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="data-generation-and-acquisition" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="data-generation-and-acquisition"><span class="header-section-number">3.2</span> Data Generation and acquisition</h3>
+<div id="tbl-datasets" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-datasets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Dataset characteristics. Target is interchangeable with “contig”.
+</figcaption>
+<div aria-describedby="tbl-datasets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 34%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Dataset</th>
+<th style="text-align: left;">Synthetic - random sequences</th>
+<th style="text-align: left;">IMG/VR4 (v1.1) - high confidence viral contigs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Spacer Sequence Count</td>
+<td style="text-align: left;">9,020</td>
+<td style="text-align: left;">3,835,942</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total Spacer size (bp)</td>
+<td style="text-align: left;">618,663</td>
+<td style="text-align: left;">132,094,902</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Spacer Length Range</td>
+<td style="text-align: left;">18 - 120</td>
+<td style="text-align: left;">25 - 100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Spacer GC%</td>
+<td style="text-align: left;">50</td>
+<td style="text-align: left;">46.73</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Spacer Median length</td>
+<td style="text-align: left;">68.6</td>
+<td style="text-align: left;">34.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Target Length Range</td>
+<td style="text-align: left;">1,501 - 200,000</td>
+<td style="text-align: left;">165 - 2,473,870</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Target GC%</td>
+<td style="text-align: left;">50</td>
+<td style="text-align: left;">44.45</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Target Median Length</td>
+<td style="text-align: left;">100,831.50</td>
+<td style="text-align: left;">7664</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Target Sequence Count</td>
+<td style="text-align: left;">320,000</td>
+<td style="text-align: left;">5,465,076</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Target size (bp)</td>
+<td style="text-align: left;">32,266,068,302</td>
+<td style="text-align: left;">79,049,118,084</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="synthetic-dataset" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="synthetic-dataset"><span class="header-section-number">3.3</span> Synthetic dataset</h3>
+<p>In order to examine each tool’s performance on diverse spacer-to-target matches scenario (i.e.&nbsp;different number of match, similarity between spacer and target, etc), we created a simplistic command-line interface Python script automating the simulation of spacer-protospacer pairs given a set of parameters (see code and data availability). These parameters include target contig length, GC content, spacer length, number of occurrences in the target(s), range of mismatches, reverse complement frequency. This allows for fine grain control over the simulated spacer and target sequences, while recording the ground truth for later validation. See supplementary figure 1 for a visual representation of the data generation workflow.</p>
+</section>
+<section id="real-datasets" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="real-datasets"><span class="header-section-number">3.4</span> Real datasets</h3>
+<p>To evaluate the same tools in a “real-life” scenario, We used the predicted viral contigs and CRISPR spacers from IMG/VR4<span class="citation" data-cites="camargo_img_vr4_2023"><sup><a href="#ref-camargo_img_vr4_2023" role="doc-biblioref">12</a></sup></span>. IMG/VR4 was chosen for several reasons: 1) it is one of the most comprehensive databases of uncultured phage and viral genomes, and 2) the associated CRISPR database contains a large number of CRISPR spacer data from various genomes and metagenomes, 3) the original database released included an existing attempt at spacer-protospacer matching using one of the tools evaluated (blastn, albeit with different parameters, namely the “–max-target-seqs”), allowing for a direct comparison to historical results. Briefly, the viral contigs in IMG/VR4 are predicted using a combination of tools (primarily genomad<span class="citation" data-cites="camargo_genomad_2024"><sup><a href="#ref-camargo_genomad_2024" role="doc-biblioref">15</a></sup></span>) supplemented with existing databases such as NCBI’s RefSeq and GenBank, while the CRISPR spacers were compiled from previously predicted CRISPR arrays identified in IMG/M genomes and metagenomes (primarily via piler-cr<span class="citation" data-cites="edgar_piler_cr_2007"><sup><a href="#ref-edgar_piler_cr_2007" role="doc-biblioref">16</a></sup></span> and CRT<span class="citation" data-cites="bland_crt_2007"><sup><a href="#ref-bland_crt_2007" role="doc-biblioref">17</a></sup></span>). For more information, please refer to the IMG/VR4 paper<span class="citation" data-cites="camargo_img_vr4_2023"><sup><a href="#ref-camargo_img_vr4_2023" role="doc-biblioref">12</a></sup></span>.</p>
+</section>
+<section id="sec-alignment-recalc" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="sec-alignment-recalc"><span class="header-section-number">3.5</span> Alignment and Recalculation of Mismatches</h3>
+<p>For comparing alignments across tools, we used the Levenshtein distance<span class="citation" data-cites="levenshtein1966"><sup><a href="#ref-levenshtein1966" role="doc-biblioref">18</a></sup></span> (a.k.a edit distance) as our main scoring metric. For any two sequences, this metric sums both substitutions and gaps (i.e.&nbsp;insertions and deletions) into a single value. This choice was made to ensure consistent comparison across tools that may handle gaps differently, and because in the context of CRISPR-based defense, both substitutions and gaps can affect the efficiency of target recognition.</p>
+<p>To ensure consistent mismatch calculation across tools, we realigned all reported matches using parasail<span class="citation" data-cites="Daily2016_parasail"><sup><a href="#ref-Daily2016_parasail" role="doc-biblioref">19</a></sup></span>, specifically the <code>nw_stats_scan</code> i.e.&nbsp;Needleman-Wunsch global alignment with gap opening and extension penalties of 10, and a scoring matrix of <code>nuc44</code>. This allowed us to:</p>
+<ol type="1">
+<li>Calculate edit distances independently of tool-specific scoring schemes</li>
+<li>Verify reported matches and their orientations</li>
+<li>Generate standardized alignment visualizations for manual comparison</li>
+</ol>
+</section>
+<section id="sec-performance-calc" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="sec-performance-calc"><span class="header-section-number">3.6</span> Performance definition and calculation</h3>
+<p>We defined true and false positives/negatives differently for synthetic and real datasets. For synthetic datasets, sequences were generated following pre-planned insertion patterns with known coordinates, strands, and number of mismatches. While analyzing 7,638,511 pre-planned spacer occurrences, we discovered that some sequences could align at unplanned locations while still meeting our mismatch threshold (≤3). To ensure accuracy, we recalculated all alignments and filtered out sequences with extracted contig regions longer than 130bp (120bp being the maximum spacer length). After this validation, we identified 999,916 additional valid alignments (13 with 0 mismatches, 68,612 with 1 mismatch, 224,044 with 2 mismatches, and 707,247 with 3 mismatches), demonstrating that with short sequences, the number of potential spurious alignments increases substantially with the allowed mismatch threshold. Given their validated alignment scores, we included both pre-planned and these additional alignments in our positive set. For real data (IMG VR4), the positive set comprised all alignments from all tools that met the specified threshold criteria. In both cases, we calculated standard performance metric:</p>
+<p>Recall = true positives / (true positives + false negatives)</p>
+<p>where true positives are matches found by a tool that exist in the positive set, false positives are matches reported by a tool that do not exist in the positive set, and false negatives are matches in the positive set that were not found by the tool. We note that in this context, “true negative” (i.e., a false alignment a tool did not report) does not represent a meaningful metric.</p>
+</section>
+<section id="sec-benchmark" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="sec-benchmark"><span class="header-section-number">3.7</span> Benchmarking framework</h3>
+</section>
+<section id="sec-resource-tracking" class="level3" data-number="3.8">
+<h3 data-number="3.8" class="anchored" data-anchor-id="sec-resource-tracking"><span class="header-section-number">3.8</span> Computational Resource and runtime tracking</h3>
+<p>While we have made the runtime and resource (memory and storage usage) data available, the primary focus of this study was to evaluate the ability of each tool to accurately identify spacer-protospacer matches, rather than their computational performance. However, as resource usage may become a limiting factor in the future (with the advent and accumulation of metagenomic sequence data), we designed the benchmark to automatically log several usage metrics.</p>
+<p>For the synthetic data, we used hyperfine<span class="citation" data-cites="Peter_hyperfine_2023"><sup><a href="#ref-Peter_hyperfine_2023" role="doc-biblioref">20</a></sup></span> to track runtime and resource usage, with a maximum of 5 runs for each tool. For the real data, we used SLURM’s built-in accounting system for cluster-based runs (<code>sacct</code>) via a custom script (pyseff.py)<span class="citation" data-cites="pyseff"><sup><a href="#ref-pyseff" role="doc-biblioref">21</a></sup></span>. For each tool, several metrics were recorded, including wall clock time, Peak memory usage, CPU utilization, I/O operations (see fig-workflow for an overview of the synthetic data workflow). Memory efficiency was calculated as the ratio of the peak memory usage divided by the total allocated memory, and it is important to note that certain tools would identify available memory and utilize all of it, while other tools would utilize it in a deterministic manner given input size, parameters, threads, batch size, etc. This can also affect the overall runtime for different tools, making it difficult to directly compare the scaling efficiency of different tools. Additionally, the runtime reported is not the actual runtime of the tool, but rather the runtime of the SLURM job. While most tools were run as a single job, some tools (notably blastn-short) failed to complete given our maximum available resources (either due to time or memory constraints), and were instead run as multiple jobs, on different subsets of the data. As such, the runtime reported for these tools is the sum of the runtime of all their jobs.</p>
+</section>
+<section id="sec-reproducibility" class="level3" data-number="3.9">
+<h3 data-number="3.9" class="anchored" data-anchor-id="sec-reproducibility"><span class="header-section-number">3.9</span> Versioning and Reproducibility</h3>
+<p>All tools were installed and managed using conda<span class="citation" data-cites="conda"><sup><a href="#ref-conda" role="doc-biblioref">22</a></sup></span> (via the mamba<span class="citation" data-cites="mamba"><sup><a href="#ref-mamba" role="doc-biblioref">23</a></sup></span> package manager) in isolated environments. Each tool was installed in a separate environment to prevent dependency conflicts and ensure reproducibility. Environment activation time was excluded from performance measurements to focus on actual tool runtime.</p>
+<p>The exact versions and configurations of all tools were recorded in environment files, allowing for exact replication of our testing environment. All benchmarks were performed on identical hardware configurations to ensure fair comparison.</p>
+</section>
+<section id="extensibility" class="level3" data-number="3.10">
+<h3 data-number="3.10" class="anchored" data-anchor-id="extensibility"><span class="header-section-number">3.10</span> Extensibility</h3>
+<p>The framework is designed to be expandable through the integration of new tools. Each tool/software configuration is saved as a separate JSON file, which includes the exact commands and conda/mamba environment it uses. This configuration files can use placeholder variables which the main benchmarking script replaces with user choices during execution (such as {threads}, {contigs_file}, {spacers_file}, {output_dir}, and {results_dir}). A new JSON file can be added manually or via bench.utils.tool_commands:add_tool function in a semi automated method.</p>
+</section>
+</section>
+<section id="results" class="level2 page-columns page-full" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="results"><span class="header-section-number">4</span> Results</h2>
+<section id="sec-mismatch-performance" class="level3 page-columns page-full" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="sec-mismatch-performance"><span class="header-section-number">4.1</span> Performance as a function of mismatch threshold</h3>
+<div id="fig-tool-performance" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-tool-performance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figures/main/tool_performance_by_mismatches.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Performance of each tool as a function of mismatch threshold. The horizontal axis shows the number of allowed mismatches, while the vertical axis represents the mean detection fraction (0-1) aggregated across all spacer-contig pairs at a given mismatch threshold. Each color and shape indicates a different tool plot (shapes connected by lines for interpolation) Panel B shows the performance of the tools on the IMG/VR4 dataset, while panel A shows the performance of the tools on the synthetic dataset."><img src="figures/main/tool_performance_by_mismatches.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-tool-performance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Performance of each tool as a function of mismatch threshold. The horizontal axis shows the number of allowed mismatches, while the vertical axis represents the mean detection fraction (0-1) aggregated across all spacer-contig pairs at a given mismatch threshold. Each color and shape indicates a different tool plot (shapes connected by lines for interpolation) Panel B shows the performance of the tools on the IMG/VR4 dataset, while panel A shows the performance of the tools on the synthetic dataset.
+</figcaption>
+</figure>
+</div>
+<p>First we investigated potential tradeoffs and effects of the total edit distance (henceforth, interchangeable with mismatches) on the observed recall metric of the tools. Generally, the detection rate of each tool decreases as mismatch thresholds increase. Additionally, no single tool was able to identify all spacer occurrences, although at 0 mismatches the recall of bowtie1, bowtie2, blastn and mummer4 is approximately 0.99 (See supplementary table 2 for the recall values for each tool at different mismatch thresholds). At increased allowed mismatches, the tools showed more divergence, yet bowtie1 remained the single tool with the most unique matches by a considerable margin (<a href="#fig-tool-performance" class="quarto-xref">Figure&nbsp;1</a>). Overall, the performance of the tools is similar between the synthetic and real datasets, albeit the overall lower sample size of the synthetic data should be considered when interpreting the results (see <a href="#tbl-tools">table 1</a>).</p>
+</section>
+<section id="sec-abundance-performance" class="level3 page-columns page-full" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="sec-abundance-performance"><span class="header-section-number">4.2</span> Performance as a function of query (spacer) abundance in reference database</h3>
+<div id="fig-recall" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-recall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figures/main/recall_vs_occurrences_combined.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Comparison of recall (detection rate) across different mismatch thresholds and target abundance levels for IMG/VR v4 virus and spacer dataset. Top panel displays the subset of results with up to 1 mismatch, and the bottom panel displays the results with up to 3 mismatches. The horizontal axis shows the number of target occurrences on a logarithmic scale from 1 to 104, while the vertical axis represents the mean detection fraction (0-1). Each color and shape indicates a different tool plot (shapes connected by lines for interpolation). The low-abundance region (1 - 1000 occurrences) is binned into logarithmically-spaced bins, while the high-abundance region (>1000 occurrences) is divided into only 3 additional bins, as such ultra-high abundance sequences are rare. The detection fraction is the mean detection fraction across all spacer-contig pairs at a given mismatch threshold and target abundance level."><img src="figures/main/recall_vs_occurrences_combined.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-recall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Comparison of recall (detection rate) across different mismatch thresholds and target abundance levels for IMG/VR v4 virus and spacer dataset. Top panel displays the subset of results with up to 1 mismatch, and the bottom panel displays the results with up to 3 mismatches. The horizontal axis shows the number of target occurrences on a logarithmic scale from 1 to 10<sup>4</sup>, while the vertical axis represents the mean detection fraction (0-1). Each color and shape indicates a different tool plot (shapes connected by lines for interpolation). The low-abundance region (1 - 1000 occurrences) is binned into logarithmically-spaced bins, while the high-abundance region (&gt;1000 occurrences) is divided into only 3 additional bins, as such ultra-high abundance sequences are rare. The detection fraction is the mean detection fraction across all spacer-contig pairs at a given mismatch threshold and target abundance level.
+</figcaption>
+</figure>
+</div>
+<p>We then investigated if there are any potential effects for the number of times each protospacer sequence appears in the target set (i.e.&nbsp;the virus sequence set). For perfect matches (0 mismatches), bowtie1 demonstrates exceptional performance with recall rates consistently above 0.99 across all occurrence frequencies (Figure 2). Mummer4, bowtie2 and blastn all maintain a detection rate close to bowtie1. For low-occurrence spacers (1-10 occurrences), strobealign achieves detection rates of 95.44% but shows a systematic decline to approximately 20% for spacers occurring &gt;100 times, and further drops below 5% in the high occurrence range (&gt;1000).</p>
+<p>When allowing one mismatch, the overall detection capabilities decrease across all tools, although Bowtie1 maintains its high performance. At up to three mismatches, the overall recall rates for all other tools further decrease, while Bowtie1 maintains detection rates above 97% throughout the occurrence spectrum.</p>
+<p>The data shows a consistent pattern where detection rates generally decline for spacers with very high occurrence frequencies (&gt;1000), though this effect becomes less pronounced as more mismatches are permitted. Quantitatively, this decline is most evident in tools like strobealign and bbmap-skimmer, while bowtie1 maintains its high performance even with highly repetitive sequences. Detailed statistics and recall curves for exact mismatch values (rather than at a maximal value) can be found in the supplementary.</p>
+</section>
+<section id="sec-pairwise" class="level3 page-columns page-full" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="sec-pairwise"><span class="header-section-number">4.3</span> Overall number of identified spacer-contig</h3>
+<div id="fig-pairwise" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-pairwise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figures/main/tool_comaprison_matrix.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: Tool vs Tool (pairwise) comparisons - set intersections and differences matrixes. The value of a cell(i,j) is number of spacer-contig pairs identified by the tool listed in row i, which were not identified by the tool listed in the j column. Panel A shows the results for the synthetic dataset, while panel B shows the results for the IMG/VR4 dataset."><img src="figures/main/tool_comaprison_matrix.svg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-pairwise-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Tool vs Tool (pairwise) comparisons - set intersections and differences matrixes. The value of a cell(i,j) is number of spacer-contig pairs identified by the tool listed in row i, which were not identified by the tool listed in the j column. Panel A shows the results for the synthetic dataset, while panel B shows the results for the IMG/VR4 dataset.
+</figcaption>
+</figure>
+</div>
+<p>The pairwise comparison of the tool results suggests (<a href="#fig-pairwise" class="quarto-xref">Figure&nbsp;3</a>), reinforces the observation regarding bowtie1’s unique ability to recover a maximum number of spacer matches. Generally, it appears that, when compared to any single other tool, the total number of contig-spacer pairs bowtie1 misses is relatively smaller than the number of pairs the compared tool identified which were not identified by bowtie1.</p>
+</section>
+</section>
+<section id="discussion" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="discussion"><span class="header-section-number">5</span> Discussion</h2>
+<p>Our findings reveal that within the mismatch thresholds tested (less or equal to 3), no single tool was able to identify all spacer occurrences. While we observe variations across tools, the main difference appears to be the effect of the abundance of the spacer in the target set on the recall rate. Of specific concern is the relatively high number of alignments missed by blastn-short, which is the common method currently used. In this context, missing potential spacer-protospacer pairs can significantly impact downstream conclusions, e.g.&nbsp;about host range of a given MGE. Overall, Bowtie1 presented the highest recall, although still imperfect for non exact matches. It should be noted that bowtie1 is not designed to identify &gt;3 mismatches, and so a truly exhaustive approach might be to utilize a combination of tools to increase the recall rate, and use a post-search verification method (such as the score recalculation performed here using parasail) to remove potential false positives. Potentially, low complexity sequence filtering (or masking) could be performed prior to the search.</p>
+<p>It should be noted that experimental and analytical context may have to be considered when deciding on a specific tool, especially in settings where a higher level of sequence dissimilarity could be considered. On one hand, spacer and virus databases can be expected to continue to increase in size, and our results suggest that large-scale meta-analysis studies (in which spacers from multiple samples are compared to a many potential targets that may include similar or identical regions), should favour tools with high recall, to circumvent potential reporting limitations other tools might have. This is especially important as in such meta-analysis, it should not be assumed the spacer and the potential target co-occur (from the same biological sample) and though the similarity may imply a past encounter between the ancestors of the sequences, caution is due in inferring that the current MGE sequence is capable of infecting the host sequence. In contrast, in experimental designs where potential CRISPR-target pairs are constrained by prior knowledge, tools with higher tolerance for sequence mismatches such as bowtie2 or BLASTn may be more appropriate (e.g.&nbsp;when studying known phage-host pairs from isolates, or when investigating temporally resolved samples (e.g.&nbsp;time-series)).</p>
+<p>Another consideration should be the source of the spacer data: spacers sequences extracted from raw NGS data and spacers extracted from assembled CRISPR arrays (either from assembled or long read sequencing). Specifically, spacers from complete arrays present additional information, namely the location and order of the spacers within the array, and the observation they originate from the same host genome. Notably, a recent in-depth study by Mitrofanov et al<span class="citation" data-cites="Mitrofanov2025"><sup><a href="#ref-Mitrofanov2025" role="doc-biblioref">24</a></sup></span>, investigating the mutational landscape of repeats across many isolate prokaryote genomes, have identified patterns of spacer loss based on system sub/type and location. A similar meta-analysis of spacer mutations by Vink et al<span class="citation" data-cites="Vink2021"><sup><a href="#ref-Vink2021" role="doc-biblioref">25</a></sup></span>, have revealed that different CRISPR subtypes exhibit varying tolerance for mismatches within the spacer sequences, with most matched spacers containing three or fewer mismatched nucleotides. This aligns with our current general recommendation of using Bowtie1. Additionally, Vink et al observed that Type I-E and Type II systems preferentially target template strands while Type I-A, I-B, and Type III systems prefer coding strands, emphasizing system-specific characteristics which may also inform post-search verification methods (albeit this may require additional information, such as the sequences orientation or coding potential, and the CRISPR subtype of the spacer).</p>
+<p>While our technical comparison focuses on tool performance, the biological interpretation of identified matches also requires careful consideration. The arms race between prokaryotes and MGEs creates a complex landscape where simple sequence matching may not directly translate to genuine host-parasite relationships. We identified several scenarios that could lead to false positive assignments:</p>
+<ol type="1">
+<li><p><strong>Low Complexity Sequence Matches</strong>: Independently of the tool choice, low-complexity (regions with highly skewed GC content, or composed of many repeated sequences) can be susceptible to spurious matches. Low complexity regions may be present in both the virus target set, or in the spacer set, where some non-CRISPR repeated sequences may have been misclassified as such. While certain tools employ filters and heuristics to mitigate the effect of low complexity regions, a prudent procedure should include a step separated from the search, to specifically identify, filter or mask the spacer and virus sets. Dustmasker<span class="citation" data-cites="Morgulis_2006"><sup><a href="#ref-Morgulis_2006" role="doc-biblioref">26</a></sup></span>, or a similar tool (e.g.&nbsp;ldust from minimap, or BBDuk from bbmap) could be used prior to the search.</p></li>
+<li><p><strong>Common Sequence Motifs</strong>: Some matches may correspond to highly conserved sequences shared across various biological systems. For instance, horizontal gene transfer events can lead to the spread of similar sequences across diverse MGEs, potentially creating spurious matches that don’t reflect direct host-MGE interactions. An example of potential HGT mediated matches was described by Kosmopoulos et al.&nbsp;2023, where a transposon-mediated transferred of a phage lysin gene (to the host genome) created a true sequence similarity (which was verified by the authors using a combination of sequencing technologies)<span class="citation" data-cites="Kosmopoulos_2023"><sup><a href="#ref-Kosmopoulos_2023" role="doc-biblioref">27</a></sup></span>. Even if anecdotally observed, this suggests that an unknown number of observed “good” alignments may be due to HGT, which in the absence of additional information, could not be ruled out as a false positive.</p></li>
+<li><p><strong>Self-Targeting Events</strong>: Some matches may represent CRISPR targeting of host genes<span class="citation" data-cites="Wimmer_2020"><sup><a href="#ref-Wimmer_2020" role="doc-biblioref">28</a></sup></span>. Previous studies estimated a varying amount of these actually target sequences with putative exogenous origin such as prophages, ranging from ~50%<span class="citation" data-cites="Stern_2010"><sup><a href="#ref-Stern_2010" role="doc-biblioref">29</a></sup></span>, to ~80%<span class="citation" data-cites="Shmakov_2017"><sup><a href="#ref-Shmakov_2017" role="doc-biblioref">10</a></sup></span>. In Shmakov et al., the authors estimate non-defence targeting is likely a rare event. So far, most observations of non-defence (or counter defence) molecular functions of CRISPRs did not directly involve the spacer sequences, but rather the Cas genes or related effectors. Some observed functions include genome remodelling and evolution, or temporal regulation of gene expression. For example, in <em>Francisella novicida</em>, Sampson et al.&nbsp;2013 demonstrated that certain lipoprotein production is mediated by a CRISPR system<span class="citation" data-cites="Sampson_2013"><sup><a href="#ref-Sampson_2013" role="doc-biblioref">30</a></sup></span>.</p></li>
+<li><p><strong>non-chromosomal replicon encoded CRISPRs</strong>: Similarly to the potential of CRISPR systems to act in non-immune functions, in certain scenarios spacers may be acquired from non-MGE replicons, or be carried (even if partially) by mobile elements. While some types are known to be chromosomal, others are known to be carried entirely by plasmids (i.e.&nbsp;both the Cas proteins and the array loci are on the plasmid), for example in various halophilic archaea<span class="citation" data-cites="Maier_2018"><sup><a href="#ref-Maier_2018" role="doc-biblioref">31</a></sup></span>. A recent study by Zhang et al<span class="citation" data-cites="Zhang_2025"><sup><a href="#ref-Zhang_2025" role="doc-biblioref">32</a></sup></span> observed similar phenomena in the human gut microbiome, specifically in <em>Bifidobacterium longum</em>. Another non-MGE targeting phenomena in archaea was described by Turgeman-Grott et al.<span class="citation" data-cites="Turgeman_Grott_2018"><sup><a href="#ref-Turgeman_Grott_2018" role="doc-biblioref">33</a></sup></span>, where inter-species spacers (targeting genes from related species) were demonstrated to be common in archaea, at least in the context of cellular mating. Another confounding factor is the potential of certain MGEs to target host genes, potentially for regulatory functions, or as counter-defense mechanisms<span class="citation" data-cites="Shmakov_2023"><sup><a href="#ref-Shmakov_2023" role="doc-biblioref">34</a></sup></span>. Shmakov et al.&nbsp;2023 have identified widespread CRISPR-derived phage-encoded mini-arrays, which can hijack and interfere with their host native system.</p></li>
+</ol>
+<section id="study-limitations" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="study-limitations"><span class="header-section-number">5.1</span> Study Limitations</h3>
+<p>The synthetic data was generated with uniform distributions of spacer and contig lengths and base composition (where each nucleotide is chosen independently and at random). While the simulation scripts do allow user-specified base composition (or use of real data via the –contigs or –spacers parameters), real biological sequence composition is not usually uniformly distributed, and may be biased towards certain nucleotide frequencies, which could be region or loci specific. This can be clearly observed comparing the spacer attributes distributions in the synthetic and real datasets (see supplementary figure 6), and table 1. While the simulated dataset sample size is relatively small, the high level of control over the spacer and contig sequences allowed testing rare or yet-unobserved scenarios, like ultra high spacer occurrence rates. This difference in sample size and features should be considered when interpreting the results.</p>
+<p>Furthermore, we focused on a specific distance metric (Levenshtein distance), thus the synthetic sequences only have substitutions simulated into them. While insertions and deletions were not simulated, and although these might be relatively rare in short evolutionary time, they are still possible and could inform real and recent MGE-host interactions (e.g an indel that does not disrupt the encoded sequence reading frame). This could be further explored in future work, and might affect overall tool suggestion to use bowtie1 for general-case spacer-protospacer matching, as it is not designed with gaps in mind. Finally, we note that tools were not tested for all possible combinations of their available tunable parameters, and it is possible some might be further tweaked to improve their performance. Similarly, variation in parameters during index construction may further affect this (e.g.&nbsp;offset rate, seed selection). Similarly, not all major versions of all tools were tested. Of specific note are MMseqs2 (where the latest release version at the time of execution resulted in frequent crashes, hence we used the latest commit version from github), and Lexicmap which does not have a formal “v1” release at the time of writing, and since the benchmark was run, a new minor version was released, which is a good candidate for future testing.</p>
+</section>
+</section>
+<section id="conclusion" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">6</span> Conclusion</h2>
+<p>Our comparison of spacer-protospacer search tools reveals variations in their ability to detect unique putative CRISPR-target matches, which is a key and common input for current host-MGE interaction tools and studies. The main tool-derived difference we report is the ability to detect multiple matches - most tools show a sharp decline in detection rates as the total number of occurrences increases. This can directly impact the downstream interpretation of microbial relationships, such as under estimation of potential hosts-range, or over reliance on seemingly unique matches which may actually be due to non-direct intercations resulting from common sequence motifs or high tolerance for mismatches. While Bowtie1 demonstrates superior performance in detecting multiple matches under the threshold of 3 mismatches, the interpretation of spacer-protospacer matches requires careful consideration of biological context and potential interfering factors, especially when comparing large databases of CRISPR spacers and potential targets collected from a broad range of samples and ecosystems. Our findings also emphasize the importance of recalculating alignment metrics in a tool-agnostic manner, to ensure consistent comparison across tools. Finally, we provide general recommendations and experimental design considerations of potential interfering factors for future studies.</p>
+</section>
+<section id="code-and-data-availability" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="code-and-data-availability"><span class="header-section-number">7</span> Code and data availability</h2>
+<p>All code generated for this study can be found in the git repository: <a href="http://code.jgi.doe.gov/spacersdb/spacer_matching_bench">code.jgi.doe.gov/spacersdb/spacer_matching_bench</a>. All raw outputs (tool results on real and synthetic datasets, the simulated sequence files, the SLURM logs, and the hyperfine runtime measurements) are available on Zenodo<span class="citation" data-cites="zenodo_doi"><sup><a href="#ref-zenodo_doi" role="doc-biblioref">35</a></sup></span>.</p>
+</section>
+<section id="acknowledgements" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="acknowledgements"><span class="header-section-number">8</span> Acknowledgements</h2>
+<p>Work conducted by the U.S. DOE Joint Genome Institute (https://ror.org/04xm1d337) (SR, UN, APC and BB), a DOE Office of Science User Facility, is supported by the Office of Science of the U.S. DOE operated under Contract DE-AC02-05CH11231.</p>
+<p>We would like to thank the following people for their helpful feedback and suggestions: Uri Gophna and Georg Rath.</p>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Mojica_2005" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Mojica, F. J. M., Díez-Villaseñor, C., García-Martínez, J. &amp; Soria, E. <a href="https://doi.org/10.1007/s00239-004-0046-3">Intervening sequences of regularly spaced prokaryotic repeats derive from foreign genetic elements</a>. <em>Journal of Molecular Evolution</em> <strong>60</strong>, 174–182 (2005).</div>
+</div>
+<div id="ref-CRISPR_review" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Koonin, K. S., Eugene V. AND Makarova. <a href="https://doi.org/10.1371/journal.pbio.3001481">Evolutionary plasticity and functional versatility of CRISPR systems</a>. <em>PLOS Biology</em> <strong>20</strong>, 1–19 (2022).</div>
+</div>
+<div id="ref-CRISPR_classification" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Makarova, K. S. <em>et al.</em> Evolutionary classification of CRISPR–cas systems: A burst of class 2 and derived variants. <em>Nature Reviews Microbiology</em> <strong>18</strong>, 67–83 (2020).</div>
+</div>
+<div id="ref-Edwards2015_phage_host" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Edwards, R. A., McNair, K., Faust, K., Raes, J. &amp; Dutilh, B. E. <a href="https://doi.org/10.1093/femsre/fuv048">Computational approaches to predict bacteriophage–host relationships</a>. <em>FEMS Microbiology Reviews</em> <strong>40</strong>, 258–272 (2015).</div>
+</div>
+<div id="ref-soto_perez_crispr_2019" class="csl-entry" role="listitem">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Soto-Perez, P. <em>et al.</em> <a href="https://doi.org/10.1016/j.chom.2019.08.008"><span>CRISPR</span>-<span>Cas</span> <span>System</span> of a <span>Prevalent</span> <span>Human</span> <span>Gut</span> <span>Bacterium</span> <span>Reveals</span> <span>Hyper</span>-targeting against <span>Phages</span> in a <span>Human</span> <span>Virome</span> <span>Catalog</span></a>. <em>Cell Host &amp; Microbe</em> <strong>26</strong>, 325–335.e5 (2019).</div>
+</div>
+<div id="ref-Biswas2013" class="csl-entry" role="listitem">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Biswas, A., Gagnon, J. N., Brouns, S. J. J., Fineran, P. C. &amp; and, C. M. B. <a href="https://doi.org/10.4161/rna.24046">CRISPRTarget</a>. <em>RNA Biology</em> <strong>10</strong>, 817–827 (2013).</div>
+</div>
+<div id="ref-Altschul1990_blast" class="csl-entry" role="listitem">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Altschul, S. F., Gish, W., Miller, W., Myers, E. W. &amp; Lipman, D. J. Basic local alignment search tool. <em>J. Mol. Biol.</em> <strong>215</strong>, 403–410 (1990).</div>
+</div>
+<div id="ref-Shah2018" class="csl-entry" role="listitem">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Shah, N., Nute, M. G., Warnow, T. &amp; Pop, M. <a href="https://doi.org/10.1093/bioinformatics/bty833">Misunderstood parameter of NCBI BLAST impacts the correctness of bioinformatics workflows</a>. <em>Bioinformatics</em> <strong>35</strong>, 1613–1614 (2018).</div>
+</div>
+<div id="ref-Madden2018" class="csl-entry" role="listitem">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Madden, T. L., Busby, B. &amp; Ye, J. <a href="https://doi.org/10.1093/bioinformatics/bty1026">Reply to the paper: Misunderstood parameters of NCBI BLAST impacts the correctness of bioinformatics workflows</a>. <em>Bioinformatics</em> <strong>35</strong>, 2699–2700 (2018).</div>
+</div>
+<div id="ref-Shmakov_2017" class="csl-entry" role="listitem">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Shmakov, S. A. <em>et al.</em> <a href="https://doi.org/10.1128/mbio.01397-17">The CRISPR spacer space is dominated by sequences from species-specific mobilomes</a>. <em>mBio</em> <strong>8</strong>, (2017).</div>
+</div>
+<div id="ref-Dion_2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">11. </div><div class="csl-right-inline">Dion, M. B. <em>et al.</em> <a href="https://doi.org/10.1093/nar/gkab133">Streamlining CRISPR spacer-based bacterial host predictions to decipher the viral dark matter</a>. <em>Nucleic Acids Research</em> <strong>49</strong>, 3127–3138 (2021).</div>
+</div>
+<div id="ref-camargo_img_vr4_2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">12. </div><div class="csl-right-inline">Camargo, A. P. <em>et al.</em> <a href="https://doi.org/10.1093/nar/gkac1037"><span>IMG</span>/<span>VR</span> v4: An expanded database of uncultivated virus genomes within a framework of extensive functional, taxonomic, and ecological metadata</a>. <em>Nucleic Acids Research</em> <strong>51</strong>, D733–D743 (2023).</div>
+</div>
+<div id="ref-Zhang_2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Zhang, R. <em>et al.</em> <a href="https://doi.org/10.1093/bioinformatics/btab222">SpacePHARER: Sensitive identification of phages from CRISPR spacers in prokaryotic hosts</a>. <em>Bioinformatics</em> <strong>37</strong>, 3364–3366 (2021).</div>
+</div>
+<div id="ref-Roux2023_iphop" class="csl-entry" role="listitem">
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Roux, A. P. A. C., Simon AND Camargo. <a href="https://doi.org/10.1371/journal.pbio.3002083">iPHoP: An integrated machine learning framework to maximize host prediction for metagenome-derived viruses of archaea and bacteria</a>. <em>PLOS Biology</em> <strong>21</strong>, 1–26 (2023).</div>
+</div>
+<div id="ref-camargo_genomad_2024" class="csl-entry" role="listitem">
+<div class="csl-left-margin">15. </div><div class="csl-right-inline">Camargo, A. P. <em>et al.</em> <a href="https://doi.org/10.1038/s41587-023-01953-y">Identification of mobile genetic elements with <span class="nocase">geNomad</span></a>. <em>Nature Biotechnology</em> <strong>42</strong>, 1303–1312 (2024).</div>
+</div>
+<div id="ref-edgar_piler_cr_2007" class="csl-entry" role="listitem">
+<div class="csl-left-margin">16. </div><div class="csl-right-inline">Edgar, R. C. <a href="https://doi.org/10.1186/1471-2105-8-18"><span>PILER</span>-<span>CR</span>: <span>Fast</span> and accurate identification of <span>CRISPR</span> repeats</a>. <em>BMC Bioinformatics</em> <strong>8</strong>, 18 (2007).</div>
+</div>
+<div id="ref-bland_crt_2007" class="csl-entry" role="listitem">
+<div class="csl-left-margin">17. </div><div class="csl-right-inline">Bland, C. <em>et al.</em> <a href="https://doi.org/10.1186/1471-2105-8-209"><span>CRISPR</span> <span>Recognition</span> <span>Tool</span> (<span>CRT</span>): A tool for automatic detection of clustered regularly interspaced palindromic repeats</a>. <em>BMC Bioinformatics</em> <strong>8</strong>, 209 (2007).</div>
+</div>
+<div id="ref-levenshtein1966" class="csl-entry" role="listitem">
+<div class="csl-left-margin">18. </div><div class="csl-right-inline">Levenshtein, V. I. Binary codes capable of correcting deletions, insertions and reversals. <em>Soviet Physics Doklady</em> <strong>10</strong>, 707 (1966).</div>
+</div>
+<div id="ref-Daily2016_parasail" class="csl-entry" role="listitem">
+<div class="csl-left-margin">19. </div><div class="csl-right-inline">Daily, J. <a href="https://doi.org/10.1186/s12859-016-0930-z">Parasail: SIMD c library for global, semi-global, and local pairwise sequence alignments</a>. <em>BMC Bioinformatics</em> <strong>17</strong>, 81 (2016).</div>
+</div>
+<div id="ref-Peter_hyperfine_2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">20. </div><div class="csl-right-inline">Peter, D. <a href="https://github.com/sharkdp/hyperfine"><span class="nocase">hyperfine</span></a>. (2023).</div>
+</div>
+<div id="ref-pyseff" class="csl-entry" role="listitem">
+<div class="csl-left-margin">21. </div><div class="csl-right-inline">Neri, U. <a href="https://github.com/UriNeri/pyseff"><span class="nocase">pyseff: A Python script to calculate the efficiency of SLURM jobs</span></a>.</div>
+</div>
+<div id="ref-conda" class="csl-entry" role="listitem">
+<div class="csl-left-margin">22. </div><div class="csl-right-inline">conda contributors. <a href="https://github.com/conda/conda"><span class="nocase">conda: A system-level, binary package and environment manager running on all major operating systems and platforms.</span></a></div>
+</div>
+<div id="ref-mamba" class="csl-entry" role="listitem">
+<div class="csl-left-margin">23. </div><div class="csl-right-inline">mamba-org. <a href="https://github.com/mamba-org/mamba"><span>Mamba: The Fast Cross-Platform Package Manager</span></a>.</div>
+</div>
+<div id="ref-Mitrofanov2025" class="csl-entry" role="listitem">
+<div class="csl-left-margin">24. </div><div class="csl-right-inline">Mitrofanov, A., Beisel, C. L., Baumdicker, F., Alkhnbashi, O. S. &amp; Backofen, R. Comprehensive analysis of CRISPR array repeat mutations reveals subtype-specific patterns and links to spacer dynamics. <em>bioRxiv</em> (2025) doi:<a href="https://doi.org/10.1101/2025.04.02.646798">10.1101/2025.04.02.646798</a>.</div>
+</div>
+<div id="ref-Vink2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">25. </div><div class="csl-right-inline">Vink, J. N. A., Baijens, J.-H. L. &amp; Brouns, S. J. J. PAM-repeat associations and spacer selection preferences in single and co-occurring CRISPR-cas systems. <em>Genome Biology</em> (2021) doi:<a href="https://doi.org/10.1186/s13059-021-02495-9">10.1186/s13059-021-02495-9</a>.</div>
+</div>
+<div id="ref-Morgulis_2006" class="csl-entry" role="listitem">
+<div class="csl-left-margin">26. </div><div class="csl-right-inline">Morgulis, A., Gertz, E. M., Schäffer, A. A. &amp; Agarwala, R. <a href="https://doi.org/10.1089/cmb.2006.13.1028">A fast and symmetric DUST implementation to mask low-complexity DNA sequences</a>. <em>Journal of Computational Biology</em> <strong>13</strong>, 1028–1040 (2006).</div>
+</div>
+<div id="ref-Kosmopoulos_2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">27. </div><div class="csl-right-inline">Kosmopoulos, J. C., Campbell, D. E., Whitaker, R. J. &amp; Wilbanks, E. G. <a href="https://doi.org/10.1128/aem.00177-23">Horizontal gene transfer and CRISPR targeting drive phage-bacterial host interactions and coevolution in <span>“pink berry”</span> marine microbial aggregates</a>. <em>Applied and Environmental Microbiology</em> <strong>89</strong>, (2023).</div>
+</div>
+<div id="ref-Wimmer_2020" class="csl-entry" role="listitem">
+<div class="csl-left-margin">28. </div><div class="csl-right-inline">Wimmer, F. &amp; Beisel, C. L. <a href="https://doi.org/10.3389/fmicb.2019.03078">CRISPR-cas systems and the paradox of self-targeting spacers</a>. <em>Frontiers in Microbiology</em> <strong>10</strong>, (2020).</div>
+</div>
+<div id="ref-Stern_2010" class="csl-entry" role="listitem">
+<div class="csl-left-margin">29. </div><div class="csl-right-inline">Stern, A., Keren, L., Wurtzel, O., Amitai, G. &amp; Sorek, R. <a href="https://doi.org/10.1016/j.tig.2010.05.008">Self-targeting by CRISPR: Gene regulation or autoimmunity?</a> <em>Trends in Genetics</em> <strong>26</strong>, 335–340 (2010).</div>
+</div>
+<div id="ref-Sampson_2013" class="csl-entry" role="listitem">
+<div class="csl-left-margin">30. </div><div class="csl-right-inline">Sampson, T. R., Saroj, S. D., Llewellyn, A. C., Tzeng, Y.-L. &amp; Weiss, D. S. <a href="https://doi.org/10.1038/nature12048">A CRISPR/cas system mediates bacterial innate immune evasion and virulence</a>. <em>Nature</em> <strong>497</strong>, 254–257 (2013).</div>
+</div>
+<div id="ref-Maier_2018" class="csl-entry" role="listitem">
+<div class="csl-left-margin">31. </div><div class="csl-right-inline">Maier, L.-K. <em>et al.</em> <a href="https://doi.org/10.1080/15476286.2018.1460994">The nuts and bolts of the haloferax CRISPR-cas system i-b</a>. <em>RNA Biology</em> <strong>16</strong>, 469–480 (2018).</div>
+</div>
+<div id="ref-Zhang_2025" class="csl-entry" role="listitem">
+<div class="csl-left-margin">32. </div><div class="csl-right-inline">Zhang, A.-N. <em>et al.</em> <a href="https://doi.org/10.1016/j.xgen.2024.100725">CRISPR-cas spacer acquisition is a rare event in human gut microbiome</a>. <em>Cell Genomics</em> <strong>5</strong>, 100725 (2025).</div>
+</div>
+<div id="ref-Turgeman_Grott_2018" class="csl-entry" role="listitem">
+<div class="csl-left-margin">33. </div><div class="csl-right-inline">Turgeman-Grott, I. <em>et al.</em> <a href="https://doi.org/10.1038/s41564-018-0302-8">Pervasive acquisition of CRISPR memory driven by inter-species mating of archaea can limit gene transfer and influence speciation</a>. <em>Nature Microbiology</em> <strong>4</strong>, 177–186 (2018).</div>
+</div>
+<div id="ref-Shmakov_2023" class="csl-entry" role="listitem">
+<div class="csl-left-margin">34. </div><div class="csl-right-inline">Shmakov, S. A. <em>et al.</em> <a href="https://doi.org/10.1093/nar/gkad495">Widespread CRISPR-derived RNA regulatory elements in CRISPR-cas systems</a>. <em>Nucleic Acids Research</em> <strong>51</strong>, 8150–8168 (2023).</div>
+</div>
+<div id="ref-zenodo_doi" class="csl-entry" role="listitem">
+<div class="csl-left-margin">35. </div><div class="csl-right-inline">Neri, U., Pedro Camargo, A., Roux, S. &amp; Brian, B. Supplementary data for CRISPR spacer-protospacer matching benchmarks [data set]. doi:<a href="https://doi.org/10.5281/zenodo.15171878">10.5281/zenodo.15171878</a>.</div>
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"right","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

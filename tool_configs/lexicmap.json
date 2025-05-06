@@ -1,0 +1,10 @@
+{
+  "name": "lexicmap",
+  "output_file": "{output_dir}/lexicmap_output.tsv",
+  "parse_function_name": "parse_lexicmap",
+  "script_name": "lexicmap.sh",
+  "mamba_env": "lexicmap_env",
+  "command": [
+    "mkdir -p {output_dir}/tmp_lexicmap_contigs {output_dir}/tmp_lexicmap_spacers && cp {contigs_file} {output_dir}/tmp_lexicmap_contigs/simulated_contigs.fa && cp {spacers_file} {output_dir}/tmp_lexicmap_spacers/simulated_spacers.fa && lexicmap index -k 15 -m 40000 --seed-max-desert 200 --seed-in-desert-dist 50 -I {output_dir}/tmp_lexicmap_contigs -O {output_dir}/tmp_lexicmap.lmi && lexicmap search -d {output_dir}/tmp_lexicmap.lmi {output_dir}/tmp_lexicmap_spacers/simulated_spacers.fa -o {output_dir}/lexicmap_output.tsv --threads {threads} --align-min-match-len 17 --align-min-match-pident 85 --seed-min-prefix 15 --seed-min-single-prefix 15 --seed-max-dist 100 --seed-max-gap 100 --align-max-gap 20 --align-band 100 --top-n-genomes 0 -a"
+  ]
+}

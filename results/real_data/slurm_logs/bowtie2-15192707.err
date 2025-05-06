@@ -1,0 +1,13 @@
+Building a LARGE index
+Renaming results/real_data/simulated_data/contigs_bt2indx.3.bt2l.tmp to results/real_data/simulated_data/contigs_bt2indx.3.bt2l
+Renaming results/real_data/simulated_data/contigs_bt2indx.4.bt2l.tmp to results/real_data/simulated_data/contigs_bt2indx.4.bt2l
+Renaming results/real_data/simulated_data/contigs_bt2indx.1.bt2l.tmp to results/real_data/simulated_data/contigs_bt2indx.1.bt2l
+Renaming results/real_data/simulated_data/contigs_bt2indx.2.bt2l.tmp to results/real_data/simulated_data/contigs_bt2indx.2.bt2l
+Renaming results/real_data/simulated_data/contigs_bt2indx.rev.1.bt2l.tmp to results/real_data/simulated_data/contigs_bt2indx.rev.1.bt2l
+Renaming results/real_data/simulated_data/contigs_bt2indx.rev.2.bt2l.tmp to results/real_data/simulated_data/contigs_bt2indx.rev.2.bt2l
+3835942 reads; of these:
+  3835942 (100.00%) were unpaired; of these:
+    2834913 (73.90%) aligned 0 times
+    201071 (5.24%) aligned exactly 1 time
+    799958 (20.85%) aligned >1 times
+26.10% overall alignment rate

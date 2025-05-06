@@ -1,0 +1,10 @@
+{
+  "name": "spacer_containment",
+  "output_file": "{output_dir}/spacer_containment_output.tsv",
+  "parse_function_name": "parse_tab",
+  "script_name": "spacer_containment.sh",
+  "mamba_env": null,
+  "command": [
+    "spacer-containment --n-threads {threads} {contigs_file} {spacers_file} > {output_dir}/spacer_containment_output.tsv"
+  ]
+}

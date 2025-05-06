@@ -1,0 +1,10 @@
+{
+  "name": "blastn",
+  "output_file": "{output_dir}/blastn_output.tsv",
+  "parse_function_name": "parse_blastn_custom",
+  "script_name": "blastn.sh",
+  "mamba_env": "blast_env",
+  "command": [
+    "makeblastdb -in {contigs_file} -dbtype nucl -out {output_dir}/contigs_blastdb && blastn -query {spacers_file} -db {output_dir}/contigs_blastdb -max_target_seqs 1000000 -out {output_dir}/blastn_output.tsv -evalue 1e-5 -num_threads {threads} -task blastn-short -outfmt \"6 qaccver saccver nident length mismatch qlen gapopen qstart qend sstart send evalue bitscore\""
+  ]
+}

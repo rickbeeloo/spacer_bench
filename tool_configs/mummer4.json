@@ -1,0 +1,10 @@
+{
+  "name": "mummer4",
+  "output_file": "{output_dir}/mummer4_output.sam",
+  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "script_name": "mummer4.sh",
+  "mamba_env": "mummer4_env",
+  "command": [
+    "nucmer --maxmatch --nosimplify --batch=10000000 --threads {threads} --sam-long={output_dir}/mummer4_output.sam -c 1 {contigs_file} {spacers_file}"
+  ]
+}

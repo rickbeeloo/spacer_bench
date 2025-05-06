@@ -1,0 +1,10 @@
+{
+  "name": "bwa_mem",
+  "output_file": "{output_dir}/bwa_mem_output.sam",
+  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "script_name": "bwa_mem.sh",
+  "mamba_env": "bwa_env",
+  "command": [
+    "bwa index {contigs_file} && bwa mem -t {threads} -k 18 -c 5000 -a {contigs_file} {spacers_file} > {output_dir}/bwa_mem_output.sam"
+  ]
+}

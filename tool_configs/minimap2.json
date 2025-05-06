@@ -1,0 +1,10 @@
+{
+  "name": "minimap2",
+  "output_file": "{output_dir}/minimap2_output.sam",
+  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "script_name": "minimap2.sh",
+  "mamba_env": "minimap2_env",
+  "command": [
+    "minimap2 -N 100 --eqx -t {threads} -a {contigs_file} {spacers_file} -o {output_dir}/minimap2_output.sam"
+  ]
+}

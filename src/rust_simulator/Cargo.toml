@@ -1,0 +1,17 @@
+[package]
+name = "rust_simulator"
+version = "0.1.0"
+edition = "2021"
+authors = ["Uri Neri <uri.neri@gmail.com>", "Antonio Pedro Camargo <antonio.camargo@gmail.com>", "Simon Roux <simon.roux@gmail.com>", "Brian Bushnell <brian.bushnell@gmail.com>"]
+description = "misc sequence simulator"
+
+[lib]
+name = "rust_simulator"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.24.0", features = ["extension-module"] }
+rand = "0.9"
+rayon = "1.7"
+indicatif = "0.17"
+bio = "2.0"

@@ -1,0 +1,54 @@
+---
+title: "Supplementary material for: The Drastic Effect of Choice of Spacer-to-Protospacer Search or Alignment Tool in CRISPR-Based Viral Defense Analysis"
+author:
+  - name: Uri Neri
+    affiliations:
+      - name: DOE Joint Genome Institute
+        address: Berkeley, CA, USA
+    email: uneri@lbl.gov
+    corresponding: true
+  - name: Antonio Pedro Camargo
+    affiliations:
+      - name: DOE Joint Genome Institute
+        address: Berkeley, CA, USA
+  - name: Brian Bushnell
+    affiliations:
+      - name: DOE Joint Genome Institute
+        address: Berkeley, CA, USA
+  - name: Simon Roux
+    affiliations:
+      - name: DOE Joint Genome Institute
+        address: Berkeley, CA, USA
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=1in
+    fig-format: pdf
+    embed-resources: true
+    keep-tex: true
+    include-in-header:
+      text: |
+        \usepackage{float}
+        \floatplacement{figure}{H}
+        \usepackage{booktabs}
+        \usepackage{colortbl}
+        \usepackage[table]{xcolor}
+        \definecolor{light-gray}{gray}{0.9}
+        \renewcommand{\arraystretch}{1.2}
+        \let\oldtabular\tabular
+        \let\oldendtabular\endtabular
+        \renewenvironment{tabular}{\small\oldtabular}{\oldendtabular}
+        \setlength{\tabcolsep}{4pt}
+    fig-pos: 'H'
+    number-sections: true
+    cite-method: biblatex
+    pdf-engine: xelatex
+    css: pdf_styles.css
+  odt: default
+  docx: default
+---

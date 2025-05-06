@@ -1,0 +1,10 @@
+{
+  "name": "strobealign",
+  "output_file": "{output_dir}/strobealign_output.sam",
+  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "script_name": "strobealign.sh",
+  "mamba_env": "strobealign_env",
+  "command": [
+    "strobealign --eqx -k 15 -N 1000 -t {threads} {contigs_file} {spacers_file} -o {output_dir}/strobealign_output.sam"
+  ]
+}

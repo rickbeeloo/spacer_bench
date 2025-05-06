@@ -1,0 +1,39 @@
+project:
+  type: manuscript
+  output-dir: ../../public/supplementary
+
+manuscript:
+  article: supplementary.qmd
+
+format:
+  html:
+    comments: false
+    fig-cap-location: margin
+    fontsize: "15px"
+    html-math-method: katex
+    lightbox:
+      desc-position: right
+      match: auto
+    linestretch: 1.6
+    mainfont: "'InterVariable', 'Inter', -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+  docx: default
+  pdf: 
+    latex-engine: lualatex
+    pdf-engine: lualatex
+    fig-format: pdf
+    keep-tex: true
+    keep-tex-files: true
+    use-rsvg-convert: true
+    css: pdf_styles.css
+
+  odt: default
+
+execute:
+  freeze: true
+
+callout-appearance: simple
+
+highlight-style: github
+
+# csl: ../nature.csl
+

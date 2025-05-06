@@ -1,0 +1,14 @@
+image: python:3.11-slim
+
+pages:
+  script:
+    - echo "Using pre-rendered content from public/"
+  artifacts:
+    paths:
+      - public
+      - public/figures/
+      - public/_quarto_files/
+      - public/site_libs/
+      - public/index_files/
+
+  

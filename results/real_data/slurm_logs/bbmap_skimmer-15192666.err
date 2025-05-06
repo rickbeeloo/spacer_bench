@@ -1,0 +1,54 @@
+java -ea -Xmx486G -Xms486G -cp /clusterfs/jgi/groups/science/homes/uneri/.micromamba/envs/bbmap_env/opt/bbmap-39.13-1/current/ align2.BBMapPacBioSkimmer build=1 overwrite=true minratio=0.40 fastareadlen=6000 ambig=all minscaf=100 startpad=10000 stoppad=10000 midpad=6000 sam=1.4 maxindel=0 tipsearch=0 midpad=100 in=example/crispr-host-prediction/crispr-db/rm_duped_spacers.fna ref=./example/crispr-host-prediction/IMGVR_all_nucleotides-high_confidence_nr.fna out=results/real_data/raw_outputs//bbmap_skimmer_output.sam t=12 minid=0.85 path=results/real_data/raw_outputs/ -Xmx486G
+Executing align2.BBMapPacBioSkimmer [build=1, overwrite=true, minratio=0.40, fastareadlen=6000, ambig=all, minscaf=100, startpad=10000, stoppad=10000, midpad=6000, sam=1.4, maxindel=0, tipsearch=0, midpad=100, in=example/crispr-host-prediction/crispr-db/rm_duped_spacers.fna, ref=./example/crispr-host-prediction/IMGVR_all_nucleotides-high_confidence_nr.fna, out=results/real_data/raw_outputs//bbmap_skimmer_output.sam, t=12, minid=0.85, path=results/real_data/raw_outputs/, -Xmx486G]
+Version 39.13
+
+Set MINIMUM_ALIGNMENT_SCORE_RATIO to 0.400
+Retaining all best sites for ambiguous mappings.
+Set MINIMUM_ALIGNMENT_SCORE_RATIO to 0.620
+NOTE:	Ignoring reference file because it already appears to have been processed.
+NOTE:	If you wish to regenerate the index, please manually delete results/real_data/raw_outputs/ref/genome/1/summary.txt
+Set genome to 1
+
+Loaded Reference:	46.466 seconds.
+Loading index for chunk 1-149, build 1
+Generated Index:	1852.353 seconds.
+Analyzed Index:   	133.675 seconds.
+Started output stream:	1.094 seconds.
+Cleared Memory:    	0.429 seconds.
+Processing reads in single-ended mode.
+Started read stream.
+Started 12 mapping threads.
+Detecting finished threads: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+
+   ------------------   Results   ------------------   
+
+Genome:                	1
+Key Length:            	12
+Max Indel:             	0
+Minimum Score Ratio:  	0.6202
+Mapping Mode:         	normal
+Reads Used:           	3835942	(132094902 bases)
+
+Mapping:          	7260.502 seconds.
+Reads/sec:       	528.33
+kBases/sec:      	18.19
+
+
+Read 1 data:      	pct reads	num reads 	pct bases	   num bases
+
+mapped:          	 49.6988% 	  1906416 	  0.0000% 	           0
+unambiguous:     	 49.6988% 	  1906416 	  0.0000% 	           0
+ambiguous:       	  0.0000% 	        0 	  0.0000% 	           0
+low-Q discards:  	  0.0000% 	        0 	  0.0000% 	           0
+
+perfect best site:	 14.7853% 	   567154 	  0.0000% 	           0
+semiperfect site:	 14.7972% 	   567612 	 14.2063% 	    18765856
+
+Match Rate:      	      NA 	       NA 	 92.2332% 	    58704928
+Error Rate:      	 34.9040% 	  1338886 	  7.7543% 	     4935479
+Sub Rate:        	 34.1100% 	  1308427 	  6.0243% 	     3834360
+Del Rate:        	  4.2831% 	   164295 	  0.7655% 	      487219
+Ins Rate:        	  7.8519% 	   301193 	  0.9645% 	      613900
+N Rate:          	  0.0496% 	     1904 	  0.0125% 	        7957
+
+Total time:     	9295.351 seconds.

@@ -1,0 +1,10 @@
+{
+  "name": "hisat2",
+  "output_file": "{output_dir}/hisat2_output.sam",
+  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "script_name": "hisat2.sh",
+  "mamba_env": "hisat2_env",
+  "command": [
+    "hisat2-build -p {threads} {contigs_file} {output_dir}/hisat2_idx && hisat2 -a --no-spliced-alignment  --no-unal --no-softclip --secondary -p {threads} -x {output_dir}/hisat2_idx -f {spacers_file} -S {output_dir}/hisat2_output.sam"
+  ]
+} 

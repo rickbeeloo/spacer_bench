@@ -1,0 +1,45 @@
+project:
+  type: manuscript
+  output-dir: ../../public
+
+manuscript:
+  article: index.qmd
+
+format:
+  html:
+    comments: false
+    css: ../styles.css
+    fig-cap-location: margin
+    fontsize: "15px"
+    html-math-method: katex
+    lightbox:
+      desc-position: right
+      match: auto
+    linestretch: 1.6
+    mainfont: "'InterVariable', 'Inter', -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+    grid:
+      body-width: 825px
+      margin-width: 200px
+      sidebar-width: 200px
+    include-in-header:
+      text: <meta name="robots" content="noindex, nofollow">
+  docx: default
+  odt: default
+  pdf: 
+    latex-engine: lualatex
+    pdf-engine: lualatex
+    fig-format: pdf
+    include-in-header:
+      text: |
+        \usepackage{svg}
+execute:
+  freeze: true
+
+callout-appearance: simple
+
+highlight-style: github
+
+bibliography: ./references.bib
+
+csl: ../nature.csl
+

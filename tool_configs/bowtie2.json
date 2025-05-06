@@ -1,0 +1,10 @@
+{
+  "name": "bowtie2",
+  "output_file": "{output_dir}/bowtie2_output.sam",
+  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "script_name": "bowtie2.sh",
+  "mamba_env": "bowtie2_env",
+  "command": [
+    "bowtie2-build --large-index --threads {threads} {contigs_file} {results_dir}/simulated_data/contigs_bt2indx && bowtie2 --all --xeq --very-sensitive -x {results_dir}/simulated_data/contigs_bt2indx -f {spacers_file} -S {output_dir}/bowtie2_output.sam --threads {threads}"
+  ]
+}

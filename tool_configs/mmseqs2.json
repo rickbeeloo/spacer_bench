@@ -1,0 +1,10 @@
+{
+  "name": "mmseqs2",
+  "output_file": "{output_dir}/mmseqs_output.tsv",
+  "parse_function_name": "parse_blastn_custom",
+  "script_name": "mmseqs.sh",
+  "mamba_env": "mmseqs_env",
+  "command": [
+    "mkdir -p {output_dir}/tmp_spacers {output_dir}/tmp_contigs {output_dir}/tmp_mmseqs {output_dir}/tmp_mmseqs_outputs && mmseqs createdb {spacers_file} {output_dir}/tmp_spacers/mmdb && mmseqs createdb {contigs_file} {output_dir}/tmp_contigs/mmdb && mmseqs search {output_dir}/tmp_spacers/mmdb {output_dir}/tmp_contigs/mmdb {output_dir}/tmp_mmseqs_outputs/mmseqs_output {output_dir}/tmp_mmseqs --min-seq-id 0.85 --min-aln-len 17 --threads {threads} -a --search-type 3 -v 1 && mmseqs convertalis {output_dir}/tmp_spacers/mmdb {output_dir}/tmp_contigs/mmdb {output_dir}/tmp_mmseqs_outputs/mmseqs_output {output_dir}/mmseqs_output.tsv --format-mode 0 --search-type 4 --format-output query,target,nident,alnlen,mismatch,qlen,gapopen,qstart,qend,tstart,tend,evalue,bits"
+  ]
+}
