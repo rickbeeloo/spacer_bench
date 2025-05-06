@@ -204,7 +204,8 @@ Per contig independent manner means that the recall measure is the fraction of o
 ### Supplementary figure 5.
 
 Tool recall versus occurrence frequency for **IMG/VR4 dataset**.  
-Similar to main text figure, except for exact values for different mismatch thresholds (0-3). 
+Similar to main text figure, except for exact values for different mismatch thresholds (0-3).  
+
 #### A. 0 mismatches    
 
 ![](figures/supp/real_data_recall_vs_occurrences_exact_nm_0.svg) 
