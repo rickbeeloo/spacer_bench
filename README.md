@@ -138,7 +138,7 @@ Tools are configured via JSON in `tool_configs/`, for example:
 ```
 Tool configs can be added manually or using the following command:
 ```bash
-python -m utils.tool_commands add-tool
+python -m bench.utils.tool_commands add-tool
 ```
 The `parse_function_name` field should be set to an real function in `src/bench/utils/functions.py` (you add your own parser function there, or use one of the existing ones).  
 The json can use these placeholders:
