@@ -1,7 +1,7 @@
 {
   "name": "strobealign",
   "output_file": "{output_dir}/strobealign_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "strobealign.sh",
   "mamba_env": "strobealign_env",
   "command": [

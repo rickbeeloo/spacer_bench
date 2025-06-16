@@ -1,7 +1,7 @@
 {
   "name": "minimap2",
   "output_file": "{output_dir}/minimap2_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "minimap2.sh",
   "mamba_env": "minimap2_env",
   "command": [

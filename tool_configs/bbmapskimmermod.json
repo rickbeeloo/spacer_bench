@@ -1,7 +1,7 @@
 {
   "name": "bbmapskimmermod",
   "output_file": "{output_dir}/bbmap_skimmer_mod_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "bbmapskimmermod.sh",
   "mamba_env": "bbmap_env",
   "command": [

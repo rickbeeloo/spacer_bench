@@ -1878,3 +1878,10 @@ class DebugArgs:
 #         .otherwise(pl.lit("+"))
 #         .alias("strand")
 #     )
+
+def parse_sam(sam_file, spacer_lendf=None, max_mismatches=5, threads=4, ref_file=None, **kwargs):
+    """
+    A convenience function that forwards all arguments to parse_samVn_with_lens_pysam.
+    This is the recommended function to use for parsing SAM files.
+    """
+    return parse_samVn_with_lens_pysam(sam_file, spacer_lendf, max_mismatches, threads, ref_file, **kwargs)

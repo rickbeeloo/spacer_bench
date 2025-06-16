@@ -3,7 +3,7 @@
   {
     "name": "bbmapskimmer",
     "output_file": "{output_dir}/bbmap_skimmer_output.sam",
-    "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+    "parse_function_name": "parse_sam",
     "script_name": "bbmap_skimmer.sh",
     "mamba_env": "bbmap_env",
     "command": [
@@ -13,7 +13,7 @@
 {
   "name": "bbmapskimmermod",
   "output_file": "{output_dir}/bbmap_skimmer_mod_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "bbmapskimmermod.sh",
   "mamba_env": "bbmap_env",
   "command": [
@@ -33,7 +33,7 @@
 {
   "name": "bowtie1",
   "output_file": "{output_dir}/bowtie1_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "bowtie1.sh",
   "mamba_env": "bowtie1_env",
   "command": [
@@ -43,7 +43,7 @@
 {
   "name": "bowtie2",
   "output_file": "{output_dir}/bowtie2_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "bowtie2.sh",
   "mamba_env": "bowtie2_env",
   "command": [
@@ -53,7 +53,7 @@
 {
   "name": "bwa_mem",
   "output_file": "{output_dir}/bwa_mem_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "bwa_mem.sh",
   "mamba_env": "bwa_env",
   "command": [
@@ -63,7 +63,7 @@
 {
   "name": "hisat2",
   "output_file": "{output_dir}/hisat2_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "hisat2.sh",
   "mamba_env": "hisat2_env",
   "command": [
@@ -83,7 +83,7 @@
 {
   "name": "minimap2",
   "output_file": "{output_dir}/minimap2_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "minimap2.sh",
   "mamba_env": "minimap2_env",
   "command": [
@@ -93,7 +93,7 @@
 {
   "name": "minimap2_mod",
   "output_file": "{output_dir}/minimap2_mod_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "minimap2_mod.sh",
   "mamba_env": "minimap2_env",
   "command": [
@@ -123,7 +123,7 @@
 {
   "name": "mummer4",
   "output_file": "{output_dir}/mummer4_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "mummer4.sh",
   "mamba_env": "mummer4_env",
   "command": [
@@ -143,7 +143,7 @@
 {
   "name": "strobealign",
   "output_file": "{output_dir}/strobealign_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "strobealign.sh",
   "mamba_env": "strobealign_env",
   "command": [

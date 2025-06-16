@@ -61,20 +61,11 @@ def populate_tools(args, spacer_lendf=None):
     
     # Adjust parse function based on spacer length dataframe
     for tool in tools.values():
-        if spacer_lendf is not None:
-            # Handle special case for parse functions that depend on spacer length information
-            if tool['parse_function_name'] == "parse_samVn_with_lens_pysam_or_samVext":
-                tool['parse_function_name'] = "parse_samVn_with_lens_pysam"
-            elif tool['parse_function_name'] == "parse_samV1_or_parse_samVext":
-                tool['parse_function_name'] = "parse_samV1"
-        else:
-            # Handle special case for parse functions that depend on spacer length information
-            if tool['parse_function_name'] == "parse_samVn_with_lens_pysam_or_samVext":
-                tool['parse_function_name'] = "parse_samVext"
-            elif tool['parse_function_name'] == "parse_samV1_or_parse_samVext":
-                tool['parse_function_name'] = "parse_samVext"
+        # If parse_function_name is not specified, default to parse_sam
+        if 'parse_function_name' not in tool or not tool['parse_function_name']:
+            tool['parse_function_name'] = 'parse_sam'
                 
-        # Add the actual function reference TODO: add more parse functions?
+        # Add the actual function reference
         tool['parse_function'] = get_parse_function(tool['parse_function_name'])
     
     return tools

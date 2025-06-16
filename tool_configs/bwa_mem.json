@@ -1,7 +1,7 @@
 {
   "name": "bwa_mem",
   "output_file": "{output_dir}/bwa_mem_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "bwa_mem.sh",
   "mamba_env": "bwa_env",
   "command": [

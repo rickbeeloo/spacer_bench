@@ -1,9 +1,23 @@
 # Benchmarking protospacer identification tools
 Scripts, code, and data for the manuscript: "Tool Choice drastically Impacts CRISPR Spacer-Protospacer Detection"   
-Raw data files available in zenodo: [https://zenodo.org/doi/10.5281/zenodo.15171878](https://zenodo.org/doi/10.5281/zenodo.15171878).
+Raw data files available in zenodo: [https://zenodo.org/doi/10.5281/zenodo.15171878](https://zenodo.org/doi/10.5281/zenodo.15171878).  
+This benchmark is a companion project to the [SpacerDB](https://spacers.jgi.doe.gov/) and the [SpacerExtractor](https://code.jgi.doe.gov/SRoux/spacerextractor) tools.  
 
 ## Overview
 CLI Python script for simulating spacer insertions into contigs and benchmarking sequence aligners. Generates synthetic data with known ground truth and evaluates aligner performance metrics (precision, recall, F1) and runtime. Note that for proper in-depth analysis, the jupyter notebooks are preferable (less heuristics, more detailed, and runs additional tests to verify the different tool reported alignments (so more consistent approach)).
+
+## How should I analyse my own samples? (tl;dr)
+For analyzing your own samples, we recommend using [SpacerExtractor](https://code.jgi.doe.gov/SRoux/spacerextractor#extra-functions---map-spacers-to-potential-targets-at-scale) rather than this benchmarking repository. SpacerExtractor is designed for practical analysis, using only bowtie1 for alignments, and includes features like:
+- Wrapping bowtie1 commands for indexing and alignment of contigs and spacers.
+- Extraction of flanking sequences (10 bases up/downstream of matches) for PAM analysis
+- Built-in SAM file parsing (and filtering) and alignment visualization.
+
+### Still, when should I use code from this benchmarking repository for my own (non-benchmarking) analysis?
+(Apart from running benchmarks, of course), You might find the code useful for if you are interested in:
+1. Utilizing multiple search tools,
+2. Double-checking the reported alignments
+3. Matches with >3 mismatches, or with gaps (bowtie1, wrapped by SpacerExtractor, is limited to 3).
+4. The performance/resource usage of a tool (for example, you are optimizing a tool for a specific range of datasets size and parameter ranges).
 
 ### Key Features
 - Simulates contigs and spacers at given frequency and specifications.
@@ -96,8 +110,8 @@ python -m bench.bench [options]
 spacer_matching_bench --contig_length_range 1000 32000 \
                      --spacer_length_range 20 60 \
                      --n_mismatch_range 0 5 \
-                     --sample_size_contigs 1500 \
-                     --sample_size_spacers 50 \
+                     --sample_size_contigs 150 \
+                     --sample_size_spacers 5 \
                      --insertion_range 1 5 \
                      --threads 16 \
                      --prop_rc 0.5
@@ -114,7 +128,7 @@ Tools are configured via JSON in `tool_configs/`, for example:
 {
   "name": "bowtie1",
   "output_file": "{output_dir}/bowtie1_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "bowtie1.sh",
   "mamba_env": "bowtie1_env",
   "command": [

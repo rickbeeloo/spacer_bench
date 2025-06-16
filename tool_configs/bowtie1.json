@@ -1,7 +1,7 @@
 {
   "name": "bowtie1",
   "output_file": "{output_dir}/bowtie1_output.sam",
-  "parse_function_name": "parse_samVn_with_lens_pysam_or_samVext",
+  "parse_function_name": "parse_sam",
   "script_name": "bowtie1.sh",
   "mamba_env": "bowtie1_env",
   "command": [
