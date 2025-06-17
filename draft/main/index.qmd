@@ -1,29 +1,12 @@
 ---
 title: "Tool Choice drastically Impacts CRISPR Spacer-Protospacer Detection"
 author:
-  - name: Uri Neri
-    affiliations:
-      - name: DOE Joint Genome Institute
-        address: Berkeley, CA, USA
-    email: uneri@lbl.gov
+  - name: Uri Neri*^1^
     corresponding: true
-  - name: Antonio Pedro Camargo
-    affiliations:
-      - name: DOE Joint Genome Institute
-        address: Berkeley, CA, USA
-  - name: Brian Bushnell
-    affiliations:
-      - name: DOE Joint Genome Institute
-        address: Berkeley, CA, USA
-  - name: Simon Roux
-    affiliations:
-      - name: DOE Joint Genome Institute
-        address: Berkeley, CA, USA
+  - name: Antonio Pedro Camargo^1^
+  - name: Brian Bushnell^1^
+  - name: Simon Roux^1^
 format:
-  html:
-    toc: true
-    toc-depth: 3
-    number-sections: true
   pdf:
     documentclass: article
     geometry:
@@ -31,20 +14,23 @@ format:
     fig-format: pdf
     embed-resources: true
     keep-tex: true
-    include-in-header:
-      text: |
-        \usepackage{float}
-        \floatplacement{figure}{H}
     fig-pos: 'H'
     number-sections: true
     cite-method: biblatex
     bibliography: references.bib
     pdf-engine: xelatex
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
   docx: default
 execute:
   echo: false
   warning: false
 ---
+1: DOE Joint Genome Institute, Berkeley, CA, USA  
+* Uri Neri (uneri@lbl.gov)
+
 
 ## Abstract {#sec-abstract}
 
@@ -124,11 +110,7 @@ To evaluate the same tools in a "real-life" scenario, We used the predicted vira
 
 For comparing alignments across tools, we used the Levenshtein distance [@levenshtein1966] (a.k.a edit distance) as our main scoring metric. For any two sequences, this metric sums both substitutions and gaps (i.e. insertions and deletions) into a single value. This choice was made to ensure consistent comparison across tools that may handle gaps differently, and because in the context of CRISPR-based defense, both substitutions and gaps can affect the efficiency of target recognition.
 
-To ensure consistent mismatch calculation across tools, we realigned all reported matches using parasail [@Daily2016_parasail], specifically the `nw_stats_scan` i.e. Needleman-Wunsch global alignment with gap opening and extension penalties of 10, and a scoring matrix of `nuc44`. This allowed us to:
-
-1. Calculate edit distances independently of tool-specific scoring schemes
-2. Verify reported matches and their orientations
-3. Generate standardized alignment visualizations for manual comparison
+To ensure consistent mismatch calculation across tools, we realigned all reported matches using parasail [@Daily2016_parasail], specifically the `nw_stats_scan` i.e. Needleman-Wunsch global alignment with gap opening and extension penalties of 10, and a scoring matrix of `nuc44`. This allowed us to calculate edit distances independently of tool-specific scoring schemes, verify the reported matches and their orientations, and generate standardized alignment visualizations for manual comparison.
 
 
 ### Performance definition and calculation {#sec-performance-calc}
@@ -146,7 +128,7 @@ where true positives are matches found by a tool that exist in the positive set,
 
 While we have made the runtime and resource (memory and storage usage) data available, the primary focus of this study was to evaluate the ability of each tool to accurately identify spacer-protospacer matches, rather than their computational performance. However, as resource usage may become a limiting factor in the future (with the advent and accumulation of metagenomic sequence data), we designed the benchmark to automatically log several usage metrics.
 
-For the synthetic data, we used hyperfine [@Peter_hyperfine_2023] to track runtime and resource usage, with a maximum of 5 runs for each tool. For the real data, we used SLURM's built-in accounting system for cluster-based runs (`sacct`) via a custom script (pyseff.py)[@pyseff]. For each tool, several metrics were recorded, including wall clock time, Peak memory usage, CPU utilization, I/O operations (see fig-workflow for an overview of the synthetic data workflow). Memory efficiency was calculated as the ratio of the peak memory usage divided by the total allocated memory, and it is important to note that certain tools would identify available memory and utilize all of it, while other tools would utilize it in a deterministic manner given input size, parameters, threads, batch size, etc. This can also affect the overall runtime for different tools, making it difficult to directly compare the scaling efficiency of different tools. Additionally, the runtime reported is not the actual runtime of the tool, but rather the runtime of the SLURM job. While most tools were run as a single job, some tools (notably blastn-short) failed to complete given our maximum available resources (either due to time or memory constraints), and were instead run as multiple jobs, on different subsets of the data. As such, the runtime reported for these tools is the sum of the runtime of all their jobs.
+For the synthetic data, we used hyperfine [@Peter_hyperfine_2023] to track runtime and resource usage, with a maximum of 5 runs for each tool. For the real data, we used SLURM's built-in accounting system for cluster-based runs (`sacct`) via a custom script (pyseff.py)[@pyseff]. For each tool, several metrics were recorded, including wall clock time, Peak memory usage, CPU utilization, I/O operations (see supplementary figure 1 for an overview of the synthetic data workflow). Memory efficiency was calculated as the ratio of the peak memory usage divided by the total allocated memory, and it is important to note that certain tools would identify available memory and utilize all of it, while other tools would utilize it in a deterministic manner given input size, parameters, threads, batch size, etc. This can also affect the overall runtime for different tools, making it difficult to directly compare the scaling efficiency of different tools. Additionally, the runtime reported is not the actual runtime of the tool, but rather the runtime of the SLURM job. While most tools were run as a single job, some tools (notably blastn-short) failed to complete given our maximum available resources (either due to time or memory constraints), and were instead run as multiple jobs, on different subsets of the data. As such, the runtime reported for these tools is the sum of the runtime of all their jobs.
 
 
 ### Versioning and Reproducibility {#sec-reproducibility}

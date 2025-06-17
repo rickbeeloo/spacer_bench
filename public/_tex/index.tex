@@ -93,8 +93,7 @@
 \def\fps@figure{htbp}
 \makeatother
 
-\usepackage{float}
-\floatplacement{figure}{H}
+\usepackage{svg}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -145,7 +144,7 @@
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={Tool Choice drastically Impacts CRISPR Spacer-Protospacer Detection},
-  pdfauthor={Uri Neri; Antonio Pedro Camargo; Brian Bushnell; Simon Roux},
+  pdfauthor={Uri Neri*1; Antonio Pedro Camargo1; Brian Bushnell1; Simon Roux1},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -156,13 +155,17 @@
 
 \title{Tool Choice drastically Impacts CRISPR Spacer-Protospacer
 Detection}
-\author{Uri Neri \and Antonio Pedro Camargo \and Brian
-Bushnell \and Simon Roux}
+\author{Uri Neri*\textsuperscript{1} \and Antonio Pedro
+Camargo\textsuperscript{1} \and Brian
+Bushnell\textsuperscript{1} \and Simon Roux\textsuperscript{1}}
 \date{}
 
 \begin{document}
 \maketitle
 
+
+1: DOE Joint Genome Institute, Berkeley, CA, USA\\
+* Uri Neri (uneri@lbl.gov)
 
 \section{Abstract}\label{sec-abstract}
 
@@ -484,19 +487,10 @@ To ensure consistent mismatch calculation across tools, we realigned all
 reported matches using parasail \autocite{Daily2016_parasail},
 specifically the \texttt{nw\_stats\_scan} i.e.~Needleman-Wunsch global
 alignment with gap opening and extension penalties of 10, and a scoring
-matrix of \texttt{nuc44}. This allowed us to:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Calculate edit distances independently of tool-specific scoring
-  schemes
-\item
-  Verify reported matches and their orientations
-\item
-  Generate standardized alignment visualizations for manual comparison
-\end{enumerate}
+matrix of \texttt{nuc44}. This allowed us to calculate edit distances
+independently of tool-specific scoring schemes, verify the reported
+matches and their orientations, and generate standardized alignment
+visualizations for manual comparison.
 
 \subsection{Performance definition and
 calculation}\label{sec-performance-calc}
@@ -548,21 +542,22 @@ with a maximum of 5 runs for each tool. For the real data, we used
 SLURM's built-in accounting system for cluster-based runs
 (\texttt{sacct}) via a custom script (pyseff.py)\autocite{pyseff}. For
 each tool, several metrics were recorded, including wall clock time,
-Peak memory usage, CPU utilization, I/O operations (see fig-workflow for
-an overview of the synthetic data workflow). Memory efficiency was
-calculated as the ratio of the peak memory usage divided by the total
-allocated memory, and it is important to note that certain tools would
-identify available memory and utilize all of it, while other tools would
-utilize it in a deterministic manner given input size, parameters,
-threads, batch size, etc. This can also affect the overall runtime for
-different tools, making it difficult to directly compare the scaling
-efficiency of different tools. Additionally, the runtime reported is not
-the actual runtime of the tool, but rather the runtime of the SLURM job.
-While most tools were run as a single job, some tools (notably
-blastn-short) failed to complete given our maximum available resources
-(either due to time or memory constraints), and were instead run as
-multiple jobs, on different subsets of the data. As such, the runtime
-reported for these tools is the sum of the runtime of all their jobs.
+Peak memory usage, CPU utilization, I/O operations (see supplementary
+figure 1 for an overview of the synthetic data workflow). Memory
+efficiency was calculated as the ratio of the peak memory usage divided
+by the total allocated memory, and it is important to note that certain
+tools would identify available memory and utilize all of it, while other
+tools would utilize it in a deterministic manner given input size,
+parameters, threads, batch size, etc. This can also affect the overall
+runtime for different tools, making it difficult to directly compare the
+scaling efficiency of different tools. Additionally, the runtime
+reported is not the actual runtime of the tool, but rather the runtime
+of the SLURM job. While most tools were run as a single job, some tools
+(notably blastn-short) failed to complete given our maximum available
+resources (either due to time or memory constraints), and were instead
+run as multiple jobs, on different subsets of the data. As such, the
+runtime reported for these tools is the sum of the runtime of all their
+jobs.
 
 \subsection{Versioning and Reproducibility}\label{sec-reproducibility}
 

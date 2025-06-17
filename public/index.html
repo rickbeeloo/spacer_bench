@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Uri Neri">
-<meta name="author" content="Antonio Pedro Camargo">
-<meta name="author" content="Brian Bushnell">
-<meta name="author" content="Simon Roux">
+<meta name="author" content="Uri Neri*1">
+<meta name="author" content="Antonio Pedro Camargo1">
+<meta name="author" content="Brian Bushnell1">
+<meta name="author" content="Simon Roux1">
 
 <title>Tool Choice drastically Impacts CRISPR Spacer-Protospacer Detection</title>
 <style>
@@ -65,10 +65,10 @@ div.csl-indent {
 
 <link rel="stylesheet" href="../styles.css">
 <meta name="citation_title" content="Tool Choice drastically Impacts CRISPR Spacer-Protospacer Detection">
-<meta name="citation_author" content="Uri Neri">
-<meta name="citation_author" content="Antonio Pedro Camargo">
-<meta name="citation_author" content="Brian Bushnell">
-<meta name="citation_author" content="Simon Roux">
+<meta name="citation_author" content="Uri Neri*^1^">
+<meta name="citation_author" content="Antonio Pedro Camargo^1^">
+<meta name="citation_author" content="Brian Bushnell^1^">
+<meta name="citation_author" content="Simon Roux^1^">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=CRISPR provides acquired resistance against viruses in prokaryotes;,citation_author=Rodolphe Barrangou;,citation_author=Christophe Fremaux;,citation_author=Hélène Deveau;,citation_author=Melissa Richards;,citation_author=Patrick Boyaval;,citation_author=Sylvain Moineau;,citation_author=Dennis A Romero;,citation_author=Philippe Horvath;,citation_publication_date=2007;,citation_cover_date=2007;,citation_year=2007;,citation_issue=5819;,citation_volume=315;,citation_journal_title=Science;,citation_publisher=American Association for the Advancement of Science;">
 <meta name="citation_reference" content="citation_title=Intervening sequences of regularly spaced prokaryotic repeats derive from foreign genetic elements;,citation_author=Francisco J. M. Mojica;,citation_author=César Díez-Villaseñor;,citation_author=Jesús García-Martínez;,citation_author=Elena Soria;,citation_publication_date=2005-02;,citation_cover_date=2005-02;,citation_year=2005;,citation_fulltext_html_url=http://dx.doi.org/10.1007/s00239-004-0046-3;,citation_issue=2;,citation_doi=10.1007/s00239-004-0046-3;,citation_issn=1432-1432;,citation_volume=60;,citation_journal_title=Journal of Molecular Evolution;,citation_publisher=Springer Science; Business Media LLC;">
@@ -138,47 +138,19 @@ div.csl-indent {
     
     <div class="quarto-title-meta-container">
       <div class="quarto-title-meta-column-start">
-            <div class="quarto-title-meta-author">
-          <div class="quarto-title-meta-heading">Authors</div>
-          <div class="quarto-title-meta-heading">Affiliation</div>
-          
-                <div class="quarto-title-meta-contents">
-            <p class="author">Uri Neri <a href="mailto:uneri@lbl.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-          </div>
-                <div class="quarto-title-meta-contents">
-                    <p class="affiliation">
-                        DOE Joint Genome Institute
-                      </p>
-                  </div>
-                      <div class="quarto-title-meta-contents">
-            <p class="author">Antonio Pedro Camargo </p>
-          </div>
-                <div class="quarto-title-meta-contents">
-                    <p class="affiliation">
-                        DOE Joint Genome Institute
-                      </p>
-                  </div>
-                      <div class="quarto-title-meta-contents">
-            <p class="author">Brian Bushnell </p>
-          </div>
-                <div class="quarto-title-meta-contents">
-                    <p class="affiliation">
-                        DOE Joint Genome Institute
-                      </p>
-                  </div>
-                      <div class="quarto-title-meta-contents">
-            <p class="author">Simon Roux </p>
-          </div>
-                <div class="quarto-title-meta-contents">
-                    <p class="affiliation">
-                        DOE Joint Genome Institute
-                      </p>
-                  </div>
-                    </div>
         
         <div class="quarto-title-meta">
 
-                      
+                <div>
+            <div class="quarto-title-meta-heading">Authors</div>
+            <div class="quarto-title-meta-contents">
+                        <p>Uri Neri*<sup>1</sup> </p>
+                        <p>Antonio Pedro Camargo<sup>1</sup> </p>
+                        <p>Brian Bushnell<sup>1</sup> </p>
+                        <p>Simon Roux<sup>1</sup> </p>
+                      </div>
+          </div>
+                
           
                 
               </div>
@@ -237,6 +209,8 @@ div.csl-indent {
   
 
 
+<p>1: DOE Joint Genome Institute, Berkeley, CA, USA<br>
+* Uri Neri (uneri@lbl.gov)</p>
 <section id="sec-abstract" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="sec-abstract"><span class="header-section-number">1</span> Abstract</h2>
 <p>CRISPR (Clustered Regularly Interspaced Short Palindromic Repeats) systems are a fundamental defense mechanism in prokaryotes, where short sequences called spacers are stored in the host genome to recognize and target exogenous genetic elements. Viromics, the study of viral communities in environmental samples, relies heavily on identifying these spacer-target interactions to understand host-virus relationships. However, the choice of sequence search tool to identify putative spacer targets is often overlooked, leading to an unknown impact of downstream inferences in virus-host analysis. Here, we utilize simulated and real datasets to compare popular sequence alignment and search tools, revealing critical differences in their ability to detect multiple matches and handle varying degrees of sequence identity between spacers and potential targets. Finally, we provide general guidelines that may inform future research regarding matching, which is a common practice in studying the complex nature of host-MGE interactions.</p>
@@ -427,12 +401,7 @@ Table&nbsp;2: Dataset characteristics. Target is interchangeable with “contig�
 <section id="sec-alignment-recalc" class="level3" data-number="3.5">
 <h3 data-number="3.5" class="anchored" data-anchor-id="sec-alignment-recalc"><span class="header-section-number">3.5</span> Alignment and Recalculation of Mismatches</h3>
 <p>For comparing alignments across tools, we used the Levenshtein distance<span class="citation" data-cites="levenshtein1966"><sup><a href="#ref-levenshtein1966" role="doc-biblioref">18</a></sup></span> (a.k.a edit distance) as our main scoring metric. For any two sequences, this metric sums both substitutions and gaps (i.e.&nbsp;insertions and deletions) into a single value. This choice was made to ensure consistent comparison across tools that may handle gaps differently, and because in the context of CRISPR-based defense, both substitutions and gaps can affect the efficiency of target recognition.</p>
-<p>To ensure consistent mismatch calculation across tools, we realigned all reported matches using parasail<span class="citation" data-cites="Daily2016_parasail"><sup><a href="#ref-Daily2016_parasail" role="doc-biblioref">19</a></sup></span>, specifically the <code>nw_stats_scan</code> i.e.&nbsp;Needleman-Wunsch global alignment with gap opening and extension penalties of 10, and a scoring matrix of <code>nuc44</code>. This allowed us to:</p>
-<ol type="1">
-<li>Calculate edit distances independently of tool-specific scoring schemes</li>
-<li>Verify reported matches and their orientations</li>
-<li>Generate standardized alignment visualizations for manual comparison</li>
-</ol>
+<p>To ensure consistent mismatch calculation across tools, we realigned all reported matches using parasail<span class="citation" data-cites="Daily2016_parasail"><sup><a href="#ref-Daily2016_parasail" role="doc-biblioref">19</a></sup></span>, specifically the <code>nw_stats_scan</code> i.e.&nbsp;Needleman-Wunsch global alignment with gap opening and extension penalties of 10, and a scoring matrix of <code>nuc44</code>. This allowed us to calculate edit distances independently of tool-specific scoring schemes, verify the reported matches and their orientations, and generate standardized alignment visualizations for manual comparison.</p>
 </section>
 <section id="sec-performance-calc" class="level3" data-number="3.6">
 <h3 data-number="3.6" class="anchored" data-anchor-id="sec-performance-calc"><span class="header-section-number">3.6</span> Performance definition and calculation</h3>
@@ -446,7 +415,7 @@ Table&nbsp;2: Dataset characteristics. Target is interchangeable with “contig�
 <section id="sec-resource-tracking" class="level3" data-number="3.8">
 <h3 data-number="3.8" class="anchored" data-anchor-id="sec-resource-tracking"><span class="header-section-number">3.8</span> Computational Resource and runtime tracking</h3>
 <p>While we have made the runtime and resource (memory and storage usage) data available, the primary focus of this study was to evaluate the ability of each tool to accurately identify spacer-protospacer matches, rather than their computational performance. However, as resource usage may become a limiting factor in the future (with the advent and accumulation of metagenomic sequence data), we designed the benchmark to automatically log several usage metrics.</p>
-<p>For the synthetic data, we used hyperfine<span class="citation" data-cites="Peter_hyperfine_2023"><sup><a href="#ref-Peter_hyperfine_2023" role="doc-biblioref">20</a></sup></span> to track runtime and resource usage, with a maximum of 5 runs for each tool. For the real data, we used SLURM’s built-in accounting system for cluster-based runs (<code>sacct</code>) via a custom script (pyseff.py)<span class="citation" data-cites="pyseff"><sup><a href="#ref-pyseff" role="doc-biblioref">21</a></sup></span>. For each tool, several metrics were recorded, including wall clock time, Peak memory usage, CPU utilization, I/O operations (see fig-workflow for an overview of the synthetic data workflow). Memory efficiency was calculated as the ratio of the peak memory usage divided by the total allocated memory, and it is important to note that certain tools would identify available memory and utilize all of it, while other tools would utilize it in a deterministic manner given input size, parameters, threads, batch size, etc. This can also affect the overall runtime for different tools, making it difficult to directly compare the scaling efficiency of different tools. Additionally, the runtime reported is not the actual runtime of the tool, but rather the runtime of the SLURM job. While most tools were run as a single job, some tools (notably blastn-short) failed to complete given our maximum available resources (either due to time or memory constraints), and were instead run as multiple jobs, on different subsets of the data. As such, the runtime reported for these tools is the sum of the runtime of all their jobs.</p>
+<p>For the synthetic data, we used hyperfine<span class="citation" data-cites="Peter_hyperfine_2023"><sup><a href="#ref-Peter_hyperfine_2023" role="doc-biblioref">20</a></sup></span> to track runtime and resource usage, with a maximum of 5 runs for each tool. For the real data, we used SLURM’s built-in accounting system for cluster-based runs (<code>sacct</code>) via a custom script (pyseff.py)<span class="citation" data-cites="pyseff"><sup><a href="#ref-pyseff" role="doc-biblioref">21</a></sup></span>. For each tool, several metrics were recorded, including wall clock time, Peak memory usage, CPU utilization, I/O operations (see supplementary figure 1 for an overview of the synthetic data workflow). Memory efficiency was calculated as the ratio of the peak memory usage divided by the total allocated memory, and it is important to note that certain tools would identify available memory and utilize all of it, while other tools would utilize it in a deterministic manner given input size, parameters, threads, batch size, etc. This can also affect the overall runtime for different tools, making it difficult to directly compare the scaling efficiency of different tools. Additionally, the runtime reported is not the actual runtime of the tool, but rather the runtime of the SLURM job. While most tools were run as a single job, some tools (notably blastn-short) failed to complete given our maximum available resources (either due to time or memory constraints), and were instead run as multiple jobs, on different subsets of the data. As such, the runtime reported for these tools is the sum of the runtime of all their jobs.</p>
 </section>
 <section id="sec-reproducibility" class="level3" data-number="3.9">
 <h3 data-number="3.9" class="anchored" data-anchor-id="sec-reproducibility"><span class="header-section-number">3.9</span> Versioning and Reproducibility</h3>
