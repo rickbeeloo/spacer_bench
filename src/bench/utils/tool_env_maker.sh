@@ -9,15 +9,15 @@ create_env() {
 
     echo "Creating environment: $env_name with package: $package"
     
-    # Remove environment if it exists
-    micromamba env remove -n $env_name # ignore errors if it doesn't exist yolo
+    # Remove environment if it exists (ignore errors if it doesn't exist)
+    mamba env remove -n $env_name 2>/dev/null || true
     
     # Create new environment with only the specific tool
-    micromamba create -n $env_name -c $channel $package -y
+    mamba create -n $env_name -c $channel $package -y
 }
 
 
-tools=("bowtie1" "bowtie2" "minimap2" "bbmap" "strobealign" "blast" "mmseqs" "spacepharer" "spacer-containment" "mummer4", "lexicmap","vsearch", "bwa", "hisat2", "sassy")
+tools=("bowtie" "bowtie2" "minimap2" "bbmap" "strobealign" "blast" "mmseqs" "spacepharer" "spacer-containment" "mummer4" "lexicmap" "vsearch" "bwa" "hisat2" "sassy")
 
 # Create individual environments for each tool
 for tool in "${tools[@]}"; do
@@ -26,17 +26,10 @@ for tool in "${tools[@]}"; do
     fi
 done
 
-# Create individual environments for each tool
-# create_env "bowtie1_env" "bowtie"
-# create_env "bowtie2_env" "bowtie2"
-# create_env "minimap2_env" "minimap2"
-# create_env "bbmap_env" "bbmap"
-# create_env "strobealign_env" "strobealign"
-# create_env "blast_env" "blast"
-# create_env "mmseqs_env" "mmseqs2"
-# create_env "spacepharers_env" "spacepharer"
-
-
+# Create sassy environment separately (empty environment for Rust tool)
+echo "Creating sassy environment..."
+mamba env remove -n sassy_env 2>/dev/null || true
+mamba create -n sassy_env -y
 
 # For spacer-containment, assuming it's available through a specific channel
 # Adjust the channel and package name as needed
@@ -48,7 +41,7 @@ echo "All environments created successfully!"
 check_tool_version() {
     local tool_name=$1
     echo "#####" >> versions.txt
-    micromamba run -n $tool_name"_env" $tool_name --version  >> versions.txt
+    mamba run -n $tool_name"_env" $tool_name --version  >> versions.txt
 }   
 
 # Print versions of installed tools
@@ -62,25 +55,25 @@ echo "#####" > versions.txt
 # check_tool_version "blast"
 # check_tool_version "mmseqs"
 
-micromamba run -n bowtie2_env bowtie2 --version >> versions.txt
+mamba run -n bowtie2_env bowtie2 --version >> versions.txt
 echo "#####" >> versions.txt
-micromamba run -n minimap2_env minimap2 --version >> versions.txt
+mamba run -n minimap2_env minimap2 --version >> versions.txt
 echo "#####" >> versions.txt
-micromamba run -n bbmap_env bbmap.sh --version >> versions.txt
+mamba run -n bbmap_env bbmap.sh --version >> versions.txt
 echo "#####" >> versions.txt
-micromamba run -n strobealign_env strobealign --version >> versions.txt
+mamba run -n strobealign_env strobealign --version >> versions.txt
 echo "#####" >> versions.txt
-micromamba run -n blast_env blastn -version >> versions.txt
+mamba run -n blast_env blastn -version >> versions.txt
 echo "#####" >> versions.txt
-micromamba run -n mmseqs_env mmseqs version >> versions.txt
+mamba run -n mmseqs_env mmseqs version >> versions.txt
 echo "#####" >> versions.txt
-micromamba run -n spacepharer_env spacepharer --version >> versions.txt
+mamba run -n spacepharer_env spacepharer --version >> versions.txt
 echo "#####" >> versions.txt
 
 
 ###### 
 # mmseqs 16.747c6 (current bioconda version) results in frequent crashes. as it is borken, we will install the latest version from github
-micromamba activate mmseqs_env
+mamba activate mmseqs_env
 wget https://mmseqs.com/latest/mmseqs-linux-avx2.tar.gz 
 tar -xvzf mmseqs-linux-avx2.tar.gz
 mv ./mmseqs/bin/mmseqs $CONDA_PREFIX/bin/mmseqs
@@ -92,9 +85,9 @@ mmseqs version >> tool_versions.txt
 ###### 
 # mummer 4 from main branch has bugs in SAM format output (see https://github.com/mummer4/mummer/issues/24)
 # we will install the latest version of the develop branch (https://github.com/mummer4/mummer/tree/develop)
-micromamba activate mummer4_env
+mamba activate mummer4_env
 # install dependencies
-micromamba install gcc make yaggo -y
+mamba install gcc make yaggo -y
 wget https://github.com/mummer4/mummer/archive/refs/heads/develop.zip # https://github.com/mummer4/mummer/releases/download/v4.0.1/mummer-4.0.1.tar.gz testing now
 rm -rf mummer-develop
 unzip develop.zip
@@ -114,7 +107,7 @@ nucmer --version >> tool_versions.txt
 
 ######
 # Sassy - Rust tool that needs to be built from source
-micromamba activate sassy_env
+mamba activate sassy_env
 # Install Rust if not already installed
 if ! command -v cargo &> /dev/null; then
     echo "Installing Rust..."
@@ -138,7 +131,7 @@ sassy --version >> tool_versions.txt 2>&1 || echo "Version info not available" >
 ######
 # hisat2
 # create_env "hisat2_env" "hisat2"
-micromamba activate hisat2_env
+mamba activate hisat2_env
 echo "#####\n Hisat2 version: \n" >> tool_versions.txt
 hisat2 --version >> tool_versions.txt
 # wget https://github.com/DaehwanKimLab/hisat2/archive/refs/tags/v2.2.1.tar.gz
@@ -151,7 +144,7 @@ hisat2 --version >> tool_versions.txt
 ######
 # Bwa   
 # create_env "bwa_env" "bwa"
-micromamba activate bwa_env
+mamba activate bwa_env
 echo "#####\n Bwa version: \n" >> tool_versions.txt
 bwa 2>&1 |  head -n 3 |tail -n 1 >> tool_versions.txt
 
