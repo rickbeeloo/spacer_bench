@@ -1,0 +1,10 @@
+{
+    "name": "sassy",
+    "output_file": "{output_dir}/sassy.tsv",
+    "parse_function_name": "parse_sassy",
+    "script_name": "sassy.sh",
+    "mamba_env": "sassy_env",
+    "command": [
+        "sassy query --alphabet iupac {spacers_file} 5 {contigs_file} -o {output_dir}/sassy.tsv"
+    ]
+  }

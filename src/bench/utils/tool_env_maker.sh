@@ -17,11 +17,13 @@ create_env() {
 }
 
 
-tools=("bowtie1" "bowtie2" "minimap2" "bbmap" "strobealign" "blast" "mmseqs" "spacepharer" "spacer-containment" "mummer4", "lexicmap","vsearch", "bwa", "hisat2")
+tools=("bowtie1" "bowtie2" "minimap2" "bbmap" "strobealign" "blast" "mmseqs" "spacepharer" "spacer-containment" "mummer4", "lexicmap","vsearch", "bwa", "hisat2", "sassy")
 
 # Create individual environments for each tool
 for tool in "${tools[@]}"; do
-    create_env "${tool}_env" "$tool"
+    if [ "$tool" != "sassy" ]; then
+        create_env "${tool}_env" "$tool"
+    fi
 done
 
 # Create individual environments for each tool
@@ -109,6 +111,29 @@ chmod +x $CONDA_PREFIX/bin/nucmer
 echo "#####\n Mummer version: \n" >> tool_versions.txt
 nucmer --version >> tool_versions.txt
 
+
+######
+# Sassy - Rust tool that needs to be built from source
+micromamba activate sassy_env
+# Install Rust if not already installed
+if ! command -v cargo &> /dev/null; then
+    echo "Installing Rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source ~/.cargo/env
+fi
+
+# Clone and build Sassy
+echo "Building Sassy from source..."
+git clone https://github.com/RagnarGrootKoerkamp/sassy.git
+cd sassy
+cargo build --release
+# Copy the binary to the conda environment
+cp target/release/sassy $CONDA_PREFIX/bin/sassy
+chmod +x $CONDA_PREFIX/bin/sassy
+cd ..
+rm -rf sassy
+echo "#####\n Sassy version: \n" >> tool_versions.txt
+sassy --version >> tool_versions.txt 2>&1 || echo "Version info not available" >> tool_versions.txt
 
 ######
 # hisat2

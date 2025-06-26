@@ -562,6 +562,71 @@ def vstack_easy(df1_to_stack, df2_to_stack):
     df2_to_stack = order_columns_to_match(df2_to_stack, df1_to_stack)
     return df1_to_stack.vstack(df2_to_stack)
 
+def parse_sassy(sassy_file, max_mismatches=5, spacer_lendf=None, **kwargs):
+    """Parse Sassy TSV output format and return standardized coordinates.
+    
+    Sassy output format:
+    query_id, target_id, cost, strand, start, end, slice_str, cigar
+    """
+    try:
+        results = pl.read_csv(
+            sassy_file, 
+            separator="\t", 
+            has_header=False,
+            infer_schema_length=100000,
+            new_columns=["spacer_id", "contig_id", "cost", "strand", "start", "end", "slice_str", "cigar"]
+        )
+    except Exception as e:
+        print(f"Failed to read Sassy file {sassy_file}: {e}, returning empty dataframe")
+        return pl.DataFrame(schema={"spacer_id": pl.Utf8, "contig_id": pl.Utf8, "spacer_length": pl.UInt32, "strand": pl.Boolean, "start": pl.UInt32, "end": pl.UInt32, "mismatches": pl.UInt32})
+    
+    # Convert cost to mismatches (assuming cost represents edit distance)
+    results = results.with_columns(
+        pl.col("cost").cast(pl.UInt32).alias("mismatches")
+    )
+    
+    # Filter by max_mismatches, already enforced by the searcher itself
+    results = results.filter(pl.col("mismatches") <= max_mismatches)
+    
+    # Convert strand from string to boolean
+    results = results.with_columns(
+        pl.when(pl.col("strand") == "-")
+        .then(pl.lit(True))
+        .otherwise(pl.lit(False))
+        .alias("strand")
+    )
+    
+    # Cast other columns to appropriate types
+    results = results.with_columns([
+        pl.col("spacer_id").cast(pl.Utf8),
+        pl.col("contig_id").cast(pl.Utf8),
+        pl.col("start").cast(pl.UInt32),
+        pl.col("end").cast(pl.UInt32)
+    ])
+    
+    # Join with spacer lengths if provided
+    if spacer_lendf is not None:
+        results = spacer_lendf.join(results, on="spacer_id", how="inner")
+        results = results.rename({"length": "spacer_length"})
+    else:
+        # If no spacer_lendf provided, create a dummy spacer_length column
+        results = results.with_columns(pl.lit(0).alias("spacer_length"))
+    
+    # Select and order columns to match standard format
+    results = results.select(
+        "spacer_id",
+        "contig_id", 
+        "spacer_length",
+        "strand",
+        "start",
+        "end",
+        "mismatches"
+    ).unique()
+    
+    return results
+
+
+
 def parse_blastn_custom(blastn_file, max_mismatches=5, spacer_lendf=None, **kwargs):
     """Parse a custom BLAST or mmseqs output format 
     (query,target,nident,alnlen,mismatch,qlen,gapopen,qstart,qend,tstart,tend,evalue,bits)
