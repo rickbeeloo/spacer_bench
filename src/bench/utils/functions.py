@@ -274,7 +274,7 @@ def simulate_data_rust(contig_length_range, spacer_length_range, n_mismatch_rang
         print(f"Using provided ID prefix: {id_prefix}")
     
     simulator = Simulator()
-    contigs, spacers, ground_truth = simulator.simulate_data(
+    contigs, spacers, ground_truth, myers_ground_truth = simulator.simulate_data(
         tuple(contig_length_range),
         tuple(spacer_length_range),
         tuple(n_mismatch_range),
@@ -323,7 +323,7 @@ def simulate_data_rust(contig_length_range, spacer_length_range, n_mismatch_rang
             raise ValueError("Simulated data is not correct")
          else:
              print("Simulated data is correct")
-    return contigs, spacers, ground_truth_df
+    return contigs, spacers, ground_truth_df, myers_ground_truth
 
 def verify_simulated_data(contigs, spacers, ground_truth, return_fraction=False, return_bool=False,return_positive_only=False):
     """Verify the simulated data by checking the ground truth against the contigs and spacers."""

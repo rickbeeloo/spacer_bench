@@ -8,6 +8,7 @@ use std::io::{BufWriter, Write};
 use bio::io::fasta;
 use std::cmp::max;
 use std::sync::Arc;
+use bio::pattern_matching::myers::Myers;
 
 
 #[pyclass]
@@ -90,6 +91,7 @@ impl Simulator {
         spacers: HashMap<String, String>,
         ground_truth: Vec<Vec<String>>,
     ) -> bool {
+        
         for entry in ground_truth {
             let spacer_id = &entry[0];
             let contig_id = &entry[1];
@@ -168,7 +170,7 @@ impl Simulator {
         verify: bool,
         output_dir: String,
         id_prefix: Option<String>,
-    ) -> PyResult<(HashMap<String, String>, HashMap<String, String>, Vec<Vec<String>>)> {
+    ) -> PyResult<(HashMap<String, String>, HashMap<String, String>, Vec<Vec<String>>, Vec<Vec<String>>)> {
         // Estimate required contig space
         let avg_spacer_length = (spacer_length_range.0 + spacer_length_range.1) / 2;
         // For a more conservative estimate, use max insertions if the range is wide
@@ -668,8 +670,101 @@ impl Simulator {
                 }
                 println!("Simulation verification passed");
             }
-    
-            Ok((final_contigs, spacers, final_ground_truth))
+
+            // Build actual ground truth based on myers bit vector algorithm implemented in rust bio
+            // to find ALL matches that satisfy the distance threshold
+            let max_mismatches = n_mismatch_range.1;
+
+            println!("Building Myers ground truth with reverse complement search...");
+            let mut myers_ground_truth: Vec<Vec<String>> = Vec::new();
+            
+            // Create progress bar for Myers search
+            let total_searches = spacers.len() * final_contigs.len() * 2; // *2 for forward and reverse complement
+            let pb = ProgressBar::new(total_searches as u64);
+            pb.set_style(ProgressStyle::default_bar()
+                .template("{spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] {pos}/{len} ({eta})")
+                .unwrap());
+
+            // Search each spacer in each contig (both forward and reverse complement)
+            for (spacer_id, spacer) in &spacers {
+                for (contig_id, contig) in &final_contigs {
+                    // Forward strand search
+                    let mut myers = Myers::<u64>::new(spacer);
+                    let occ: Vec<_> = myers.find_all(contig, max_mismatches).collect();
+                    for match_info in occ {
+                        let (start, end, cost) = match_info;
+                        myers_ground_truth.push(vec![
+                            spacer_id.to_string(),
+                            contig_id.to_string(),
+                            start.to_string(),
+                            end.to_string(),
+                            "false".to_string(),
+                            cost.to_string()
+                        ]);
+                    }
+                    pb.inc(1);
+
+                    // Reverse complement search
+                    let rc_spacer = self.reverse_complement(spacer);
+                    let mut myers_rc = Myers::<u64>::new(&rc_spacer);
+                    let occ_rc: Vec<_> = myers_rc.find_all(contig, max_mismatches).collect();
+                    for match_info in occ_rc {
+                        let (start, end, cost) = match_info;
+                        myers_ground_truth.push(vec![
+                            spacer_id.to_string(),
+                            contig_id.to_string(),
+                            start.to_string(),
+                            end.to_string(),
+                            "true".to_string(),
+                            cost.to_string()
+                        ]);
+                    }
+                    pb.inc(1);
+                }
+            }
+            pb.finish_with_message("Myers ground truth search completed");
+
+            println!("Found {} total matches using Myers algorithm", myers_ground_truth.len());
+
+            // Write Myers ground truth to TSV file
+            println!("Writing Myers ground truth to TSV file...");
+            let myers_ground_truth_path = format!("{}/simulated_data/myers_ground_truth.tsv", output_dir);
+            let myers_ground_truth_file = match File::create(&myers_ground_truth_path) {
+                Ok(file) => file,
+                Err(e) => return Err(PyErr::new::<pyo3::exceptions::PyIOError, _>(
+                    format!("Could not create Myers ground truth file: {}", e)
+                )),
+            };
+            
+            let mut myers_ground_truth_writer = BufWriter::new(myers_ground_truth_file);
+            
+            // Write header
+            if let Err(e) = writeln!(myers_ground_truth_writer, "spacer_id\tcontig_id\tstart\tend\tstrand\tmismatches") {
+                return Err(PyErr::new::<pyo3::exceptions::PyIOError, _>(
+                    format!("Error writing Myers ground truth header: {}", e)
+                ));
+            }
+            
+            // Write data rows
+            for row in &myers_ground_truth {
+                if row.len() != 6 {
+                    return Err(PyErr::new::<pyo3::exceptions::PyValueError, _>(
+                        format!("Invalid Myers ground truth row length: {}", row.len())
+                    ));
+                }
+                
+                let line = format!("{}\t{}\t{}\t{}\t{}\t{}\n", 
+                    row[0], row[1], row[2], row[3], 
+                    row[4].to_lowercase(), row[5]);
+                    
+                if let Err(e) = write!(myers_ground_truth_writer, "{}", line) {
+                    return Err(PyErr::new::<pyo3::exceptions::PyIOError, _>(
+                        format!("Error writing Myers ground truth line: {}", e)
+                    ));
+                }
+            }
+
+            Ok((final_contigs, spacers, final_ground_truth, myers_ground_truth))
         })
     }
 }

@@ -48,7 +48,7 @@ def main():
     print("Created directory structure")
     
     print("Simulating data...")
-    contigs, spacers, ground_truth = simulate_data_rust(
+    contigs, spacers, ground_truth, myers_ground_truth = simulate_data_rust(
         contigs=args.contigs,
         spacers=args.spacers,
         contig_length_range=args.contig_length_range,
@@ -104,9 +104,9 @@ def main():
         separator="\t")
     print(f"Wrote hyperfine results to {results_dir}/hyperfine_results.tsv")
     
-    if ground_truth is not None or len(ground_truth) > 0:
+    if myers_ground_truth is not None or len(myers_ground_truth) > 0:
         print("Comparing results against ground truth...")
-        performance_results = compare_results(tools, ground_truth, tools_results,soft_false_positive_threshold=1)
+        performance_results = compare_results(tools, myers_ground_truth, tools_results,soft_false_positive_threshold=1)
         print(performance_results)
         performance_results.write_csv(f"{results_dir}/performance_results.tsv", separator="\t")
         print(f"Wrote performance results to {results_dir}/performance_results.tsv")
