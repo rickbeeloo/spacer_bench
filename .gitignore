@@ -203,3 +203,6 @@ results/simulated/run_t_*
 # pixi environments
 .pixi
 *.egg-info
+
+
+results/*

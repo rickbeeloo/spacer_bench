@@ -157,68 +157,6 @@ impl Simulator {
         true
     }
 
-    fn generate_ground_truth_with_myers(
-        &self,
-        contigs: &HashMap<String, String>,
-        spacers: &HashMap<String, String>,
-        max_mismatches: usize,
-    ) -> Vec<Vec<String>> {
-        let mut ground_truth = Vec::new();
-        
-        for (spacer_id, spacer) in spacers {
-            for (contig_id, contig) in contigs {
-                // Convert strings to byte slices for Myers
-                let spacer_bytes = spacer.as_bytes();
-                let contig_bytes = contig.as_bytes();
-                
-                // Create Myers instance for forward strand
-                let mut myers = Myers::<u64>::new(spacer_bytes);
-                
-                // Convert max_mismatches to u8 (with bounds checking)
-                let max_mismatches_u8: u8 = max_mismatches.try_into().unwrap_or(255);
-                
-                // Find all matches in forward strand
-                let forward_matches: Vec<_> = myers.find_all(contig_bytes, max_mismatches_u8).collect();
-                
-                // Add forward matches to ground truth
-                for match_info in forward_matches {
-                    ground_truth.push(vec![
-                        spacer_id.clone(),
-                        contig_id.clone(),
-                        match_info.start.to_string(),
-                        (match_info.start + spacer.len()).to_string(),
-                        "false".to_string(), // forward strand
-                        match_info.distance.to_string(),
-                    ]);
-                }
-                
-                // Create reverse complement of spacer
-                let rc_spacer = self.reverse_complement(spacer);
-                let rc_spacer_bytes = rc_spacer.as_bytes();
-                
-                 // Create Myers instance for reverse complement
-                let mut myers_rc = Myers::<u64>::new(rc_spacer_bytes);
-                
-                // Find all matches in reverse complement
-                let rc_matches: Vec<_> = myers_rc.find_all(contig_bytes, max_mismatches_u8).collect();
-                
-                // Add reverse complement matches to ground truth
-                for match_info in rc_matches {
-                    ground_truth.push(vec![
-                        spacer_id.clone(),
-                        contig_id.clone(),
-                        match_info.start.to_string(),
-                        (match_info.start + spacer.len()).to_string(),
-                        "true".to_string(), // reverse strand
-                        match_info.distance.to_string(),
-                    ]);
-                }
-            }
-        }
-        
-        ground_truth
-    }
-
     fn simulate_data(
         &self,
         contig_length_range: (usize, usize),
@@ -684,70 +622,7 @@ impl Simulator {
                 }
             }
 
-            // After generating contigs and spacers, generate comprehensive ground truth
-            println!("Generating comprehensive ground truth with Myers algorithm...");
-            let max_mismatches_for_ground_truth = n_mismatch_range.1; // Use max mismatch from range
-            let comprehensive_ground_truth = self.generate_ground_truth_with_myers(
-                &final_contigs,
-                &spacers,
-                max_mismatches_for_ground_truth
-            );
-            
-            println!("Found {} total matches in ground truth", comprehensive_ground_truth.len());
-            
-            // Write comprehensive ground truth to TSV file
-            println!("Writing comprehensive ground truth to TSV file...");
-            let ground_truth_path = format!("{}/simulated_data/ground_truth_comprehensive.tsv", output_dir);
-            let ground_truth_file = match File::create(&ground_truth_path) {
-                Ok(file) => file,
-                Err(e) => return Err(PyErr::new::<pyo3::exceptions::PyIOError, _>(
-                    format!("Could not create comprehensive ground truth file: {}", e)
-                )),
-            };
-            
-            let mut ground_truth_writer = BufWriter::new(ground_truth_file);
-            
-            // Write header
-            if let Err(e) = writeln!(ground_truth_writer, "spacer_id\tcontig_id\tstart\tend\tstrand\tmismatches") {
-                return Err(PyErr::new::<pyo3::exceptions::PyIOError, _>(
-                    format!("Error writing header: {}", e)
-                ));
-            }
-            
-            // Write data rows
-            for row in &comprehensive_ground_truth {
-                if row.len() != 6 {
-                    return Err(PyErr::new::<pyo3::exceptions::PyValueError, _>(
-                        format!("Invalid ground truth row length: {}", row.len())
-                    ));
-                }
-                
-                let line = format!("{}\t{}\t{}\t{}\t{}\t{}\n", 
-                    row[0], row[1], row[2], row[3], 
-                    row[4].to_lowercase(), row[5]);
-                    
-                if let Err(e) = write!(ground_truth_writer, "{}", line) {
-                    return Err(PyErr::new::<pyo3::exceptions::PyIOError, _>(
-                        format!("Error writing line: {}", e)
-                    ));
-                }
-            }
-
-            // Verify the simulation if requested
-            if verify {
-                println!("Verifying simulation...");
-                if !self.verify_simulation(final_contigs.clone(), spacers.clone(), final_ground_truth.clone()) {
-                    return Err(PyErr::new::<pyo3::exceptions::PyValueError, _>(
-                        "Simulated data verification failed"
-                    ));
-                }
-                println!("Simulation verification passed");
-            }
-
-            // Build actual ground truth based on myers bit vector algorithm implemented in rust bio
-            // to find ALL matches that satisfy the distance threshold
-            let max_mismatches = n_mismatch_range.1;
-
+            // Fix the Myers ground truth generation
             println!("Building Myers ground truth with reverse complement search...");
             let mut myers_ground_truth: Vec<Vec<String>> = Vec::new();
             
@@ -758,12 +633,17 @@ impl Simulator {
                 .template("{spinner:.green} [{elapsed_precise}] [{bar:40.cyan/blue}] {pos}/{len} ({eta})")
                 .unwrap());
 
+            // Convert max_mismatches to u8
+            let max_mismatches_u8: u8 = n_mismatch_range.1.try_into().unwrap_or(255);
+
             // Search each spacer in each contig (both forward and reverse complement)
             for (spacer_id, spacer) in &spacers {
                 for (contig_id, contig) in &final_contigs {
+                    let contig_bytes = contig.as_bytes();
+
                     // Forward strand search
-                    let mut myers = Myers::<u64>::new(spacer);
-                    let occ: Vec<_> = myers.find_all(contig, max_mismatches).collect();
+                    let mut myers = Myers::<u64>::new(spacer.as_bytes());
+                    let occ: Vec<_> = myers.find_all(contig_bytes, max_mismatches_u8).collect();
                     for match_info in occ {
                         let (start, end, cost) = match_info;
                         myers_ground_truth.push(vec![
@@ -779,8 +659,8 @@ impl Simulator {
 
                     // Reverse complement search
                     let rc_spacer = self.reverse_complement(spacer);
-                    let mut myers_rc = Myers::<u64>::new(&rc_spacer);
-                    let occ_rc: Vec<_> = myers_rc.find_all(contig, max_mismatches).collect();
+                    let mut myers_rc = Myers::<u64>::new(rc_spacer.as_bytes());
+                    let occ_rc: Vec<_> = myers_rc.find_all(contig_bytes, max_mismatches_u8).collect();
                     for match_info in occ_rc {
                         let (start, end, cost) = match_info;
                         myers_ground_truth.push(vec![
@@ -835,6 +715,17 @@ impl Simulator {
                         format!("Error writing Myers ground truth line: {}", e)
                     ));
                 }
+            }
+
+            // Verify the simulation if requested
+            if verify {
+                println!("Verifying simulation...");
+                if !self.verify_simulation(final_contigs.clone(), spacers.clone(), final_ground_truth.clone()) {
+                    return Err(PyErr::new::<pyo3::exceptions::PyValueError, _>(
+                        "Simulated data verification failed"
+                    ));
+                }
+                println!("Simulation verification passed");
             }
 
             Ok((final_contigs, spacers, final_ground_truth, myers_ground_truth))

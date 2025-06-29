@@ -563,29 +563,6 @@ def parse_sassy(sassy_file, max_mismatches=5, spacer_lendf=None, **kwargs):
     query_id, target_id, cost, strand, start, end, slice_str, cigar
     """
     
-    def parse_cigar_mismatches(cigar_str):
-        """Local function to parse CIGAR string and count mismatches with error handling."""
-        if not cigar_str:
-            return 0
-        try:
-            # Count X operations (mismatches) in CIGAR string
-            mismatch_count = 0
-            current_num = ""
-            for char in cigar_str:
-                if char.isdigit():
-                    current_num += char
-                elif char == 'X':
-                    if current_num:
-                        mismatch_count += int(current_num)
-                        current_num = ""
-                else:
-                    # Reset for other operations (M, I, D, S, H, etc.)
-                    current_num = ""
-            return mismatch_count
-        except Exception as e:
-            print(f"Error parsing CIGAR string '{cigar_str}': {e}")
-            return 0
-    
     try:
         results = pl.read_csv(
             sassy_file, 
@@ -598,12 +575,9 @@ def parse_sassy(sassy_file, max_mismatches=5, spacer_lendf=None, **kwargs):
         print(f"Failed to read Sassy file {sassy_file}: {e}, returning empty dataframe")
         return pl.DataFrame(schema={"spacer_id": pl.Utf8, "contig_id": pl.Utf8, "spacer_length": pl.UInt32, "strand": pl.Boolean, "start": pl.UInt32, "end": pl.UInt32, "mismatches": pl.UInt32})
     
-    # Parse CIGAR string to get mismatches
+    # Rename cost to mismatches
     results = results.with_columns(
-        pl.col("cigar").map_elements(
-            lambda x: parse_cigar_mismatches(x), 
-            return_dtype=pl.UInt32
-        ).alias("mismatches")
+        pl.col("cost").alias("mismatches")
     )
     
     # Filter by max_mismatches
@@ -622,7 +596,8 @@ def parse_sassy(sassy_file, max_mismatches=5, spacer_lendf=None, **kwargs):
         pl.col("spacer_id").cast(pl.Utf8),
         pl.col("contig_id").cast(pl.Utf8),
         pl.col("start").cast(pl.UInt32),
-        pl.col("end").cast(pl.UInt32)
+        pl.col("end").cast(pl.UInt32),
+        pl.col("mismatches").cast(pl.UInt32)
     ])
     
     # Join with spacer lengths if provided
