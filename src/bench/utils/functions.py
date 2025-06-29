@@ -395,23 +395,17 @@ def create_bash_script(tool, results_dir, max_runs=1,warmups=1):
     hyperfine_command =  ["hyperfine",
                "--warmup", str(warmups),
                "--max-runs", str(max_runs),
-                "--prepare", f'"micromamba deactivate || true && rm -rf  {results_dir}/raw_outputs/tmp* || true"',
+                "--prepare", f'"rm -rf  {results_dir}/raw_outputs/tmp* || true"',
                "--output", f"{results_dir}/raw_outputs/hyperfine_output_{tool['script_name']}.txt", "--export-json", f"{results_dir}/raw_outputs/{tool['script_name']}.json"]
     
     with open(f"{results_dir}/bash_scripts/{tool['script_name']}", 'w') as f:
+        f.write("#!/bin/bash\n")
+        # Always initialize mamba shell
+        f.write("eval \"$(mamba shell hook --shell bash)\"\n")
         if mamba_env:
-            f.write(f"eval \"$(micromamba shell hook --shell bash)\"\n")
-            f.write(f"micromamba activate {mamba_env}\n")
-            f.write(f"{' '.join(hyperfine_command)} ")
-            f.write(f"'{' '.join(tool['command'])}'")
-        else:
-            f.write("#!/bin/bash\n")    
-            hyperfine_command =  ["hyperfine",
-               "--warmup", "1",
-                "--prepare", f'"rm -rf  {results_dir}/raw_outputs/tmp* || true"',
-               "--output", f"{results_dir}/raw_outputs/hyperfine_output_{tool['script_name']}.txt", "--export-json", f"{results_dir}/raw_outputs/{tool['script_name']}.json"]
-            f.write(f"{' '.join(hyperfine_command)} ")
-            f.write(f"'{' '.join(tool['command'])}'")
+            f.write(f"mamba activate {mamba_env}\n")
+        f.write(f"{' '.join(hyperfine_command)} ")
+        f.write(f"'{' '.join(tool['command'])}'")
 
         os.chmod(f"{results_dir}/bash_scripts/{script_name}", 0o755)
 
@@ -568,6 +562,30 @@ def parse_sassy(sassy_file, max_mismatches=5, spacer_lendf=None, **kwargs):
     Sassy output format:
     query_id, target_id, cost, strand, start, end, slice_str, cigar
     """
+    
+    def parse_cigar_mismatches(cigar_str):
+        """Local function to parse CIGAR string and count mismatches with error handling."""
+        if not cigar_str:
+            return 0
+        try:
+            # Count X operations (mismatches) in CIGAR string
+            mismatch_count = 0
+            current_num = ""
+            for char in cigar_str:
+                if char.isdigit():
+                    current_num += char
+                elif char == 'X':
+                    if current_num:
+                        mismatch_count += int(current_num)
+                        current_num = ""
+                else:
+                    # Reset for other operations (M, I, D, S, H, etc.)
+                    current_num = ""
+            return mismatch_count
+        except Exception as e:
+            print(f"Error parsing CIGAR string '{cigar_str}': {e}")
+            return 0
+    
     try:
         results = pl.read_csv(
             sassy_file, 
@@ -580,12 +598,15 @@ def parse_sassy(sassy_file, max_mismatches=5, spacer_lendf=None, **kwargs):
         print(f"Failed to read Sassy file {sassy_file}: {e}, returning empty dataframe")
         return pl.DataFrame(schema={"spacer_id": pl.Utf8, "contig_id": pl.Utf8, "spacer_length": pl.UInt32, "strand": pl.Boolean, "start": pl.UInt32, "end": pl.UInt32, "mismatches": pl.UInt32})
     
-    # Convert cost to mismatches (assuming cost represents edit distance)
+    # Parse CIGAR string to get mismatches
     results = results.with_columns(
-        pl.col("cost").cast(pl.UInt32).alias("mismatches")
+        pl.col("cigar").map_elements(
+            lambda x: parse_cigar_mismatches(x), 
+            return_dtype=pl.UInt32
+        ).alias("mismatches")
     )
     
-    # Filter by max_mismatches, already enforced by the searcher itself
+    # Filter by max_mismatches
     results = results.filter(pl.col("mismatches") <= max_mismatches)
     
     # Convert strand from string to boolean

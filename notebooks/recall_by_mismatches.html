@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-872290f7831b83ff57591406c4d968e6"}, "mark": {"type": "line", "point": true}, "encoding": {"color": {"field": "tool", "title": "Tool", "type": "nominal"}, "tooltip": [{"field": "tool", "type": "nominal"}, {"field": "mismatches", "type": "quantitative"}, {"field": "value", "type": "quantitative"}], "x": {"field": "mismatches", "title": "Number of Mismatches", "type": "quantitative"}, "y": {"field": "value", "title": "RECALL", "type": "quantitative"}}, "height": 400, "title": "RECALL by Number of Mismatches per Tool", "width": 600, "$schema": "https://vega.github.io/schema/vega-lite/v5.20.1.json", "datasets": {"data-872290f7831b83ff57591406c4d968e6": [{"tool": "bbmapskimmer", "mismatches": 0, "value": 1.0}, {"tool": "bbmapskimmer", "mismatches": 1, "value": 0.041666666666666664}, {"tool": "bbmapskimmer", "mismatches": 2, "value": 0.0}, {"tool": "bbmapskimmer", "mismatches": 3, "value": 0.0}, {"tool": "bbmapskimmer", "mismatches": 4, "value": 0.0}, {"tool": "bbmapskimmer", "mismatches": 5, "value": 0.0}, {"tool": "bbmapskimmermod", "mismatches": 0, "value": 1.0}, {"tool": "bbmapskimmermod", "mismatches": 1, "value": 0.041666666666666664}, {"tool": "bbmapskimmermod", "mismatches": 2, "value": 0.0}, {"tool": "bbmapskimmermod", "mismatches": 3, "value": 0.0}, {"tool": "bbmapskimmermod", "mismatches": 4, "value": 0.0}, {"tool": "bbmapskimmermod", "mismatches": 5, "value": 0.0}, {"tool": "blastn", "mismatches": 0, "value": 1.0}, {"tool": "blastn", "mismatches": 1, "value": 1.0}, {"tool": "blastn", "mismatches": 2, "value": 0.4}, {"tool": "blastn", "mismatches": 3, "value": 0.5111111111111111}, {"tool": "blastn", "mismatches": 4, "value": 0.15789473684210525}, {"tool": "blastn", "mismatches": 5, "value": 0.0975609756097561}, {"tool": "bowtie1", "mismatches": 0, "value": 1.0}, {"tool": "bowtie1", "mismatches": 1, "value": 1.0}, {"tool": "bowtie1", "mismatches": 2, "value": 1.0}, {"tool": "bowtie1", "mismatches": 3, "value": 1.0}, {"tool": "bowtie1", "mismatches": 4, "value": 0.0}, {"tool": "bowtie1", "mismatches": 5, "value": 0.0}, {"tool": "bowtie2", "mismatches": 0, "value": 1.0}, {"tool": "bowtie2", "mismatches": 1, "value": 1.0}, {"tool": "bowtie2", "mismatches": 2, "value": 0.26666666666666666}, {"tool": "bowtie2", "mismatches": 3, "value": 0.28888888888888886}, {"tool": "bowtie2", "mismatches": 4, "value": 0.07894736842105263}, {"tool": "bowtie2", "mismatches": 5, "value": 0.024390243902439025}, {"tool": "bwa_mem", "mismatches": 0, "value": 0.7380952380952381}, {"tool": "bwa_mem", "mismatches": 1, "value": 0.25}, {"tool": "bwa_mem", "mismatches": 2, "value": 0.08888888888888889}, {"tool": "bwa_mem", "mismatches": 3, "value": 0.2}, {"tool": "bwa_mem", "mismatches": 4, "value": 0.05263157894736842}, {"tool": "bwa_mem", "mismatches": 5, "value": 0.0}, {"tool": "hisat2", "mismatches": 0, "value": 1.0}, {"tool": "hisat2", "mismatches": 1, "value": 0.0}, {"tool": "hisat2", "mismatches": 2, "value": 0.0}, {"tool": "hisat2", "mismatches": 3, "value": 0.0}, {"tool": "hisat2", "mismatches": 4, "value": 0.0}, {"tool": "hisat2", "mismatches": 5, "value": 0.0}, {"tool": "mummer4", "mismatches": 0, "value": 1.0}, {"tool": "mummer4", "mismatches": 1, "value": 0.8125}, {"tool": "mummer4", "mismatches": 2, "value": 0.15555555555555556}, {"tool": "mummer4", "mismatches": 3, "value": 0.2222222222222222}, {"tool": "mummer4", "mismatches": 4, "value": 0.02631578947368421}, {"tool": "mummer4", "mismatches": 5, "value": 0.0}, {"tool": "sassy", "mismatches": 0, "value": 1.0}, {"tool": "sassy", "mismatches": 1, "value": 0.0}, {"tool": "sassy", "mismatches": 2, "value": 0.0}, {"tool": "sassy", "mismatches": 3, "value": 0.0}, {"tool": "sassy", "mismatches": 4, "value": 0.0}, {"tool": "sassy", "mismatches": 5, "value": 0.0}, {"tool": "strobealign", "mismatches": 0, "value": 0.9285714285714286}, {"tool": "strobealign", "mismatches": 1, "value": 0.16666666666666666}, {"tool": "strobealign", "mismatches": 2, "value": 0.08888888888888889}, {"tool": "strobealign", "mismatches": 3, "value": 0.06666666666666667}, {"tool": "strobealign", "mismatches": 4, "value": 0.0}, {"tool": "strobealign", "mismatches": 5, "value": 0.0}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

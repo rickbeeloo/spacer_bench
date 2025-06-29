@@ -26,8 +26,8 @@
 
 
 cd /clusterfs/jgi/scratch/science/metagen/neri/code/blits/spacer_matching_bench/
-eval "$(micromamba shell hook --shell bash)"
-micromamba activate base_env
+eval "$(mamba shell hook --shell bash)"
+mamba activate base_env
 # echo $SLURM_MEM_PER_NODE
 
 echo "SLURM_ARRAY_TASK_ID: $SLURM_ARRAY_TASK_ID"

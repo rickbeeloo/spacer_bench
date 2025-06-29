@@ -157,6 +157,68 @@ impl Simulator {
         true
     }
 
+    fn generate_ground_truth_with_myers(
+        &self,
+        contigs: &HashMap<String, String>,
+        spacers: &HashMap<String, String>,
+        max_mismatches: usize,
+    ) -> Vec<Vec<String>> {
+        let mut ground_truth = Vec::new();
+        
+        for (spacer_id, spacer) in spacers {
+            for (contig_id, contig) in contigs {
+                // Convert strings to byte slices for Myers
+                let spacer_bytes = spacer.as_bytes();
+                let contig_bytes = contig.as_bytes();
+                
+                // Create Myers instance for forward strand
+                let mut myers = Myers::<u64>::new(spacer_bytes);
+                
+                // Convert max_mismatches to u8 (with bounds checking)
+                let max_mismatches_u8: u8 = max_mismatches.try_into().unwrap_or(255);
+                
+                // Find all matches in forward strand
+                let forward_matches: Vec<_> = myers.find_all(contig_bytes, max_mismatches_u8).collect();
+                
+                // Add forward matches to ground truth
+                for match_info in forward_matches {
+                    ground_truth.push(vec![
+                        spacer_id.clone(),
+                        contig_id.clone(),
+                        match_info.start.to_string(),
+                        (match_info.start + spacer.len()).to_string(),
+                        "false".to_string(), // forward strand
+                        match_info.distance.to_string(),
+                    ]);
+                }
+                
+                // Create reverse complement of spacer
+                let rc_spacer = self.reverse_complement(spacer);
+                let rc_spacer_bytes = rc_spacer.as_bytes();
+                
+                 // Create Myers instance for reverse complement
+                let mut myers_rc = Myers::<u64>::new(rc_spacer_bytes);
+                
+                // Find all matches in reverse complement
+                let rc_matches: Vec<_> = myers_rc.find_all(contig_bytes, max_mismatches_u8).collect();
+                
+                // Add reverse complement matches to ground truth
+                for match_info in rc_matches {
+                    ground_truth.push(vec![
+                        spacer_id.clone(),
+                        contig_id.clone(),
+                        match_info.start.to_string(),
+                        (match_info.start + spacer.len()).to_string(),
+                        "true".to_string(), // reverse strand
+                        match_info.distance.to_string(),
+                    ]);
+                }
+            }
+        }
+        
+        ground_truth
+    }
+
     fn simulate_data(
         &self,
         contig_length_range: (usize, usize),
@@ -622,13 +684,24 @@ impl Simulator {
                 }
             }
 
-            // Write ground truth to TSV file
-            println!("Writing ground truth to TSV file...");
-            let ground_truth_path = format!("{}/simulated_data/ground_truth.tsv", output_dir);
+            // After generating contigs and spacers, generate comprehensive ground truth
+            println!("Generating comprehensive ground truth with Myers algorithm...");
+            let max_mismatches_for_ground_truth = n_mismatch_range.1; // Use max mismatch from range
+            let comprehensive_ground_truth = self.generate_ground_truth_with_myers(
+                &final_contigs,
+                &spacers,
+                max_mismatches_for_ground_truth
+            );
+            
+            println!("Found {} total matches in ground truth", comprehensive_ground_truth.len());
+            
+            // Write comprehensive ground truth to TSV file
+            println!("Writing comprehensive ground truth to TSV file...");
+            let ground_truth_path = format!("{}/simulated_data/ground_truth_comprehensive.tsv", output_dir);
             let ground_truth_file = match File::create(&ground_truth_path) {
                 Ok(file) => file,
                 Err(e) => return Err(PyErr::new::<pyo3::exceptions::PyIOError, _>(
-                    format!("Could not create ground truth file: {}", e)
+                    format!("Could not create comprehensive ground truth file: {}", e)
                 )),
             };
             
@@ -642,7 +715,7 @@ impl Simulator {
             }
             
             // Write data rows
-            for row in &final_ground_truth {
+            for row in &comprehensive_ground_truth {
                 if row.len() != 6 {
                     return Err(PyErr::new::<pyo3::exceptions::PyValueError, _>(
                         format!("Invalid ground truth row length: {}", row.len())
