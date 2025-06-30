@@ -206,3 +206,5 @@ results/simulated/run_t_*
 
 
 results/*
+results_mismatches/*
+*.tsv

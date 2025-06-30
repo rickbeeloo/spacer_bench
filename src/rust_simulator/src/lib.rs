@@ -36,36 +36,38 @@ impl Simulator {
         let mut rng = rand::thread_rng();
         let mut sequence: Vec<char> = sequence.chars().collect();
         
-        // Apply mismatches
-        let mismatch_positions: HashSet<usize> = (0..sequence.len())
-            .collect::<Vec<_>>()
-            .choose_multiple(&mut rng, n_mismatches)
-            .cloned()
-            .collect();
-
-        for pos in mismatch_positions {
-            let original = sequence[pos];
-            let valid_bases: Vec<_> = self
-                .nucleotides
-                .iter()
-                .filter(|&&b| b != original)
-                .collect();
-            let new_base = *valid_bases.choose(&mut rng).unwrap();
-            sequence[pos] = *new_base;
-        }
-        
-        // Apply insertions
+        // Apply insertions first (before mismatches and deletions)
         for _ in 0..n_insertions {
             let insert_pos = rng.gen_range(0..=sequence.len());
             let new_base = *self.nucleotides.choose(&mut rng).unwrap();
             sequence.insert(insert_pos, new_base);
         }
         
-        // Apply deletions
+        // Apply deletions after insertions
         for _ in 0..n_deletions {
             if !sequence.is_empty() {
                 let delete_pos = rng.gen_range(0..sequence.len());
                 sequence.remove(delete_pos);
+            }
+        }
+        
+        // Apply mismatches last (after insertions and deletions, so we use the final sequence length)
+        if n_mismatches > 0 && !sequence.is_empty() {
+            let mismatch_positions: HashSet<usize> = (0..sequence.len())
+                .collect::<Vec<_>>()
+                .choose_multiple(&mut rng, n_mismatches)
+                .cloned()
+                .collect();
+
+            for pos in mismatch_positions {
+                let original = sequence[pos];
+                let valid_bases: Vec<_> = self
+                    .nucleotides
+                    .iter()
+                    .filter(|&&b| b != original)
+                    .collect();
+                let new_base = *valid_bases.choose(&mut rng).unwrap();
+                sequence[pos] = *new_base;
             }
         }
 
@@ -567,15 +569,22 @@ impl Simulator {
                                 // Update contig sequence
                                 let target_contig = group_contigs.get_mut(&target_contig_id).unwrap();
                                 let mut chars: Vec<char> = target_contig.chars().collect();
-                                chars.splice(start_pos..end_pos, spacer_variant.chars());
+                                
+                                // Ensure we don't exceed the contig bounds
+                                let max_end_pos = chars.len();
+                                let splice_end_pos = std::cmp::min(end_pos, max_end_pos);
+                                
+                                let spacer_variant_chars: Vec<char> = spacer_variant.chars().collect();
+                                chars.splice(start_pos..splice_end_pos, spacer_variant_chars);
                                 *target_contig = chars.into_iter().collect();
 
-                                // Record in ground truth
+                                // Record in ground truth - use the actual end position based on spacer_variant length
+                                let actual_end_pos = start_pos + spacer_variant.len();
                                 local_ground_truth.push(vec![
                                     spacer_id.to_string(),
                                     target_contig_id,
                                     start_pos.to_string(),
-                                    end_pos.to_string(),
+                                    actual_end_pos.to_string(),
                                     if is_rc { "true".to_string() } else { "false".to_string() },
                                     n_mismatches.to_string()
                                 ]);
