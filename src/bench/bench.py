@@ -10,7 +10,7 @@ pl.Config(tbl_cols=13, tbl_rows=8)
 
 def main():
     print("Starting benchmark script...")
-    argmessage="Example command: python bench.py --contig_length_range 1000 32000 --spacer_length_range 20 60 --n_mismatch_range 0 5 --sample_size_contigs 1500 --sample_size_spacers 50 --insertion_range 1 5 --threads 1 --prop_rc 0.5"  
+    argmessage="Example command: python bench.py --contig_length_range 1000 32000 --spacer_length_range 20 60 --n_mismatch_range 0 5 --sample_size_contigs 1500 --sample_size_spacers 50 --insertion_range 1 5 --n_insertion_range 0 2 --n_deletion_range 0 1 --threads 1 --prop_rc 0.5"  
     parser = argparse.ArgumentParser(description="Simulate spacer insertions and compare with multiple aligners", add_help=True, allow_abbrev=True,  usage=argmessage)
     parser.add_argument("-cl", "--contig_length_range", nargs=2, type=int, default=[1000, 32000], help="Range of contig lengths")
     parser.add_argument("-nc", "--sample_size_contigs", type=int, default=1500, help="Number of contigs to generate")
@@ -18,6 +18,8 @@ def main():
     parser.add_argument("-ls", "--spacer_length_range", nargs=2, type=int, default=[20, 60], help="Range of spacer lengths")
     parser.add_argument("-lm", "--n_mismatch_range", nargs=2, type=int, default=[0, 5], help="Range of number of mismatches")
     parser.add_argument("-ir", "--insertion_range", nargs=2, type=int, default=[1, 5], help="Range of number of insertions per contig")
+    parser.add_argument("-nir", "--n_insertion_range", nargs=2, type=int, default=[0, 2], help="Range of number of insertions within spacer sequences")
+    parser.add_argument("-ndr", "--n_deletion_range", nargs=2, type=int, default=[0, 1], help="Range of number of deletions within spacer sequences")
     parser.add_argument("-prc", "--prop_rc", type=float, default=0.5, help="Proportion of spacers to reverse complement")
     parser.add_argument("-t", "--threads", type=int, default=1, help="Number threads")
     parser.add_argument("-c", "--contigs", type=str, default=None, help="Path to contigs file (if not provided, will generate simulated data)")
@@ -36,7 +38,7 @@ def main():
     print("Created results directory")
     
     # Determine the results directory path
-    results_dir = f"results/run_t_{args.threads}_nc_{args.sample_size_contigs}_ns_{args.sample_size_spacers}_ir_{args.insertion_range[0]}_{args.insertion_range[1]}_lm_{args.n_mismatch_range[0]}_{args.n_mismatch_range[1]}_prc_{args.prop_rc}"
+    results_dir = f"results/run_t_{args.threads}_nc_{args.sample_size_contigs}_ns_{args.sample_size_spacers}_ir_{args.insertion_range[0]}_{args.insertion_range[1]}_lm_{args.n_mismatch_range[0]}_{args.n_mismatch_range[1]}_nir_{args.n_insertion_range[0]}_{args.n_insertion_range[1]}_ndr_{args.n_deletion_range[0]}_{args.n_deletion_range[1]}_prc_{args.prop_rc}"
     args.results_dir = results_dir # add to the args object for simplicity
     print(f"Results will be saved to: {results_dir}")
     
@@ -57,6 +59,8 @@ def main():
         sample_size_contigs=args.sample_size_contigs,
         sample_size_spacers=args.sample_size_spacers,
         insertion_range=args.insertion_range,
+        n_insertion_range=args.n_insertion_range,
+        n_deletion_range=args.n_deletion_range,
         prop_rc=args.prop_rc,
         debug=True,
         threads=args.threads,

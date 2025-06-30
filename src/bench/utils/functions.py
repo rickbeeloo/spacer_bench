@@ -241,6 +241,7 @@ def generate_simulation_id(params):
 
 def simulate_data_rust(contig_length_range, spacer_length_range, n_mismatch_range, 
                       sample_size_contigs, sample_size_spacers, insertion_range, 
+                      n_insertion_range=(0, 0), n_deletion_range=(0, 0),
                       contigs=None, spacers=None, prop_rc=0.5, debug=False, threads=None, verify=True, results_dir=None, id_prefix=None):
     
     if contigs is not None or spacers is not None:
@@ -266,6 +267,8 @@ def simulate_data_rust(contig_length_range, spacer_length_range, n_mismatch_rang
             'sample_size_contigs': sample_size_contigs,
             'sample_size_spacers': sample_size_spacers,
             'insertion_range': insertion_range,
+            'n_insertion_range': n_insertion_range,
+            'n_deletion_range': n_deletion_range,
             'prop_rc': prop_rc
         }
         id_prefix = generate_simulation_id(sim_params)
@@ -281,6 +284,8 @@ def simulate_data_rust(contig_length_range, spacer_length_range, n_mismatch_rang
         sample_size_contigs,
         sample_size_spacers,
         tuple(insertion_range),
+        tuple(n_insertion_range),
+        tuple(n_deletion_range),
         prop_rc,
         threads,
         verify,

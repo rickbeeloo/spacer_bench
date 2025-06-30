@@ -32,16 +32,18 @@ impl Simulator {
             .collect()
     }
 
-    fn apply_mismatches(&self, sequence: &str, n_mismatches: usize) -> String {
+    fn apply_mutations(&self, sequence: &str, n_mismatches: usize, n_insertions: usize, n_deletions: usize) -> String {
         let mut rng = rand::thread_rng();
         let mut sequence: Vec<char> = sequence.chars().collect();
-        let positions: HashSet<usize> = (0..sequence.len())
+        
+        // Apply mismatches
+        let mismatch_positions: HashSet<usize> = (0..sequence.len())
             .collect::<Vec<_>>()
             .choose_multiple(&mut rng, n_mismatches)
             .cloned()
             .collect();
 
-        for pos in positions {
+        for pos in mismatch_positions {
             let original = sequence[pos];
             let valid_bases: Vec<_> = self
                 .nucleotides
@@ -50,6 +52,21 @@ impl Simulator {
                 .collect();
             let new_base = *valid_bases.choose(&mut rng).unwrap();
             sequence[pos] = *new_base;
+        }
+        
+        // Apply insertions
+        for _ in 0..n_insertions {
+            let insert_pos = rng.gen_range(0..=sequence.len());
+            let new_base = *self.nucleotides.choose(&mut rng).unwrap();
+            sequence.insert(insert_pos, *new_base);
+        }
+        
+        // Apply deletions
+        for _ in 0..n_deletions {
+            if !sequence.is_empty() {
+                let delete_pos = rng.gen_range(0..sequence.len());
+                sequence.remove(delete_pos);
+            }
         }
 
         sequence.into_iter().collect()
@@ -165,6 +182,8 @@ impl Simulator {
         mut sample_size_contigs: usize,
         sample_size_spacers: usize,
         insertion_range: (usize, usize),
+        n_insertion_range: (usize, usize),
+        n_deletion_range: (usize, usize),
         prop_rc: f64,
         threads: usize,
         verify: bool,
@@ -273,7 +292,7 @@ impl Simulator {
                 spacer_length: usize,
                 n_insertions: usize,
                 total_length: usize,
-                insertion_plans: Vec<(bool, usize)>, // (is_rc, n_mismatches) pairs
+                insertion_plans: Vec<(bool, usize, usize, usize)>, // (is_rc, n_mismatches, n_insertions, n_deletions) tuples
             }
             
             let mut insertion_plans: Vec<SpacerInsertionPlan> = Vec::with_capacity(spacers.len());
@@ -289,7 +308,9 @@ impl Simulator {
                 for _ in 0..n_insertions {
                     let is_rc = rng.random_bool(prop_rc);
                     let n_mismatches = rng.random_range(n_mismatch_range.0..=n_mismatch_range.1);
-                    plans.push((is_rc, n_mismatches));
+                    let n_insertions = rng.random_range(n_insertion_range.0..=n_insertion_range.1);
+                    let n_deletions = rng.random_range(n_deletion_range.0..=n_deletion_range.1);
+                    plans.push((is_rc, n_mismatches, n_insertions, n_deletions));
                 }
                 
                 let total_length = seq.len() * n_insertions;
@@ -465,19 +486,19 @@ impl Simulator {
                         let spacer_len = spacer.len();
                         
                         // Cache reverse complement and mismatched versions to avoid repeated calculations
-                        let mut cached_variants: HashMap<(bool, usize), String> = HashMap::new();
+                        let mut cached_variants: HashMap<(bool, usize, usize, usize), String> = HashMap::new();
                         
                         // Process each insertion plan for this spacer
-                        for &(is_rc, n_mismatches) in &plan.insertion_plans {
+                        for &(is_rc, n_mismatches, n_insertions, n_deletions) in &plan.insertion_plans {
                             // Get or calculate the variant
-                            let spacer_variant = cached_variants.entry((is_rc, n_mismatches))
+                            let spacer_variant = cached_variants.entry((is_rc, n_mismatches, n_insertions, n_deletions))
                                 .or_insert_with(|| {
                                     let base = if is_rc {
                                         self.reverse_complement(spacer)
                                     } else {
                                         spacer.to_string()
                                     };
-                                    self.apply_mismatches(&base, n_mismatches)
+                                    self.apply_mutations(&base, n_mismatches, n_insertions, n_deletions)
                                 });
                             
                             // Instead of generating all positions:
@@ -624,7 +645,6 @@ impl Simulator {
 
             // Fix the Myers ground truth generation
             println!("Building Myers ground truth with reverse complement search...");
-            let mut myers_ground_truth: Vec<Vec<String>> = Vec::new();
             
             // Create progress bar for Myers search
             let total_searches = spacers.len() * final_contigs.len() * 2; // *2 for forward and reverse complement
@@ -636,9 +656,15 @@ impl Simulator {
             // Convert max_mismatches to u8
             let max_mismatches_u8: u8 = n_mismatch_range.1.try_into().unwrap_or(255);
 
-            // Search each spacer in each contig (both forward and reverse complement)
-            for (spacer_id, spacer) in &spacers {
-                for (contig_id, contig) in &final_contigs {
+            // Convert to vectors for parallel processing
+            let spacers_vec: Vec<_> = spacers.iter().collect();
+            let contigs_vec: Vec<_> = final_contigs.iter().collect();
+
+            // Process spacers in parallel
+            let myers_results: Vec<Vec<Vec<String>>> = spacers_vec.into_par_iter().map(|(spacer_id, spacer)| {
+                let mut local_results = Vec::new();
+                
+                for (contig_id, contig) in &contigs_vec {
                     let contig_bytes = contig.as_bytes();
 
                     // Forward strand search
@@ -646,7 +672,7 @@ impl Simulator {
                     let occ: Vec<_> = myers.find_all(contig_bytes, max_mismatches_u8).collect();
                     for match_info in occ {
                         let (start, end, cost) = match_info;
-                        myers_ground_truth.push(vec![
+                        local_results.push(vec![
                             spacer_id.to_string(),
                             contig_id.to_string(),
                             start.to_string(),
@@ -655,7 +681,6 @@ impl Simulator {
                             cost.to_string()
                         ]);
                     }
-                    pb.inc(1);
 
                     // Reverse complement search
                     let rc_spacer = self.reverse_complement(spacer);
@@ -663,7 +688,7 @@ impl Simulator {
                     let occ_rc: Vec<_> = myers_rc.find_all(contig_bytes, max_mismatches_u8).collect();
                     for match_info in occ_rc {
                         let (start, end, cost) = match_info;
-                        myers_ground_truth.push(vec![
+                        local_results.push(vec![
                             spacer_id.to_string(),
                             contig_id.to_string(),
                             start.to_string(),
@@ -672,9 +697,17 @@ impl Simulator {
                             cost.to_string()
                         ]);
                     }
-                    pb.inc(1);
                 }
-            }
+                
+                // Update progress bar (2 searches per spacer: forward and reverse complement)
+                pb.inc(2 * contigs_vec.len() as u64);
+                
+                local_results
+            }).collect();
+
+            // Merge all results
+            let myers_ground_truth: Vec<Vec<String>> = myers_results.into_iter().flatten().collect();
+
             pb.finish_with_message("Myers ground truth search completed");
 
             println!("Found {} total matches using Myers algorithm", myers_ground_truth.len());
