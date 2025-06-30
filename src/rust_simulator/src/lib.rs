@@ -58,7 +58,7 @@ impl Simulator {
         for _ in 0..n_insertions {
             let insert_pos = rng.gen_range(0..=sequence.len());
             let new_base = *self.nucleotides.choose(&mut rng).unwrap();
-            sequence.insert(insert_pos, *new_base);
+            sequence.insert(insert_pos, new_base);
         }
         
         // Apply deletions
