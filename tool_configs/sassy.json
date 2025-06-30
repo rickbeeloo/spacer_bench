@@ -5,6 +5,6 @@
     "script_name": "sassy.sh",
     "mamba_env": "sassy_env",
     "command": [
-        "sassy query --alphabet iupac {spacers_file} 5 {contigs_file} -o {output_dir}/sassy.tsv"
+        "sassy query --alphabet iupac {spacers_file} 3 {contigs_file} -o {output_dir}/sassy.tsv"
     ]
   }
